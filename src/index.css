@@ -1,0 +1,310 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  body {
+    @apply fixed w-full bg-warm-nude-200 font-signika;
+  }
+
+  .icon {
+    @apply mr-2 flex flex-row items-center rounded-full bg-warm-nude-400 p-2 shadow-xl ring-black transition-colors duration-500 ease-in-out hover:bg-warm-nude-500 lg:mr-4 lg:p-3;
+  }
+
+  .hero-item {
+    @apply mx-4 mt-5 lg:mx-8 lg:mt-8;
+  }
+
+  .login-container {
+    @apply mx-1 flex w-full flex-1 flex-col items-center justify-around rounded-sm;
+  }
+
+  .login-entry {
+    @apply m-1 w-10/12 rounded-2xl px-4 py-[6px] text-xl ring-2 ring-gray-500 focus:outline-none focus:ring-gray-800;
+  }
+
+  .category-item {
+    @apply m-1 flex flex-col items-center justify-center rounded-sm bg-warm-nude-300;
+  }
+
+  .product-form-entry {
+    @apply h-4/5 w-1/2 rounded-full p-2 text-xl;
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: "Signika-Light";
+    src:
+      url("./assets/fonts/Signika-Light.woff2") format("woff2"),
+      url("./assets/fonts/Signika-Light.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Signika-Regular";
+    src:
+      url("./assets/fonts/Signika-Regular.woff2") format("woff2"),
+      url("./assets/fonts/Signika-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Signika-Medium";
+    src:
+      url("./assets/fonts/Signika-Medium.woff2") format("woff2"),
+      url("./assets/fonts/Signika-Medium.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Signika-SemiBold";
+    src:
+      url("./assets/fonts/Signika-SemiBold.woff2") format("woff2"),
+      url("./assets/fonts/Signika-SemiBold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Signika-Bold";
+    src:
+      url("./assets/fonts/Signika-Bold.woff2") format("woff2"),
+      url("./assets/fonts/Signika-Bold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "EtherealDemoFont-Thin";
+    src:
+      url("./assets/fonts/EtherealDemoFont-Thin.woff2") format("woff2"),
+      url("./assets/fonts/EtherealDemoFont-Thin.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "EtherealDemoFont-Light";
+    src:
+      url("./assets/fonts/EtherealDemoFont-Light.woff2") format("woff2"),
+      url("./assets/fonts/EtherealDemoFont-Light.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "EtherealDemoFont-Regular";
+    src:
+      url("./assets/fonts/EtherealDemoFont-Regular.woff2") format("woff2"),
+      url("./assets/fonts/EtherealDemoFont-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "EtherealDemoFont-Bold";
+    src:
+      url("./assets/fonts/EtherealDemoFont-Bold.woff2") format("woff2"),
+      url("./assets/fonts/EtherealDemoFont-Bold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Nunito-ExtraBold";
+    src:
+      url("./assets/fonts/Nunito-ExtraBold.woff2") format("woff2"),
+      url("./assets/fonts/Nunito-ExtraBold.woff") format("woff");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Nunito-ExtraLight";
+    src:
+      url("./assets/fonts/Nunito-ExtraLight.woff2") format("woff2"),
+      url("./assets/fonts/Nunito-ExtraLight.woff") format("woff");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Nunito-Italic";
+    src:
+      url("./assets/fonts/Nunito-Italic.woff2") format("woff2"),
+      url("./assets/fonts/Nunito-Italic.woff") format("woff");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Nunito-Light";
+    src:
+      url("./assets/fonts/Nunito-Light.woff2") format("woff2"),
+      url("./assets/fonts/Nunito-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Nunito-LightItalic";
+    src:
+      url("./assets/fonts/Nunito-LightItalic.woff2") format("woff2"),
+      url("./assets/fonts/Nunito-LightItalic.woff") format("woff");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Nunito-Medium";
+    src:
+      url("./assets/fonts/Nunito-Medium.woff2") format("woff2"),
+      url("./assets/fonts/Nunito-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Nunito-Regular";
+    src:
+      url("./assets/fonts/Nunito-Regular.woff2") format("woff2"),
+      url("./assets/fonts/Nunito-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Nunito-SemiBold";
+    src:
+      url("./assets/fonts/Nunito-SemiBold.woff2") format("woff2"),
+      url("./assets/fonts/Nunito-SemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Nunito-SemiBoldItalic";
+    src:
+      url("./assets/fonts/Nunito-SemiBoldItalic.woff2") format("woff2"),
+      url("./assets/fonts/Nunito-SemiBoldItalic.woff") format("woff");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Overlock-Black";
+    src:
+      url("./assets/fonts/Overlock-Black.woff2") format("woff2"),
+      url("./assets/fonts/Overlock-Black.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Overlock-BlackItalic";
+    src:
+      url("./assets/fonts/Overlock-BlackItalic.woff2") format("woff2"),
+      url("./assets/fonts/Overlock-BlackItalic.woff") format("woff");
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Overlock-Bold";
+    src:
+      url("./assets/fonts/Overlock-Bold.woff2") format("woff2"),
+      url("./assets/fonts/Overlock-Bold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Overlock-BoldItalic";
+    src:
+      url("./assets/fonts/Overlock-BoldItalic.woff2") format("woff2"),
+      url("./assets/fonts/Overlock-BoldItalic.woff") format("woff");
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Overlock-Italic";
+    src:
+      url("./assets/fonts/Overlock-Italic.woff2") format("woff2"),
+      url("./assets/fonts/Overlock-Italic.woff") format("woff");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Overlock-Regular";
+    src:
+      url("./assets/fonts/Overlock-Regular.woff2") format("woff2"),
+      url("./assets/fonts/Overlock-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Merriweather-Light";
+    src:
+      url("./assets/fonts/Merriweather-Light.woff2") format("woff2"),
+      url("./assets/fonts/Merriweather-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Merriweather";
+    src:
+      url("./assets/fonts/Merriweather-Regular.woff2") format("woff2"),
+      url("./assets/fonts/Merriweather-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
+@layer utilities {
+  .border-dashed-long {
+    height: 2px;
+    background-image: linear-gradient(
+      to right,
+      black 0%,
+      black 66%,
+      transparent 66%,
+      transparent 100%
+    );
+    background-size: 25px 1px;
+    background-repeat: repeat-x;
+  }
+}
