@@ -16,7 +16,7 @@ export type ProductData = {
 export type ReviewData = {
   user_id: number;
   product_id: string;
-  message: string;
+  message: string | null;
   stars: number;
   created_at: Date;
 };

@@ -6,7 +6,7 @@ const formSchema = z.object({});
 
 type FormFields = z.infer<typeof formSchema>;
 
-const ShoppingForm = () => {
+const TrousseauForm = () => {
   const { register, handleSubmit } = useForm<FormFields>({
     resolver: zodResolver(formSchema),
   });
@@ -16,4 +16,4 @@ const ShoppingForm = () => {
   return <form className="w-full" onSubmit={handleSubmit(onSubmit)}></form>;
 };
 
-export default ShoppingForm;
+export default TrousseauForm;

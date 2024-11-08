@@ -29,7 +29,9 @@ const ShoppingPage = () => {
   const location = useLocation();
 
   const queryParams: QueryParams = {
+    // first option is retrieved from the router parameters, and the second one from the search parameters (e.g. filtering)
     categories: category || searchParams.get("category") || null,
+    // first option is retrieved from the router parameters, and the second one from the search parameters (e.g. same as previously)
     type: (type && pluralToSingular[type]) || searchParams.get("type") || null,
     gender: searchParams.get("gender"),
     skip: Number(searchParams.get("skip")) || 0,
@@ -80,10 +82,10 @@ const ShoppingPage = () => {
               ).toUpperCase())}
         </span>
       </div>
-      <div className="flex h-fit w-dvw justify-center lg:w-4/5">
+      <div className="mb-6 flex h-fit w-dvw justify-center lg:w-4/5">
         <ProductGrid items={data} />
       </div>
-      <div className="mt-6 flex h-12 w-fit flex-row justify-around">
+      <div className="mt-auto flex h-12 w-fit flex-row justify-around">
         {Array.from({ length: totalPages }, (_, i) => i).map((page) => {
           // Show first page, last page, current page, and pages around current
           const shouldShow =
@@ -107,7 +109,7 @@ const ShoppingPage = () => {
             <button
               key={page}
               onClick={() => handlePageChange(page)}
-              className={`mx-1 h-10 w-10 rounded ${
+              className={`mx-1 h-10 w-10 rounded transition-colors duration-300 ease-out ${
                 page === queryParams.skip
                   ? "bg-rose-500 text-white"
                   : "bg-rose-100 hover:bg-rose-200"

@@ -6,7 +6,7 @@ import Rating from "./Rating";
 import { AxiosError } from "axios";
 import ErrorPage from "./ErrorPage";
 import ImageLayout from "./ImageLayout";
-import ShoppingForm from "./ShoppingForm";
+import TrousseauForm from "./TrousseauForm";
 
 const ProductPage = () => {
   const params = useParams<{ productID: string }>();
@@ -17,12 +17,22 @@ const ProductPage = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
+      setIsLoading(true); // Set loading at start of async operation
       try {
         if (params.productID) {
+          const initialURL = "/products/" + params.productID;
+
+          // Fetch product
           const fetchedProduct = await apiClient
-            .get("/products/" + params.productID)
+            .get<ProductData>(initialURL)
             .then((res) => res.data);
           setProduct(fetchedProduct);
+
+          // Fetch reviews
+          const fetchedReviews = await apiClient
+            .get<ReviewData[]>(initialURL + "/reviews")
+            .then((res) => res.data);
+          setReviews(fetchedReviews);
         }
       } catch (error) {
         if (error instanceof AxiosError) {
@@ -34,16 +44,17 @@ const ProductPage = () => {
             setError(`O eroare neasteptata s-a intamplat`);
           }
         }
+      } finally {
+        setIsLoading(false); // Set loading false after everything is done
       }
     };
-    setIsLoading(true);
+
     fetchProduct();
-    setIsLoading(false);
   }, [params.productID]);
 
-  if (product)
+  if (product && reviews)
     return (
-      <div className="mt-8 grid h-fit grid-cols-1 lg:grid-cols-2">
+      <div className="mt-8 grid h-fit min-h-page-height grid-cols-1 lg:grid-cols-2">
         <div className="lg:mr-2">
           <ImageLayout
             images={
@@ -62,12 +73,17 @@ const ProductPage = () => {
               <span className="font-overlock-regular text-xl">
                 {product.price} RON
               </span>
-              <div className="flex flex-row items-center">
+              <div className="flex flex-row items-center font-nunito-medium">
                 <Rating rating={product.rating} size={20} />
-                <span className="ml-2">{product.rating}</span>
+                <span className="ml-1 mt-[1px]">{product.rating + " /"}</span>
+                <span className="text-md ml-1 mt-[1px]">
+                  {reviews.length > 0
+                    ? reviews.length + " recenzii"
+                    : "0 recenzii"}
+                </span>
               </div>
             </div>
-            <ShoppingForm />
+            <TrousseauForm />
           </div>
         </div>
       </div>

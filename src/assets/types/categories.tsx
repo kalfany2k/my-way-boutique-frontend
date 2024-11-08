@@ -39,7 +39,7 @@ export const categories: Category[] = [
     name: "Prima baie",
     path: "/categorii/prima_baie",
     subcategories: [
-      { name: "Set produse prima baita", path: "/produse/prima_baie/set" },
+      { name: "Set produse prima baie", path: "/seturi/prima_baie" },
       { name: "Haine", path: "/produse/haine?category=prima_baie" },
       { name: "Accesorii", path: "/produse/accesorii?category=prima_baie" },
       { name: "Cadouri", path: "/produse/cadouri?category=prima_baie" },
@@ -51,8 +51,8 @@ export const categories: Category[] = [
     subcategories: [
       { name: "Baietei", path: "/categorii/prima_aniversare?gender=baieti" },
       { name: "Fetite", path: "/categorii/prima_aniversare?gender=fete" },
-      { name: "Set mot", path: "/categorii/prima_aniversare/set_mot" },
-      { name: "Set turta", path: "/categorii/prima_aniversare/set_turta" },
+      { name: "Set mot", path: "/seturi/mot" },
+      { name: "Set turta", path: "/seturi/turta" },
       { name: "Tricouri", path: "/produse/tricouri?category=prima_aniversare" },
       { name: "Tavite", path: "/produse/tavite?category=prima_aniversare" },
       { name: "Hainute", path: "/produse/haine?category=prima_aniversare" },
