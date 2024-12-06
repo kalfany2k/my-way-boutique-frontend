@@ -18,7 +18,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="mt-6 w-full bg-warm-nude-400 px-2 pb-24 pt-6 lg:mt-8 lg:px-12 lg:pb-6">
+    <footer className="mt-6 w-full bg-rosy-nude-200 px-2 pb-24 pt-6 lg:mt-8 lg:px-12 lg:pb-6">
       <div className="mx-auto max-w-[90%] lg:max-w-[80%]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-8">
           {/* First column */}

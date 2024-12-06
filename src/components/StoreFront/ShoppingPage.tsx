@@ -2,7 +2,8 @@ import texture from "../../assets/pictures/texture.jpg";
 import useData from "../../hooks/useData";
 import ProductGrid, { ProductData } from "./ProductGrid";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
-import { pluralToSingular } from "../../assets/types/types";
+import { pluralToSingular, singularToPlural } from "../../assets/types/plurals";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const ITEMS_PER_PAGE = 16;
 
@@ -10,18 +11,9 @@ interface QueryParams {
   categories?: string | null;
   type?: string | null;
   gender?: string | null;
+  search?: string | null;
   skip: number;
 }
-
-export const singularToPlural: Record<string, string> = Object.entries(
-  pluralToSingular,
-).reduce(
-  (acc, [plural, singular]) => ({
-    ...acc,
-    [singular]: plural,
-  }),
-  {},
-);
 
 const ShoppingPage = () => {
   const { category, type } = useParams();
@@ -30,25 +22,29 @@ const ShoppingPage = () => {
 
   const queryParams: QueryParams = {
     // first option is retrieved from the router parameters, and the second one from the search parameters (e.g. filtering)
-    categories: category || searchParams.get("category") || null,
+    categories: category || searchParams.get("categories") || null,
     // first option is retrieved from the router parameters, and the second one from the search parameters (e.g. same as previously)
     type: (type && pluralToSingular[type]) || searchParams.get("type") || null,
+    search: searchParams.get("search"),
     gender: searchParams.get("gender"),
     skip: Number(searchParams.get("skip")) || 0,
   };
 
-  const { data, count, error, isLoading } = useData<ProductData>(
-    "/products",
-    { params: queryParams },
-    [location],
-  );
+  // prettier-ignore
+  const { data, count, error, isLoading } = useData<ProductData>("/products", { params: queryParams }, [location], );
 
   const totalPages = Math.ceil((count || 0) / ITEMS_PER_PAGE);
 
   const handlePageChange = (newPage: number) => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set("skip", newPage.toString());
-    setSearchParams(newParams);
+    const scrollableDiv = document.getElementById("scrollable-div");
+    if (scrollableDiv) {
+      scrollableDiv.scrollTo({ top: 0, behavior: "auto" });
+    }
+    setTimeout(() => {
+      const newParams = new URLSearchParams(searchParams);
+      newParams.set("skip", newPage.toString());
+      setSearchParams(newParams);
+    }, 400);
   };
 
   if (error) {
@@ -56,70 +52,101 @@ const ShoppingPage = () => {
   }
 
   return (
-    <div className="mt-6 flex h-fit min-h-screen flex-col items-center">
-      <div
-        className="mb-6 flex h-[15%] min-h-24 min-w-80 max-w-fit items-center justify-center rounded-sm bg-no-repeat px-2 shadow-xl lg:px-12"
-        style={{
-          backgroundImage: `url(${texture})`,
-          backgroundSize: "200%",
-          backgroundPosition: "center",
-        }}
-      >
-        <span className="font-overlock-black text-4xl text-rose-950 lg:text-6xl">
-          {(queryParams.type &&
-            queryParams.categories &&
-            (
-              singularToPlural[queryParams.type] || queryParams.type
-            ).toUpperCase() +
-              " " +
-              queryParams.categories.replace("_", " ").toUpperCase()) ||
-            (queryParams.categories &&
-              "ARTICOLE " +
-                queryParams.categories.replace("_", " ").toUpperCase()) ||
-            (queryParams.type &&
+    <div className="flex min-h-page-height w-full flex-grow flex-col items-center">
+      {(queryParams.categories || queryParams.type) && (
+        <div className="mb-3 flex min-h-24 w-full items-center justify-center border-b-[1px] border-black px-2 shadow-xl lg:px-12">
+          <span className="font-signika-medium text-4xl text-gray-800 lg:text-5xl">
+            {(
+              queryParams.type &&
+              queryParams.categories &&
+              (singularToPlural[queryParams.type] || queryParams.type) +
+                " " +
+                queryParams.categories.replace("_", " ")
+            )?.toUpperCase() ||
               (
-                singularToPlural[queryParams.type] || queryParams.type
-              ).toUpperCase())}
-        </span>
-      </div>
-      <div className="mb-6 flex h-fit w-dvw justify-center lg:w-4/5">
-        <ProductGrid items={data} />
-      </div>
-      <div className="mt-auto flex h-12 w-fit flex-row justify-around">
-        {Array.from({ length: totalPages }, (_, i) => i).map((page) => {
-          // Show first page, last page, current page, and pages around current
-          const shouldShow =
-            page === 0 ||
-            page === totalPages - 1 ||
-            Math.abs(page - queryParams.skip) <= 1;
+                queryParams.categories &&
+                "ARTICOLE " + queryParams.categories.replace("_", " ")
+              )?.toUpperCase() ||
+              (
+                queryParams.type &&
+                (singularToPlural[queryParams.type] || queryParams.type)
+              )?.toUpperCase() ||
+              (
+                queryParams.gender && "PRODUSE PENTRU " + queryParams.gender
+              )?.toUpperCase()}
+          </span>
+        </div>
+      )}
 
-          if (!shouldShow) {
-            // Show ellipsis if there's a gap
-            if (page === 1 || page === totalPages - 2) {
-              return (
-                <span key={page} className="mx-2 mt-1 lg:mx-1">
-                  ...
-                </span>
-              );
+      <div
+        className={`${queryParams.search ? "mt-3" : ""} mb-6 flex h-fit w-dvw flex-col items-center lg:w-4/5`}
+      >
+        <div className="mb-3 flex w-full flex-col">
+          <div className="">
+            <span>Sorteaza dupa...</span>
+          </div>
+          {/* prettier-ignore */}
+          <span className="">
+            {count} {count > 20 ? "de" : ""} produse gasite {queryParams.search ? "pentru cautarea termenului \"" + queryParams.search + "\"" : ""}
+          </span>
+        </div>
+        <ProductGrid items={data} count={count} />
+      </div>
+
+      {totalPages > 1 && (
+        <div className="relative mt-auto flex h-12 w-fit flex-row items-center justify-around">
+          {queryParams.skip > 1 && (
+            <div className="absolute left-0 flex -translate-x-full cursor-pointer items-center justify-center">
+              <ChevronLeft
+                className=""
+                onClick={() => handlePageChange(queryParams.skip - 1)}
+              />
+            </div>
+          )}
+
+          {Array.from({ length: totalPages }, (_, i) => i).map((page) => {
+            // Show first page, last page, current page, and pages around current
+            const shouldShow =
+              page === 0 ||
+              page === totalPages - 1 ||
+              Math.abs(page - queryParams.skip) <= 1;
+
+            if (!shouldShow) {
+              // Show ellipsis if there's a gap
+              if (page === 1 || page === totalPages - 2) {
+                return (
+                  <span key={page} className="mx-2 mt-1 lg:mx-1">
+                    ...
+                  </span>
+                );
+              }
+              return null;
             }
-            return null;
-          }
 
-          return (
-            <button
-              key={page}
-              onClick={() => handlePageChange(page)}
-              className={`mx-1 h-10 w-10 rounded transition-colors duration-300 ease-out ${
-                page === queryParams.skip
-                  ? "bg-rose-500 text-white"
-                  : "bg-rose-100 hover:bg-rose-200"
-              }`}
-            >
-              {page + 1}
-            </button>
-          );
-        })}
-      </div>
+            return (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`mx-1 h-10 w-10 rounded transition-colors duration-300 ease-out ${
+                  page === queryParams.skip
+                    ? "bg-rose-500 text-white"
+                    : "bg-rose-100 hover:bg-rose-200"
+                }`}
+              >
+                {page + 1}
+              </button>
+            );
+          })}
+          {queryParams.skip < totalPages - 2 && (
+            <div className="absolute right-0 flex translate-x-full cursor-pointer items-center justify-center">
+              <ChevronRight
+                className=""
+                onClick={() => handlePageChange(queryParams.skip + 1)}
+              />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

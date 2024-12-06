@@ -22,7 +22,7 @@ const TopBar = () => {
         }}
       />
       <div
-        className={`fixed ${topBarOpen ? "-translate-y-0" : "-translate-y-full"} top-0 z-priority flex h-96 w-screen flex-col items-center justify-end bg-warm-nude-300 transition-transform duration-500 ease-in-out`}
+        className={`fixed ${topBarOpen ? "-translate-y-0" : "-translate-y-full"} top-0 z-priority flex h-96 w-screen flex-col items-center justify-end bg-rosy-nude-200 transition-transform duration-500 ease-in-out`}
       >
         <ArrowUpFromLine
           className="m-2 size-12 rounded-full border border-gray-700 bg-warm-nude-400 p-1"

@@ -145,7 +145,7 @@ const RegisterForm = () => {
         {error && <p className="self-center text-sm text-red-500">{error}</p>}
         <button
           type="submit"
-          className="m-3 rounded-full bg-warm-nude-500 px-4 py-2 font-signika text-2xl"
+          className="m-3 rounded-full bg-rose-200 px-4 py-2 text-2xl"
         >
           Creeaza cont
         </button>

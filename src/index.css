@@ -4,11 +4,11 @@
 
 @layer components {
   body {
-    @apply fixed w-full bg-warm-nude-200 font-signika;
+    @apply fixed;
   }
 
   .icon {
-    @apply mr-2 flex flex-row items-center rounded-full bg-warm-nude-400 p-2 shadow-xl ring-black transition-colors duration-500 ease-in-out hover:bg-warm-nude-500 lg:mr-4 lg:p-3;
+    @apply mr-2 flex flex-row items-center rounded-full bg-rosy-nude-200 p-3 shadow-md transition-colors duration-500 ease-in-out hover:bg-rosy-nude-300 lg:mr-4;
   }
 
   .hero-item {
@@ -16,7 +16,7 @@
   }
 
   .login-container {
-    @apply mx-1 flex w-full flex-1 flex-col items-center justify-around rounded-sm;
+    @apply mx-1 my-6 flex w-full flex-1 flex-col items-center justify-between rounded-sm;
   }
 
   .login-entry {

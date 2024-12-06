@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <div className="fixed inset-0 z-header flex h-total-header touch-pan-up flex-col">
-      <div className="z-10 flex h-10 items-center justify-center bg-pink-nude font-overlock-bold text-rose-950 shadow-md">
+      <div className="z-10 flex h-10 items-center justify-center border-b-[1px] border-black bg-rosy-nude-200 font-overlock-bold text-gray-800">
         <span className="hidden text-xl lg:block">
           Cumpara acum si beneficiaza de{" "}
           <span className="font-overlock-bolditalic underline">
@@ -35,7 +35,7 @@ const Header = () => {
           <span>L-V: 9:00-16:00</span>
         </div>
       </div>
-      <div className="flex h-header flex-row items-center justify-between bg-warm-nude-300 shadow-md">
+      <div className="flex h-header flex-row items-center justify-between border-b-[1px] border-black bg-white">
         <div className="z-sidebar flex-1 lg:hidden xl:block">
           <TopBar />
         </div>

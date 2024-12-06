@@ -51,7 +51,12 @@ const LoginForm = () => {
             {errors.email.message}
           </p>
         )}
-        <input {...register("email")} type="text" className="login-entry" />
+        <input
+          {...register("email")}
+          type="text"
+          className="login-entry"
+          autoComplete="email"
+        />
         <label className="ml-10 self-start">Parola</label>
         {errors.password && (
           <p className="mb-1 ml-10 self-start text-sm text-red-500">
@@ -62,6 +67,7 @@ const LoginForm = () => {
           {...register("password")}
           type="password"
           className="login-entry"
+          autoComplete="current-password"
         />
         <div className="my-2 flex w-full flex-row">
           <label className="ml-10 self-start">Tine minte detaliile</label>
@@ -73,16 +79,16 @@ const LoginForm = () => {
           />
         </div>
       </div>
-      <div className="relative flex flex-col">
+      <div className="flex flex-col">
         {error && <span className="text-center text-red-500">{error}</span>}
         <button
           type="submit"
-          className="my-2 rounded-full bg-warm-nude-500 px-4 py-2 text-2xl"
+          className="my-2 rounded-full bg-rose-200 px-4 py-2 text-2xl"
         >
           Logheaza-te
         </button>
         <span
-          className="absolute top-[calc(100%-4px)] w-full cursor-pointer self-start text-center text-gray-500"
+          className="w-full cursor-pointer text-center text-gray-500"
           onClick={() => setForgottenPassword(true)}
         >
           Ai uitat parola?

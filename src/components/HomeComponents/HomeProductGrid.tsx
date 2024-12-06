@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import placeholder from "../../assets/pictures/placeholder1x1.jpg";
 import ItemCard from "./ItemCard";
 import useData from "../../hooks/useData";
 import { ProductData } from "../StoreFront/ProductGrid";

@@ -6,7 +6,7 @@ import Rating from "./Rating";
 import { AxiosError } from "axios";
 import ErrorPage from "./ErrorPage";
 import ImageLayout from "./ImageLayout";
-import TrousseauForm from "./TrousseauForm";
+import ShoppingForm from "./ShoppingForm";
 
 const ProductPage = () => {
   const params = useParams<{ productID: string }>();
@@ -52,7 +52,11 @@ const ProductPage = () => {
     fetchProduct();
   }, [params.productID]);
 
-  if (product && reviews)
+  if (isLoading) return <div className="min-h-page-height"></div>;
+
+  if (error) return <ErrorPage />;
+
+  if (product)
     return (
       <div className="mt-8 grid h-fit min-h-page-height grid-cols-1 lg:grid-cols-2">
         <div className="lg:mr-2">
@@ -73,23 +77,23 @@ const ProductPage = () => {
               <span className="font-overlock-regular text-xl">
                 {product.price} RON
               </span>
-              <div className="flex flex-row items-center font-nunito-medium">
-                <Rating rating={product.rating} size={20} />
-                <span className="ml-1 mt-[1px]">{product.rating + " /"}</span>
-                <span className="text-md ml-1 mt-[1px]">
-                  {reviews.length > 0
-                    ? reviews.length + " recenzii"
-                    : "0 recenzii"}
-                </span>
-              </div>
+              {product.rating && (
+                <div className="flex flex-row items-center font-nunito-medium">
+                  <Rating rating={product.rating} size={20} />
+                  <span className="ml-1 mt-[1px]">{product.rating + " /"}</span>
+                  <span className="text-md ml-1 mt-[1px]">
+                    {reviews.length > 0
+                      ? reviews.length + " recenzii"
+                      : "0 recenzii"}
+                  </span>
+                </div>
+              )}
             </div>
-            <TrousseauForm />
+            <ShoppingForm product={product} />
           </div>
         </div>
       </div>
     );
-
-  if (error) return <ErrorPage />;
 };
 
 export default ProductPage;

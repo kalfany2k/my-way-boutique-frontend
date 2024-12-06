@@ -11,3 +11,13 @@ export const pluralToSingular: Record<string, string> = {
   perii: "perie",
   oglinzi: "oglinda",
 } as const;
+
+export const singularToPlural: Record<string, string> = Object.entries(
+  pluralToSingular,
+).reduce(
+  (acc, [plural, singular]) => ({
+    ...acc,
+    [singular]: plural,
+  }),
+  {},
+);

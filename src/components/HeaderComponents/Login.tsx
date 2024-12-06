@@ -31,12 +31,12 @@ const Login = () => {
         <User className="size-6" />
       </button>
       <div
-        className={`fixed left-1/2 top-1/2 z-priority h-full w-full bg-warm-nude-200 md:h-fit md:min-h-[624px] ${loginOpen ? "opacity-100" : "pointer-events-none opacity-0"} flex -translate-x-1/2 -translate-y-1/2 flex-col items-center overflow-hidden transition-all duration-500 ease-in-out md:w-3/5 lg:w-2/5 lg:rounded-lg xl:w-1/3 2xl:w-1/5`}
+        className={`fixed left-1/2 top-1/2 z-priority h-full w-full bg-rosy-nude-200 md:h-fit md:min-h-[624px] ${loginOpen ? "opacity-100" : "pointer-events-none opacity-0"} flex -translate-x-1/2 -translate-y-1/2 flex-col items-center overflow-hidden transition-all duration-500 ease-in-out md:w-3/5 lg:w-2/5 lg:rounded-lg xl:w-1/3 2xl:w-1/5`}
       >
         <span className="my-6 font-ethereal-bold text-5xl">Autentificare</span>
         <div className="relative mb-6 flex w-4/5 flex-row justify-around">
           <button
-            className={`w-[45%] ${menuOption ? "ring-2 ring-black" : ""} rounded-xl bg-gradient-to-r from-warm-nude-500 to-rose-300 p-2 text-xl`}
+            className={`w-[45%] ${menuOption ? "ring-2 ring-black" : ""} rounded-xl bg-gradient-to-r from-slate-300 to-rose-200 p-2 text-xl`}
             onClick={() => {
               if (!menuOption) setMenuOption(true);
             }}
@@ -44,7 +44,7 @@ const Login = () => {
             Logare
           </button>
           <button
-            className={`w-[45%] rounded-xl bg-gradient-to-l from-warm-nude-500 to-rose-300 p-2 text-xl ${!menuOption ? "ring-2 ring-black" : ""}`}
+            className={`w-[45%] rounded-xl bg-gradient-to-l from-slate-300 to-rose-200 p-2 text-xl ${!menuOption ? "ring-2 ring-black" : ""}`}
             onClick={() => {
               if (menuOption) setMenuOption(false);
             }}
@@ -52,7 +52,7 @@ const Login = () => {
             Inregistrare
           </button>
         </div>
-        <div className="h-[3px] w-full bg-gradient-to-r from-warm-nude-400 via-rosy-nude-600 to-warm-nude-400" />
+        <div className="h-[3px] w-full bg-gradient-to-r from-rosy-nude-300 via-rosy-nude-500 to-rosy-nude-300" />
         {menuOption ? <LoginForm /> : <RegisterForm />}
         <X
           className="absolute right-0 top-0 m-1 size-12 cursor-pointer md:size-8"

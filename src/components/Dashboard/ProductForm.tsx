@@ -121,11 +121,9 @@ const ProductForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data: FormFields) => {
     try {
-      console.log(data);
       setIdError(null);
       setNameError(null);
-      const response = await postProduct(data);
-      console.log(response);
+      await postProduct(data);
       reset();
       setSubmitSuccess(true);
     } catch (error) {
@@ -145,12 +143,12 @@ const ProductForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="m-4 flex h-full w-full flex-col"
+      className="flex h-full w-full flex-col items-center lg:ml-8 lg:items-start"
     >
       <label>Alege codul de identificare al produsului</label>
       <input
         {...register("id")}
-        className="mb-2 w-4/5 rounded-lg bg-transparent p-2 text-xl ring-1 ring-orange-400 focus-within:bg-warm-nude-300/50 lg:w-1/2"
+        className="mb-2 w-4/5 rounded-lg bg-transparent p-2 text-xl ring-1 ring-rose-400 focus-within:bg-rosy-nude-200 lg:w-1/2"
         type="text"
       />
       {idError && <span className="text-sm text-red-500">{idError}</span>}
@@ -161,7 +159,7 @@ const ProductForm = () => {
       <label>Alege titlul produsului</label>
       <input
         {...register("name")}
-        className="mb-2 w-4/5 rounded-lg bg-transparent p-2 text-xl ring-1 ring-orange-400 focus-within:bg-warm-nude-300/50 lg:w-1/2"
+        className="mb-2 w-4/5 rounded-lg bg-transparent p-2 text-xl ring-1 ring-rose-400 focus-within:bg-rosy-nude-200 lg:w-1/2"
         type="text"
       />
       {nameError && <span className="text-sm text-red-500">{nameError}</span>}
@@ -172,7 +170,7 @@ const ProductForm = () => {
       <label>Alege pretul produsului</label>
       <input
         {...register("price")}
-        className="mb-2 w-4/5 rounded-lg bg-transparent p-2 text-xl ring-1 ring-orange-400 focus-within:bg-warm-nude-300/50 lg:w-1/2"
+        className="mb-2 w-4/5 rounded-lg bg-transparent p-2 text-xl ring-1 ring-rose-400 focus-within:bg-rosy-nude-200 lg:w-1/2"
         type="number"
         step="0.01"
       />
@@ -194,8 +192,8 @@ const ProductForm = () => {
                   onClick={() => field.onChange(category.value)}
                   className={`category-item flex min-h-[60px] select-none flex-col items-center justify-center rounded-sm p-2 transition-colors duration-300 lg:min-h-0 ${
                     field.value === category.value
-                      ? "bg-warm-nude-700 text-white"
-                      : "bg-warm-nude-300 hover:bg-warm-nude-400"
+                      ? "bg-rose-400 text-white"
+                      : "bg-rose-200 hover:bg-rose-300"
                   }`}
                 >
                   <span>{category.name}</span>
@@ -228,8 +226,8 @@ const ProductForm = () => {
                   }}
                   className={`category-item flex min-h-[60px] select-none flex-col items-center justify-center rounded-sm p-2 transition-colors duration-300 lg:min-h-0 ${
                     field.value.includes(key)
-                      ? "bg-warm-nude-700 text-white"
-                      : "bg-warm-nude-300 hover:bg-warm-nude-400"
+                      ? "bg-rose-400 text-white"
+                      : "bg-rose-200 hover:bg-rose-300"
                   }`}
                 >
                   <span>{value}</span>
@@ -259,8 +257,8 @@ const ProductForm = () => {
                   onClick={() => field.onChange(gender)}
                   className={`category-item flex min-h-[60px] select-none flex-col items-center justify-center rounded-sm p-2 transition-colors duration-300 lg:min-h-0 ${
                     field.value === gender
-                      ? "bg-warm-nude-700 text-white"
-                      : "bg-warm-nude-300 hover:bg-warm-nude-400"
+                      ? "bg-rose-400 text-white"
+                      : "bg-rose-200 hover:bg-rose-300"
                   }`}
                 >
                   <span>{gender}</span>

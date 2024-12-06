@@ -21,7 +21,7 @@ const LoggedInMenu: React.FC<Props> = ({ user }) => {
 
   return (
     <div
-      className={`relative mr-4 flex w-fit min-w-28 flex-row items-center ${openMenu ? "cursor-default rounded-t-2xl bg-warm-nude-500" : "rounded-full"} bg-warm-nude-400 px-3 py-2 drop-shadow-lg transition-colors duration-500 ease-in-out hover:bg-warm-nude-500`}
+      className={`relative mr-4 hidden w-fit min-w-28 flex-row items-center md:flex ${openMenu ? "cursor-default rounded-t-xl" : "rounded-full"} bg-rosy-nude-200 px-3 py-2 drop-shadow-lg transition-colors duration-500 ease-in-out hover:bg-rosy-nude-300`}
       onMouseEnter={() => setOpenMenu(!openMenu)}
       onMouseLeave={() => setOpenMenu(!openMenu)}
     >

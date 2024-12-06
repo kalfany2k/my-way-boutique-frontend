@@ -63,7 +63,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         <button
           type="button"
           onClick={handleButtonClick}
-          className="rounded-md bg-warm-nude-600 px-4 py-2 text-white hover:bg-warm-nude-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
+          className="rounded-md bg-rose-200 px-4 py-2 transition-colors duration-300 ease-in-out hover:bg-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2"
         >
           {multiple ? "Selectează fișierele" : "Selectează fișierul"}
         </button>

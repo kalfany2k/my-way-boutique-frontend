@@ -92,12 +92,12 @@ export default {
         "priority": 60,
       },
       height: {
-        "page-height": "calc(100dvh - 10.5rem)",
+        "page-height": "calc(100dvh - 12.5rem)",
         "header": "5rem",
         "total-header": "7.5rem",
       },
       minHeight: {
-        "page-height": "calc(100dvh - 10.5rem)",
+        "page-height": "calc(100dvh - 9.5rem)",
       },
       margin: {
         "header": "5rem",

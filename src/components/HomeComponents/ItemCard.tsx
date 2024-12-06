@@ -14,7 +14,7 @@ const ItemCard: React.FC<Props> = ({ product }) => {
           alt={product.name}
           className="h-auto w-full rounded-sm shadow-md"
         /> */}
-        <div className="aspect-square w-full bg-pink-nude" />
+        <div className="aspect-square w-full bg-rosy-nude-200" />
       </Link>
       <p className="mt-2 text-center font-nunito-medium text-sm text-gray-700">
         {product.name}
