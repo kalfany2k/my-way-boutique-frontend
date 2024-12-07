@@ -1,7 +1,7 @@
 import { Search, X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
-import apiClient from "../../services/api-client";
+import apiClient from "../../services/apiClient";
 
 interface SearchResult {
   id: string;

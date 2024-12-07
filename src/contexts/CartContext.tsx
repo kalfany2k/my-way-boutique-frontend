@@ -4,6 +4,9 @@ export interface CartItem {
   id: number;
   product_id: string;
   product_name: string;
+  product_type: string;
+  product_price: number;
+  product_primary_image: string;
   quantity: number;
   personalised_name: string | null;
   personalised_date: string | null;

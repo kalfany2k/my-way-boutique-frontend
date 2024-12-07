@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { ProductData, ReviewData } from "./ProductGrid";
-import apiClient from "../../services/api-client";
+import apiClient from "../../services/apiClient";
 import { useEffect, useState } from "react";
 import Rating from "./Rating";
 import { AxiosError } from "axios";
@@ -69,7 +69,7 @@ const ProductPage = () => {
           />
         </div>
         <div className="flex flex-col items-center lg:ml-2 lg:items-start">
-          <div className="w-fit">
+          <div className="w-fit rounded-md bg-rose-100 p-4">
             <span className="font-merriweather-light text-3xl text-gray-800">
               {product.name}
             </span>

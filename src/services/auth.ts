@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import apiClient from "./api-client";
+import apiClient from "./apiClient";
 import Cookies from "js-cookie";
 
 export interface ErrorResponse {

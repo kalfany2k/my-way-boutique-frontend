@@ -8,7 +8,6 @@ import { ro } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import { CalendarFold, Minus, Plus } from "lucide-react";
-import { AxiosError } from "axios";
 import { postCartItem } from "../../services/cart";
 import { useCart } from "../../contexts/CartContext";
 
@@ -43,7 +42,7 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
   var date = new Date();
   var todayDate = moment(date).format("DD/MM/YYYY");
-  const { addCartItem, cartItems } = useCart();
+  const { addCartItem, deleteCartItem, cartItems } = useCart();
 
   useEffect(() => {
     switch (product.type) {
@@ -84,7 +83,8 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data: FormFields) => {
     try {
-      const response = await postCartItem(data, product.id, product.name);
+      const response = await postCartItem(data, product.id);
+      if (response.data.changed_quantity) deleteCartItem(response.data.item.id);
       addCartItem(response.data.item);
       reset();
     } catch (error) {
@@ -233,7 +233,7 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
         </div>
         <button
           type="submit"
-          className="rounded-lg bg-warm-nude-400 p-2 shadow-xl transition-colors duration-300 ease-in-out hover:bg-warm-nude-600"
+          className="rounded-lg bg-rose-200 p-2 shadow-md transition-colors duration-300 ease-in-out hover:bg-rose-300"
         >
           <span className="font-signika-medium text-xl">Adauga in cos</span>
         </button>

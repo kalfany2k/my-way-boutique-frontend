@@ -1,4 +1,4 @@
-import apiClient from "./api-client";
+import apiClient from "./apiClient";
 import { FormFields } from "../components/StoreFront/ShoppingForm";
 import Cookies from "js-cookie";
 import { CartItem } from "../contexts/CartContext";
@@ -9,13 +9,10 @@ type FormData = FormFields;
 export async function postCartItem(
   data: FormData,
   product_id: string,
-  product_name: string,
 ): Promise<AxiosResponse> {
   const formData = new FormData();
 
   formData.append("product_id", product_id);
-
-  formData.append("product_name", product_name);
 
   formData.append("quantity", data.quantity.toString());
 

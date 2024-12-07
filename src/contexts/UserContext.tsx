@@ -24,7 +24,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     // Load user from session storage on initial render
-    const storedUser = sessionStorage.getItem("user");
+    const storedUser =
+      sessionStorage.getItem("user") || localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }

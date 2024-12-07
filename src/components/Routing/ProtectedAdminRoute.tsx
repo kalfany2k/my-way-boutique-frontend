@@ -1,8 +1,9 @@
 import { useUser } from "../../contexts/UserContext";
 import { Navigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import apiClient from "../../services/api-client";
+import apiClient from "../../services/apiClient";
 import Cookies from "js-cookie";
+import authService from "../../services/authService";
 
 interface ProtectedAdminRouteProps {
   children: React.ReactNode;
@@ -11,7 +12,7 @@ interface ProtectedAdminRouteProps {
 const ProtectedAdminRoute: React.FC<ProtectedAdminRouteProps> = ({
   children,
 }) => {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const location = useLocation();
   const [isVerifying, setIsVerifying] = useState<boolean>(true);
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
@@ -30,10 +31,16 @@ const ProtectedAdminRoute: React.FC<ProtectedAdminRouteProps> = ({
             Authorization: `Bearer ${authToken}`,
           },
         });
+
         if (response.data?.status === "verified") {
           setIsAuthorized(true);
         }
-      } catch (error) {
+      } catch (error: any) {
+        if (error.response?.status === 401) {
+          // Clear auth state if token is expired/invalid
+          authService.clearAuth();
+          setUser(null);
+        }
         setIsAuthorized(false);
       }
       setIsVerifying(false);

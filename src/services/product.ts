@@ -1,4 +1,4 @@
-import apiClient from "./api-client";
+import apiClient from "./apiClient";
 import { FormFields } from "../components/Dashboard/ProductForm";
 import Cookies from "js-cookie";
 

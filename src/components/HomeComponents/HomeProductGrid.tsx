@@ -21,6 +21,13 @@ const HomeProductGrid: React.FC<GridProps> = ({
     params: { type: type, limit: 8 },
   });
 
+  const handleShowMore = () => {
+    const scrollableDiv = document.getElementById("scrollable-div");
+    if (scrollableDiv) {
+      scrollableDiv.scrollTo({ top: 0, behavior: "auto" });
+    }
+  };
+
   return (
     <>
       <div className="hero-item z-body mx-auto h-fit w-11/12 md:w-2/3">
@@ -42,6 +49,7 @@ const HomeProductGrid: React.FC<GridProps> = ({
           <Link
             to={path}
             className="font-ethereal-light text-lg font-bold hover:underline lg:text-xl"
+            onClick={handleShowMore}
           >
             Apasa aici pentru a vedea mai multe
           </Link>

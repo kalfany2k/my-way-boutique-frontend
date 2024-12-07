@@ -5,6 +5,7 @@ import { z } from "zod";
 import { useOverlay } from "../../contexts/OverlayContext";
 import { login } from "../../services/auth";
 import { useUser } from "../../contexts/UserContext";
+import authService from "../../services/authService";
 
 const formSchema = z.object({
   email: z
@@ -20,7 +21,7 @@ type FormFields = z.infer<typeof formSchema>;
 
 const LoginForm = () => {
   const { hideOverlay } = useOverlay();
-  const { setUser, setUserLong } = useUser();
+  const { setUser } = useUser();
   const [error, setError] = useState<string | null>(null);
   const {
     register,
@@ -33,9 +34,10 @@ const LoginForm = () => {
     try {
       // prettier-ignore
       const response = await login(data.email, data.password, data.keepLoggedIn);
+      authService.storeUser(response.user, data.keepLoggedIn);
+      setUser(response.user);
       hideOverlay();
       setError(null);
-      data.keepLoggedIn ? setUserLong(response.user) : setUser(response.user);
     } catch (error) {
       // prettier-ignore
       error instanceof Error ? setError(error.message) : setError("O eroare neasteptata s-a intamplat");
