@@ -9,14 +9,12 @@ interface Props {
 }
 
 const LoggedInMenu: React.FC<Props> = ({ user }) => {
-  const { setUser, setUserLong } = useUser();
+  const { setUser } = useUser();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const handleLogOut = () => {
     setOpenMenu(false);
     setUser(null);
-    setUserLong(null);
-    Cookies.remove("authToken");
   };
 
   return (
@@ -26,7 +24,7 @@ const LoggedInMenu: React.FC<Props> = ({ user }) => {
       onMouseLeave={() => setOpenMenu(!openMenu)}
     >
       <UserCheck className="mr-1 h-6 w-6" />
-      <span className="mt-[1px] flex-1 text-center font-nunito-regular text-xl">
+      <span className="ml-[1px] mt-[2px] flex-1 text-center font-nunito-regular text-xl">
         {user.surname}
       </span>
       <div className={`${openMenu ? "" : "invisible"} bg-inherit`}>

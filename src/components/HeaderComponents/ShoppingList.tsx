@@ -3,24 +3,20 @@ import apiClient from "../../services/apiClient";
 import Cookies from "js-cookie";
 import { useUser } from "../../contexts/UserContext";
 import { Trash } from "lucide-react";
-import { CartItem, useCart } from "../../contexts/CartContext";
-import { ProductData } from "../StoreFront/ProductGrid";
+import { useCart } from "../../contexts/CartContext";
 import { Link } from "react-router-dom";
+import { useOverlay } from "../../contexts/OverlayContext";
 
 const ShoppingList = () => {
-  const { cartItems, setCartItems, addCartItem, deleteCartItem } = useCart();
+  const { cartItems, setCartItems, deleteCartItem } = useCart();
+  const { hideOverlay } = useOverlay();
   const [authToken, setAuthToken] = useState<string | undefined>(undefined);
   const { user } = useUser();
 
   useEffect(() => {
     const token = Cookies.get("authToken");
     setAuthToken(token);
-    if (token) {
-      retrieveCart(token);
-      console.log(cartItems[0]);
-    } else {
-      setCartItems([]);
-    }
+    token ? retrieveCart(token) : setCartItems([]);
   }, [user]);
 
   // retrieveCart simply returns the current user's cart based on his JWT token's user id
@@ -63,6 +59,7 @@ const ShoppingList = () => {
             <div className="flex flex-1 flex-col items-center justify-between bg-rose-200/25 py-1">
               <Link
                 to={`/produse/${cartItem.product_type}/${cartItem.product_id}`}
+                onClick={hideOverlay}
               >
                 <span>{cartItem.product_name}</span>
               </Link>

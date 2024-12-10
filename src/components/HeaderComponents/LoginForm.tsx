@@ -21,7 +21,7 @@ type FormFields = z.infer<typeof formSchema>;
 
 const LoginForm = () => {
   const { hideOverlay } = useOverlay();
-  const { setUser } = useUser();
+  const { setUser, setUserLong } = useUser();
   const [error, setError] = useState<string | null>(null);
   const {
     register,
@@ -33,11 +33,12 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
       // prettier-ignore
-      const response = await login(data.email, data.password, data.keepLoggedIn);
-      authService.storeUser(response.user, data.keepLoggedIn);
-      setUser(response.user);
-      hideOverlay();
+      const response = await login(data.email, data.password);
+      // if login was successful, by now the authToken would have been updated
+      data.keepLoggedIn ? setUserLong(response.user) : setUser(response.user);
+      // then, update the session/local storage with the User object, alongside the stateful user we will be using
       setError(null);
+      hideOverlay();
     } catch (error) {
       // prettier-ignore
       error instanceof Error ? setError(error.message) : setError("O eroare neasteptata s-a intamplat");

@@ -7,6 +7,7 @@ import ShoppingBag from "./ShoppingBag";
 import { useUser } from "../../contexts/UserContext";
 import LoggedInMenu from "./LoggedInMenu";
 import { Clock, Phone } from "lucide-react";
+import CurrencyModifier from "./CurrencyModifier";
 
 const Header = () => {
   const { user } = useUser();
@@ -36,8 +37,11 @@ const Header = () => {
         </div>
       </div>
       <div className="flex h-header flex-row items-center justify-between border-b-[1px] border-black bg-white">
-        <div className="z-sidebar flex-1 lg:hidden xl:block">
+        <div className="z-sidebar flex-1 lg:hidden">
           <TopBar />
+        </div>
+        <div className="mx-4 flex flex-row">
+          <CurrencyModifier />
         </div>
         <div className="absolute left-1/2 -translate-x-1/2 lg:left-0 lg:ml-3 lg:-translate-x-0 xl:left-1/2 xl:ml-0 xl:-translate-x-1/2">
           <Link to="/" className="w-fit">

@@ -7,6 +7,7 @@ import { AxiosError } from "axios";
 import ErrorPage from "./ErrorPage";
 import ImageLayout from "./ImageLayout";
 import ShoppingForm from "./ShoppingForm";
+import { useCurrency } from "../../contexts/CurrencyContext";
 
 const ProductPage = () => {
   const params = useParams<{ productID: string }>();
@@ -14,6 +15,7 @@ const ProductPage = () => {
   const [reviews, setReviews] = useState<ReviewData[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { formatPrice } = useCurrency();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -74,8 +76,8 @@ const ProductPage = () => {
               {product.name}
             </span>
             <div className="mt-3 flex flex-row justify-between">
-              <span className="font-overlock-regular text-xl">
-                {product.price} RON
+              <span className="font-nunito-regular text-xl">
+                {formatPrice(product.price)}
               </span>
               {product.rating && (
                 <div className="flex flex-row items-center font-nunito-medium">

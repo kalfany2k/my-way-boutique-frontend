@@ -26,8 +26,8 @@ const ShoppingBag = () => {
         }}
       >
         <Bag className="size-6" />
-        <div className="absolute bottom-2 right-2 flex h-3 w-3 items-center justify-center rounded-full bg-inherit ring-1 ring-black">
-          <span className="mt-[2px] font-nunito-extrabold text-xs">
+        <div className="absolute bottom-2 right-2 flex h-3 w-3 flex-row items-center justify-center rounded-full bg-inherit ring-1 ring-black">
+          <span className="mt-[1px] text-center font-nunito-regular text-xs">
             {cartItems.length}
           </span>
         </div>

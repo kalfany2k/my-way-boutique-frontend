@@ -6,26 +6,29 @@ import { OverlayProvider } from "./contexts/OverlayContext";
 import { UserProvider } from "./contexts/UserContext";
 import { Outlet } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
+import { CurrencyProvider } from "./contexts/CurrencyContext";
 
 const App = () => {
   return (
-    <CartProvider>
-      <OverlayProvider>
-        <UserProvider>
-          <div className="z-header flex h-screen min-h-screen w-screen flex-col">
-            <Header />
-            <div
-              id="scrollable-div"
-              className="mt-total-header flex-grow overflow-y-auto scroll-smooth lg:mt-total-header"
-            >
-              <Categories />
-              <Outlet />
-              <Footer />
+    <CurrencyProvider>
+      <CartProvider>
+        <OverlayProvider>
+          <UserProvider>
+            <div className="z-header flex h-screen min-h-screen w-screen flex-col">
+              <Header />
+              <div
+                id="scrollable-div"
+                className="mt-total-header flex-grow overflow-y-auto scroll-smooth lg:mt-total-header"
+              >
+                <Categories />
+                <Outlet />
+                <Footer />
+              </div>
             </div>
-          </div>
-        </UserProvider>
-      </OverlayProvider>
-    </CartProvider>
+          </UserProvider>
+        </OverlayProvider>
+      </CartProvider>
+    </CurrencyProvider>
   );
 };
 

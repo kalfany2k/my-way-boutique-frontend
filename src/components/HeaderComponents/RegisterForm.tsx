@@ -2,8 +2,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useOverlay } from "../../contexts/OverlayContext";
-import { login, register as reg } from "../../services/auth";
-import { useState } from "react";
+import { login, register as registerUser } from "../../services/auth";
+import { useRef, useState } from "react";
 import { useUser } from "../../contexts/UserContext";
 
 const formSchema = z.object({
@@ -40,23 +40,30 @@ const formSchema = z.object({
 type FormFields = z.infer<typeof formSchema>;
 
 const RegisterForm = () => {
-  const [error, setError] = useState<string | null>(null);
+  const [existingEmailError, setExistingEmailError] = useState<string | null>(null);
+  const [confirmedEmailError, setConfirmedEmailError] = useState<string | null>(null);
   const { setUser } = useUser();
   const { hideOverlay } = useOverlay();
-  // prettier-ignore
-  const { register, handleSubmit, formState: { errors }, } = useForm<FormFields>({ resolver: zodResolver(formSchema), });
+  const { register, getValues, handleSubmit, formState: { errors }, } = useForm<FormFields>({ resolver: zodResolver(formSchema), });
+  const confirmEmailRef = useRef<HTMLInputElement>(null);
+
+  function validateEmail(secondaryEmail: string): boolean {
+    return secondaryEmail === getValues("email");
+  }
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    try {
-      // prettier-ignore
-      await reg(data.email, data.surname, data.name, data.gender, data.password );
-      hideOverlay();
-      setError(null);
-      const loginResponse = await login(data.email, data.password, false);
-      setUser(loginResponse.user);
-    } catch (error) {
-      // prettier-ignore
-      error instanceof Error ? setError(error.message) : setError("O eroare neasteptata s-a intamplat");
+    if (confirmEmailRef.current?.value && validateEmail(confirmEmailRef.current?.value)) {
+      try {
+        await registerUser(data.email, data.surname, data.name, data.gender, data.password );
+        hideOverlay();
+        setExistingEmailError(null);
+        const loginResponse = await login(data.email, data.password);
+        setUser(loginResponse.user);
+      } catch (error) {
+        error instanceof Error ? setExistingEmailError(error.message) : setExistingEmailError("O eroare neasteptata s-a intamplat");
+      }
+    } else {
+      setConfirmedEmailError("E-mailurile trebuie sa se potriveasca");
     }
   };
 
@@ -70,6 +77,14 @@ const RegisterForm = () => {
           </p>
         )}
         <input {...register("email")} type="text" className="login-entry" />
+
+        <span className="ml-10 self-start">Confirma adresa de e-mail</span>
+        {confirmedEmailError && (
+          <p className="mb-1 ml-10 self-start text-sm text-red-500">
+            {confirmedEmailError}
+          </p>
+        )}
+        <input ref={confirmEmailRef} type="text" className="login-entry" />
 
         {errors.gender && (
           <p className="mb-1 ml-10 self-start text-sm text-red-500">
@@ -142,7 +157,11 @@ const RegisterForm = () => {
         />
       </div>
       <div className="flex flex-col">
-        {error && <p className="self-center text-sm text-red-500">{error}</p>}
+        {existingEmailError && (
+          <p className="self-center text-sm text-red-500">
+            {existingEmailError}
+          </p>
+        )}
         <button
           type="submit"
           className="m-3 rounded-full bg-rose-200 px-4 py-2 text-2xl"

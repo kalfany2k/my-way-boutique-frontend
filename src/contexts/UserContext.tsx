@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import authService from "../services/authService";
 
 export interface User {
   id: number;
@@ -34,18 +35,18 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   const updateUser = (newUser: User | null) => {
     setUser(newUser);
     if (newUser) {
-      sessionStorage.setItem("user", JSON.stringify(newUser));
+      authService.storeUser(newUser, false);
     } else {
-      sessionStorage.removeItem("user");
+      authService.clearAuth();
     }
   };
 
   const updateUserLong = (newUser: User | null) => {
     setUser(newUser);
     if (newUser) {
-      localStorage.setItem("user", JSON.stringify(newUser));
+      authService.storeUser(newUser, true);
     } else {
-      localStorage.removeItem("user");
+      authService.clearAuth();
     }
   };
 

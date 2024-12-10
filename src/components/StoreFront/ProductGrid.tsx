@@ -1,3 +1,4 @@
+import { useCurrency } from "../../contexts/CurrencyContext";
 import ProductCard from "./ProductCard";
 
 export type ProductData = {
@@ -27,6 +28,8 @@ type Props = {
 };
 
 const ProductGrid: React.FC<Props> = ({ items, count }) => {
+  const { formatPrice } = useCurrency();
+
   if (count > 0)
     return (
       <div className="grid w-11/12 grid-cols-2 gap-4 lg:grid-cols-4">
@@ -36,8 +39,8 @@ const ProductGrid: React.FC<Props> = ({ items, count }) => {
             <span className="mt-1 w-full text-center font-nunito-semibold text-sm">
               {item.name.substring(0, item.name.lastIndexOf(" "))}
             </span>
-            <span className="text-md mt-1 w-full text-center font-nunito-semibolditalic">
-              {item.price.toFixed(2)} RON
+            <span className="text-md mt-1 w-full text-center font-nunito-regular">
+              {formatPrice(item.price)}
             </span>
           </div>
         ))}
