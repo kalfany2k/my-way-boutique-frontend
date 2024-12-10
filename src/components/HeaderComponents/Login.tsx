@@ -31,7 +31,7 @@ const Login = () => {
         <User className="size-6" />
       </button>
       <div
-        className={`fixed left-1/2 top-1/2 z-priority h-full w-full border border-gray-500/50 bg-white/75 backdrop-blur-sm md:h-fit md:min-h-[624px] ${loginOpen ? "opacity-100" : "pointer-events-none opacity-0"} flex -translate-x-1/2 -translate-y-1/2 flex-col items-center overflow-hidden transition-all duration-500 ease-in-out md:w-3/5 lg:w-2/5 lg:rounded-lg xl:w-1/3 2xl:w-1/5`}
+        className={`fixed left-1/2 top-1/2 z-priority h-full w-full border border-gray-500/75 bg-white/70 backdrop-blur-sm md:h-fit md:min-h-[624px] ${loginOpen ? "opacity-100" : "pointer-events-none opacity-0"} flex -translate-x-1/2 -translate-y-1/2 flex-col items-center overflow-hidden transition-all duration-500 ease-in-out md:w-3/5 lg:w-2/5 lg:rounded-lg xl:w-1/3 2xl:w-1/5`}
       >
         <span className="my-6 font-ethereal-bold text-5xl">Autentificare</span>
         <div className="relative mb-6 flex w-4/5 flex-row justify-around">

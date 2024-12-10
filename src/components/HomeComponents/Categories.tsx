@@ -30,9 +30,9 @@ const Categories = () => {
             </Link>
             {category.subcategories.length > 0 && (
               <div
-                className={`${hoveredCategory === index ? "translate-y-0 opacity-100" : "pointer-events-none invisible translate-y-4 opacity-0"} absolute left-1/2 top-full z-10 flex h-fit min-h-80 w-fit -translate-x-1/2 flex-row divide-x-[1px] divide-black border-[1px] border-black bg-white pb-4 transition-all duration-[400ms] ease-in-out`}
+                className={`${hoveredCategory === index ? "translate-y-0 opacity-100" : "pointer-events-none invisible translate-y-4 opacity-0"} absolute left-1/2 top-full z-10 flex h-fit min-h-80 w-fit -translate-x-1/2 flex-row divide-x-[1px] divide-black border-[1px] border-black bg-white py-4 transition-all duration-[400ms] ease-in-out`}
               >
-                <div className="mr-4 flex w-fit flex-col pl-4">
+                <div className="flex w-fit flex-col pl-4">
                   {category.subcategories.map((subcategory, secondaryIndex) => (
                     <Link
                       key={index + "-" + secondaryIndex}
