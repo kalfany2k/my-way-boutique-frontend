@@ -7,7 +7,7 @@ const CurrencyModifier = () => {
   const [detailsHovered, setDetailsHovered] = useState<boolean>(false);
 
   return (
-    <>
+    <div className="hidden lg:flex flex-row">
       <button
         className={`${currency === "RON" && "underline"} mr-2`}
         onClick={() => setCurrency("RON")}
@@ -34,7 +34,7 @@ const CurrencyModifier = () => {
           </span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

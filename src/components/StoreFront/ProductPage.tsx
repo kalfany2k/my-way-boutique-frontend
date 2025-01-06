@@ -71,25 +71,22 @@ const ProductPage = () => {
           />
         </div>
         <div className="flex flex-col items-center lg:ml-2 lg:items-start">
-          <div className="w-fit rounded-md bg-rose-100 p-4">
+          <div className="w-fit rounded-md p-4">
             <span className="font-merriweather-light text-3xl text-gray-800">
               {product.name}
             </span>
             <div className="mt-3 flex flex-row justify-between">
-              <span className="font-nunito-regular text-xl">
+              <span className="font-nunito-semibold text-2xl">
                 {formatPrice(product.price)}
               </span>
-              {product.rating && (
-                <div className="flex flex-row items-center font-nunito-medium">
-                  <Rating rating={product.rating} size={20} />
-                  <span className="ml-1 mt-[1px]">{product.rating + " /"}</span>
-                  <span className="text-md ml-1 mt-[1px]">
-                    {reviews.length > 0
-                      ? reviews.length + " recenzii"
-                      : "0 recenzii"}
-                  </span>
-                </div>
-              )}
+              <div className="flex flex-row items-center font-nunito-medium">
+                {product.rating && (
+                  <>
+                    <Rating rating={product.rating} size={20} />
+                    <span className="ml-1 mt-[1px]">{product.rating}</span>
+                  </>
+                )}
+              </div>
             </div>
             <ShoppingForm product={product} />
           </div>

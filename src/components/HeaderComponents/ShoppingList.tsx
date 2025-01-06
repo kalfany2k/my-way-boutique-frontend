@@ -43,13 +43,13 @@ const ShoppingList = () => {
     <div className="flex h-full w-full flex-col items-center">
       <span>
         {cartItems.length === 0
-          ? "Cosul dumneavoastra de cumparaturi este gol"
-          : "In momentul de fata aveti " +
+          ? "Cosul tau de cumparaturi este gol"
+          : "In momentul de fata ai " +
             (cartItems.length === 1
               ? "un produs in cos"
               : cartItems.length + " produse in cos")}
       </span>
-      <div className="flex w-full flex-col items-center">
+      <div className="mt-4 flex w-full flex-col items-center">
         {cartItems.map((cartItem, index) => (
           <div
             key={index}

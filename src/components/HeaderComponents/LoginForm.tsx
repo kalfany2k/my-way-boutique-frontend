@@ -5,7 +5,8 @@ import { z } from "zod";
 import { useOverlay } from "../../contexts/OverlayContext";
 import { login } from "../../services/auth";
 import { useUser } from "../../contexts/UserContext";
-import authService from "../../services/authService";
+import { mergeCarts } from "../../services/cart";
+import Cookies from "js-cookie";
 
 const formSchema = z.object({
   email: z
@@ -32,7 +33,6 @@ const LoginForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      // prettier-ignore
       const response = await login(data.email, data.password);
       // if login was successful, by now the authToken would have been updated
       data.keepLoggedIn ? setUserLong(response.user) : setUser(response.user);
@@ -40,8 +40,9 @@ const LoginForm = () => {
       setError(null);
       hideOverlay();
     } catch (error) {
-      // prettier-ignore
-      error instanceof Error ? setError(error.message) : setError("O eroare neasteptata s-a intamplat");
+      error instanceof Error
+        ? setError(error.message)
+        : setError("O eroare neasteptata s-a intamplat");
     }
   };
 

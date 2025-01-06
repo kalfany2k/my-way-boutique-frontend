@@ -30,28 +30,29 @@ const Categories = () => {
             </Link>
             {category.subcategories.length > 0 && (
               <div
-                className={`${hoveredCategory === index ? "translate-y-0 opacity-100" : "pointer-events-none invisible translate-y-4 opacity-0"} absolute left-1/2 top-full z-10 flex h-fit min-h-80 w-fit -translate-x-1/2 flex-row divide-x-[1px] divide-black border-[1px] border-black bg-white py-4 transition-all duration-[400ms] ease-in-out`}
+                className={`${hoveredCategory === index ? "translate-y-0 opacity-100" : "pointer-events-none invisible translate-y-4 opacity-0"} absolute left-1/2 top-full z-10 flex h-fit min-h-72 w-fit -translate-x-1/2 flex-row divide-x-[1px] divide-black border-[1px] border-black bg-white py-4 transition-all duration-[400ms] ease-in-out`}
               >
-                <div className="flex w-fit flex-col pl-4">
+                <div className="flex w-fit flex-col pl-4 font-nunito-medium text-base">
                   {category.subcategories.map((subcategory, secondaryIndex) => (
                     <Link
                       key={index + "-" + secondaryIndex}
                       to={subcategory.path}
                       onClick={() => setHoveredCategory(-1)}
-                      className="w-full py-[1px]"
+                      className="w-fit py-[1px]"
                     >
-                      <span className="font-nunito-light text-base hover:text-rose-900 xl:whitespace-nowrap">
+                      <span className="hover:text-rose-900 xl:whitespace-nowrap">
                         {subcategory.name}
                       </span>
                     </Link>
                   ))}
                 </div>
-                <div className="ml-4 flex w-64 flex-col items-center justify-around xl:w-96">
-                  <img
-                    src={placeholder}
-                    className="aspect-video w-11/12 object-cover"
-                  />
-                  <span>Exploreaza mai multe</span>
+                <div className="ml-4 flex w-64 flex-col items-center justify-between px-4 xl:w-96">
+                  <span className="font-nunito-light">
+                    {category.description}
+                  </span>
+                  <Link to={category.path}>
+                    <span>Exploreaza mai multe</span>
+                  </Link>
                 </div>
               </div>
             )}

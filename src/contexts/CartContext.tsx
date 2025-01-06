@@ -1,5 +1,13 @@
 import React, { createContext, useContext, useState } from "react";
 
+interface Personalization {
+  name?: string;
+  date?: string;
+  message?: string;
+  size?: string;
+  family_member?: string;
+}
+
 export interface CartItem {
   id: number;
   product_id: string;
@@ -8,11 +16,7 @@ export interface CartItem {
   product_price: number;
   product_primary_image: string;
   quantity: number;
-  personalised_name: string | null;
-  personalised_date: string | null;
-  personalised_message: string | null;
-  personalised_size: string | null;
-  personalised_member: string | null;
+  personalization?: Personalization;
 }
 
 interface CartContextType {

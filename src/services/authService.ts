@@ -14,6 +14,7 @@ const authService = {
 
   clearAuth() {
     Cookies.remove("authToken");
+    Cookies.remove("guestSessionToken");
     sessionStorage.removeItem("user");
     localStorage.removeItem("user");
   },

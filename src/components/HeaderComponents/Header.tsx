@@ -8,9 +8,15 @@ import { useUser } from "../../contexts/UserContext";
 import LoggedInMenu from "./LoggedInMenu";
 import { Clock, Phone } from "lucide-react";
 import CurrencyModifier from "./CurrencyModifier";
+import { useEffect } from "react";
+import { setGuestToken } from "../../services/setGuestToken";
 
 const Header = () => {
   const { user } = useUser();
+
+  useEffect(() => {
+    setGuestToken();
+  }, []);
 
   return (
     <div className="fixed inset-0 z-header flex h-total-header touch-pan-up flex-col">
@@ -40,7 +46,7 @@ const Header = () => {
         <div className="z-sidebar flex-1 lg:hidden">
           <TopBar />
         </div>
-        <div className="mx-4 flex flex-row">
+        <div className="mx-4">
           <CurrencyModifier />
         </div>
         <div className="absolute left-1/2 -translate-x-1/2 lg:left-0 lg:ml-3 lg:-translate-x-0 xl:left-1/2 xl:ml-0 xl:-translate-x-1/2">

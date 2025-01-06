@@ -40,11 +40,20 @@ const formSchema = z.object({
 type FormFields = z.infer<typeof formSchema>;
 
 const RegisterForm = () => {
-  const [existingEmailError, setExistingEmailError] = useState<string | null>(null);
-  const [confirmedEmailError, setConfirmedEmailError] = useState<string | null>(null);
+  const [existingEmailError, setExistingEmailError] = useState<string | null>(
+    null,
+  );
+  const [confirmedEmailError, setConfirmedEmailError] = useState<string | null>(
+    null,
+  );
   const { setUser } = useUser();
   const { hideOverlay } = useOverlay();
-  const { register, getValues, handleSubmit, formState: { errors }, } = useForm<FormFields>({ resolver: zodResolver(formSchema), });
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormFields>({ resolver: zodResolver(formSchema) });
   const confirmEmailRef = useRef<HTMLInputElement>(null);
 
   function validateEmail(secondaryEmail: string): boolean {
@@ -52,15 +61,26 @@ const RegisterForm = () => {
   }
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    if (confirmEmailRef.current?.value && validateEmail(confirmEmailRef.current?.value)) {
+    if (
+      confirmEmailRef.current?.value &&
+      validateEmail(confirmEmailRef.current?.value)
+    ) {
       try {
-        await registerUser(data.email, data.surname, data.name, data.gender, data.password );
+        await registerUser(
+          data.email,
+          data.surname,
+          data.name,
+          data.gender,
+          data.password,
+        );
         hideOverlay();
         setExistingEmailError(null);
         const loginResponse = await login(data.email, data.password);
         setUser(loginResponse.user);
       } catch (error) {
-        error instanceof Error ? setExistingEmailError(error.message) : setExistingEmailError("O eroare neasteptata s-a intamplat");
+        error instanceof Error
+          ? setExistingEmailError(error.message)
+          : setExistingEmailError("O eroare neasteptata s-a intamplat");
       }
     } else {
       setConfirmedEmailError("E-mailurile trebuie sa se potriveasca");

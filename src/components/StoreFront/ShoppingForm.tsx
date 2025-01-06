@@ -10,6 +10,7 @@ import moment from "moment";
 import { CalendarFold, Minus, Plus } from "lucide-react";
 import { postCartItem } from "../../services/cart";
 import { useCart } from "../../contexts/CartContext";
+import { AxiosError } from "axios";
 
 const baseSchema = z.object({
   name: z.string().optional(),
@@ -88,7 +89,11 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
       addCartItem(response.data.item);
       reset();
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        console.log(
+          `Nu am putut adauga obiectul in cosul de cumparaturi al utilizatorului; STATUS ${error.response?.status}`,
+        );
+      }
     }
   };
 
@@ -110,19 +115,19 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       {fields.includes("name") && (
         <div className="mb-2 mt-3 flex w-52 flex-col">
-          <label className="text-xl">Numele copilului</label>
+          <label className="mb-1 text-lg">Numele copilului</label>
           <input
             {...register("name")}
             required={true}
             placeholder="ex. Andrei"
-            className="rounded-md p-1 text-base shadow-lg focus:outline-none focus:ring-1 focus:ring-black"
+            className="rounded-md p-1 text-base shadow-lg ring-1 ring-gray-700 focus:outline-none focus:ring-black"
           />
         </div>
       )}
       {fields.includes("date") && (
         <div className="mb-2 flex flex-col justify-center">
           <div className="flex flex-row items-center">
-            <label className="text-xl">Data evenimentului</label>
+            <label className="mb-1 text-lg">Data evenimentului</label>
             <CalendarFold size={24} className="mb-1 ml-1" />
           </div>
           <Controller
@@ -140,7 +145,7 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
                   open={calendarOpen}
                   placeholderText={"ex. " + todayDate}
                   dateFormat="dd/MM/yyyy"
-                  className="w-52 rounded-md p-1 shadow-lg focus:outline-none focus:ring-1 focus:ring-black"
+                  className="w-52 rounded-md p-1 shadow-lg ring-1 ring-gray-700 focus:outline-none focus:ring-black"
                   onClickOutside={() => setCalendarOpen(false)}
                 />
               </div>
@@ -155,7 +160,7 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
 
       {fields.includes("message") && (
         <div className="mb-2 flex w-72 flex-col">
-          <label className="text-xl">Mesaj personalizat</label>
+          <label className="mb-1 text-lg">Mesaj personalizat</label>
           <Controller
             control={control}
             name="message"
@@ -166,7 +171,7 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
                 rows={4}
                 cols={90}
                 placeholder="Introdu un mesaj pentru cel mic"
-                className="resize-none rounded-md p-1 shadow-lg focus:outline-none focus:ring-1 focus:ring-black"
+                className="resize-none rounded-md p-1 shadow-lg ring-1 ring-gray-700 focus:outline-none focus:ring-black"
               />
             )}
           />
@@ -179,7 +184,7 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
 
       {fields.includes("smallMessage") && (
         <div className="mb-2 flex w-72 flex-col">
-          <label className="text-xl">Mesaj personalizat</label>
+          <label className="mb-1 text-lg">Mesaj personalizat</label>
           <Controller
             control={control}
             name="smallMessage"
@@ -190,7 +195,7 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
                 rows={3}
                 cols={70}
                 placeholder="Introdu un mesaj pentru cel mic"
-                className="resize-none rounded-md p-1 shadow-lg focus:outline-none focus:ring-1 focus:ring-black"
+                className="resize-none rounded-md p-1 shadow-lg ring-1 ring-gray-700 focus:outline-none focus:ring-black"
               />
             )}
           />
