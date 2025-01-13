@@ -1,17 +1,15 @@
-import { Clock, Mail, MessageCircle, Phone } from "lucide-react";
+import { Clock, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   const links = [
-    { text: "Gaseste-mi marimea", path: "/gaseste-marimea" },
+    { text: "Gaseste-mi marimea", path: "/ghid-marimi" },
     { text: "Termeni si conditii", path: "/termeni-si-conditii" },
     { text: "Contact", path: "/contact" },
     { text: "Contul meu", path: "/contul-meu" },
-    { text: "Campanii", path: "/campanii" },
     { text: "Povestea noastra", path: "/povestea-noastra" },
     { text: "ANPC", path: "/anpc" },
     { text: "Confidentialitate", path: "/confidentialitate" },
-    { text: "Politica cookies", path: "/cookies" },
     { text: "Comenzi si plata", path: "/comenzi-si-plata" },
     { text: "Livrare", path: "/livrare" },
     { text: "Retur", path: "/retur" },
@@ -42,19 +40,22 @@ const Footer = () => {
           </div>
 
           {/* Last column */}
-          <div className="flex h-fit flex-col items-center justify-center font-signika-light text-sm lg:h-full lg:items-start">
-            <div className="relative mt-1 flex flex-row items-center">
-              <MessageCircle className="size-6" strokeWidth={1.5} />
-              <Phone className="absolute left-[7px] top-[8px] size-[10px] fill-black" />
-              <h1 className="ml-[5px]">Telefon: 07XX XXX XXX</h1>
+          <div className="flex h-fit flex-col items-center justify-center font-signika-light text-base lg:h-full">
+            <span className="font-signika-light text-xl">
+              Contacteaza-ne aici
+            </span>
+            <div className="mt-1 flex flex-row items-center">
+              <Phone className="size-6" strokeWidth={1.5} />
+              <h1 className="ml-[6px]">- 07XX XXX XXX</h1>
             </div>
+
             <div className="mt-1 flex flex-row items-center">
               <Mail className="size-6" strokeWidth={1.5} />
-              <h1 className="ml-[6px]">E-mail: xxxx@gmail.com</h1>
+              <h1 className="ml-[6px]">- xxxx@gmail.com</h1>
             </div>
             <div className="mt-1 flex flex-row items-center">
               <Clock className="size-6" strokeWidth={1.5} />
-              <h1 className="ml-2">Program: XX:XX - XX:XX</h1>
+              <h1 className="ml-2">- XX:XX - XX:XX</h1>
             </div>
           </div>
         </div>

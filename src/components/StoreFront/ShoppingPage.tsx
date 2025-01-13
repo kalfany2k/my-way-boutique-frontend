@@ -1,8 +1,8 @@
-import texture from "../../assets/pictures/texture.jpg";
 import useData from "../../hooks/useData";
 import ProductGrid, { ProductData } from "./ProductGrid";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { pluralToSingular, singularToPlural } from "../../assets/types/plurals";
+import SortByComponent from "./SortByComponent";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const ITEMS_PER_PAGE = 16;
@@ -12,6 +12,7 @@ interface QueryParams {
   type?: string | null;
   gender?: string | null;
   search?: string | null;
+  sort_by?: string | null;
   skip: number;
 }
 
@@ -21,12 +22,11 @@ const ShoppingPage = () => {
   const location = useLocation();
 
   const queryParams: QueryParams = {
-    // first option is retrieved from the router parameters, and the second one from the search parameters (e.g. filtering)
     categories: category || searchParams.get("categories") || null,
-    // first option is retrieved from the router parameters, and the second one from the search parameters (e.g. same as previously)
     type: (type && pluralToSingular[type]) || searchParams.get("type") || null,
     search: searchParams.get("search"),
     gender: searchParams.get("gender"),
+    sort_by: searchParams.get("sort_by"),
     skip: Number(searchParams.get("skip")) || 0,
   };
 
@@ -53,7 +53,7 @@ const ShoppingPage = () => {
 
   return (
     <div className="flex min-h-page-height w-full flex-grow flex-col items-center">
-      {(queryParams.categories || queryParams.type) && (
+      {(queryParams.categories || queryParams.type || queryParams.gender) && (
         <div className="mb-3 flex min-h-24 w-full items-center justify-center border-b-[1px] border-black px-2 shadow-xl lg:px-12">
           <span className="font-signika-medium text-4xl text-gray-800 lg:text-5xl">
             {(
@@ -65,7 +65,7 @@ const ShoppingPage = () => {
             )?.toUpperCase() ||
               (
                 queryParams.categories &&
-                "ARTICOLE " + queryParams.categories.replace("_", " ")
+                "Articole " + queryParams.categories.replace("_", " ")
               )?.toUpperCase() ||
               (
                 queryParams.type &&
@@ -81,14 +81,12 @@ const ShoppingPage = () => {
       <div
         className={`${queryParams.search ? "mt-3" : ""} mb-6 flex h-fit w-dvw flex-col items-center lg:w-4/5`}
       >
-        <div className="mb-3 flex w-full flex-col">
-          <div className="">
-            <span>Sorteaza dupa...</span>
-          </div>
+        <div className="mb-3 flex w-full flex-row items-center justify-between">
           {/* prettier-ignore */}
           <span className="">
             {count} {count > 20 ? "de" : ""} produse gasite {queryParams.search ? "pentru cautarea termenului \"" + queryParams.search + "\"" : ""}
           </span>
+          <SortByComponent />
         </div>
         <ProductGrid items={data} count={count} />
       </div>

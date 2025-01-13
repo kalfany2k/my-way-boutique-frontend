@@ -27,10 +27,15 @@ export const login = async (username: string, password: string) => {
     const response = await apiClient.post(
       "/login",
       { username, password },
-      // prettier-ignore
-      { headers: { "Content-Type": "application/x-www-form-urlencoded", }, },
+      { headers: { "Content-Type": "application/x-www-form-urlencoded" } },
     );
-    Cookies.set("authToken", response.data.access_token, { expires: 1 });
+    Cookies.set("authToken", response.data.access_token, {
+      expires: 1,
+      sameSite: "Strict",
+      secure: true,
+      path: "/",
+      domain: "mwb.local",
+    });
     return response.data;
   } catch (error) {
     throwError(error);

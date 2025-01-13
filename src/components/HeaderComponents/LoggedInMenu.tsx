@@ -3,6 +3,8 @@ import { User as UserType, useUser } from "../../contexts/UserContext";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import { useCart } from "../../contexts/CartContext";
+import { setGuestToken } from "../../services/setGuestToken";
 
 interface Props {
   user: UserType;
@@ -10,11 +12,16 @@ interface Props {
 
 const LoggedInMenu: React.FC<Props> = ({ user }) => {
   const { setUser } = useUser();
+  const { setCartItems } = useCart();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const handleLogOut = () => {
     setOpenMenu(false);
+    Cookies.remove("authToken");
+    Cookies.remove("guestSessionToken");
+    setCartItems([]);
     setUser(null);
+    setGuestToken();
   };
 
   return (

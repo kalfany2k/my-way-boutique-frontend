@@ -23,6 +23,8 @@ const Login = () => {
       <button
         className="icon"
         aria-label="user login"
+        aria-checked="false"
+        role="button"
         onClick={() => {
           showOverlay();
           setLoginOpen(true);

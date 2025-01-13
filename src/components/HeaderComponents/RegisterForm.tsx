@@ -3,39 +3,53 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useOverlay } from "../../contexts/OverlayContext";
 import { login, register as registerUser } from "../../services/auth";
-import { useRef, useState } from "react";
 import { useUser } from "../../contexts/UserContext";
+import { useState } from "react";
 
-const formSchema = z.object({
-  gender: z
-    .enum(["F", "M"], {
-      required_error: "Va rugam selectati un gen",
-    })
-    .nullable()
-    .refine((val) => val !== null, {
-      message: "Va rugam selectati un gen",
+const formSchema = z
+  .object({
+    gender: z
+      .enum(["F", "M"], {
+        required_error: "Va rugam selectati un gen",
+      })
+      .nullable()
+      .refine((val) => val !== null, {
+        message: "Va rugam selectati un gen",
+      }),
+    email: z
+      .string()
+      .min(1, "Camp obligatoriu")
+      .email("Adresa de e-mail invalida")
+      .max(50, "Adresa trebuie sa aiba cel mult 50 de caractere"),
+    confirmEmail: z.string(),
+    surname: z
+      .string()
+      .min(1, "Camp obligatoriu")
+      .max(50, "Campul poate avea maxim 50 de caractere"),
+    name: z
+      .string()
+      .min(1, "Camp obligatoriu")
+      .max(50, "Campul poate avea maxim 50 de caractere"),
+    password: z
+      .string()
+      .min(8, "Parola trebuie sa aiba minim 8 caractere")
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        "Parola trebuie sa contina cel putin o litera mare, o litera mica, un numar si un caracter special (e.g. !@#$%)",
+      ),
+    confirmPassword: z.string(),
+    terms: z.boolean().refine((val) => val === true, {
+      message: "Trebuie sa acceptati termenii si conditiile",
     }),
-  email: z
-    .string()
-    .min(1, "Camp obligatoriu")
-    .email("Adresa de e-mail invalida")
-    .max(50, "Adresa trebuie sa aiba cel mult 50 de caractere"),
-  surname: z
-    .string()
-    .min(1, "Camp obligatoriu")
-    .max(50, "Campul poate avea maxim 50 de caractere"),
-  name: z
-    .string()
-    .min(1, "Camp obligatoriu")
-    .max(50, "Campul poate avea maxim 50 de caractere"),
-  password: z
-    .string()
-    .min(8, "Parola trebuie sa aiba minim 8 caractere")
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      "Parola trebuie sa contina cel putin o litera mare, o litera mica, un numar si un caracter special (e.g. !@#$%)",
-    ),
-});
+  })
+  .refine((data) => data.email === data.confirmEmail, {
+    message: "E-mailurile trebuie sa se potriveasca",
+    path: ["confirmEmail"],
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Parolele trebuie sa se potriveasca",
+    path: ["confirmPassword"],
+  });
 
 type FormFields = z.infer<typeof formSchema>;
 
@@ -43,47 +57,30 @@ const RegisterForm = () => {
   const [existingEmailError, setExistingEmailError] = useState<string | null>(
     null,
   );
-  const [confirmedEmailError, setConfirmedEmailError] = useState<string | null>(
-    null,
-  );
   const { setUser } = useUser();
   const { hideOverlay } = useOverlay();
   const {
     register,
-    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<FormFields>({ resolver: zodResolver(formSchema) });
-  const confirmEmailRef = useRef<HTMLInputElement>(null);
-
-  function validateEmail(secondaryEmail: string): boolean {
-    return secondaryEmail === getValues("email");
-  }
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    if (
-      confirmEmailRef.current?.value &&
-      validateEmail(confirmEmailRef.current?.value)
-    ) {
-      try {
-        await registerUser(
-          data.email,
-          data.surname,
-          data.name,
-          data.gender,
-          data.password,
-        );
-        hideOverlay();
-        setExistingEmailError(null);
-        const loginResponse = await login(data.email, data.password);
-        setUser(loginResponse.user);
-      } catch (error) {
-        error instanceof Error
-          ? setExistingEmailError(error.message)
-          : setExistingEmailError("O eroare neasteptata s-a intamplat");
-      }
-    } else {
-      setConfirmedEmailError("E-mailurile trebuie sa se potriveasca");
+    try {
+      await registerUser(
+        data.email,
+        data.surname,
+        data.name,
+        data.gender,
+        data.password,
+      );
+      hideOverlay();
+      const loginResponse = await login(data.email, data.password);
+      setUser(loginResponse.user);
+    } catch (error) {
+      error instanceof Error
+        ? setExistingEmailError(error.message)
+        : setExistingEmailError("O eroare neasteptata s-a intamplat");
     }
   };
 
@@ -99,12 +96,17 @@ const RegisterForm = () => {
         <input {...register("email")} type="text" className="login-entry" />
 
         <span className="ml-10 self-start">Confirma adresa de e-mail</span>
-        {confirmedEmailError && (
+        {errors.confirmEmail && (
           <p className="mb-1 ml-10 self-start text-sm text-red-500">
-            {confirmedEmailError}
+            {errors.confirmEmail.message}
           </p>
         )}
-        <input ref={confirmEmailRef} type="text" className="login-entry" />
+
+        <input
+          {...register("confirmEmail")}
+          type="text"
+          className="login-entry"
+        />
 
         {errors.gender && (
           <p className="mb-1 ml-10 self-start text-sm text-red-500">
@@ -176,6 +178,29 @@ const RegisterForm = () => {
           className="login-entry"
         />
       </div>
+
+      <span className="ml-10 self-start">Confirma parola</span>
+      {errors.confirmPassword && (
+        <p className="mb-1 ml-10 self-start text-sm text-red-500">
+          {errors.confirmPassword.message}
+        </p>
+      )}
+      <input
+        {...register("confirmPassword")}
+        type="password"
+        className="login-entry"
+      />
+
+      <div className="mt-4 flex items-center">
+        <input type="checkbox" {...register("terms")} className="mr-2" />
+        <label>Accept termenii si conditiile</label>
+      </div>
+      {errors.terms && (
+        <p className="mb-1 self-center text-sm text-red-500">
+          {errors.terms.message}
+        </p>
+      )}
+
       <div className="flex flex-col">
         {existingEmailError && (
           <p className="self-center text-sm text-red-500">

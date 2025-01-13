@@ -21,7 +21,7 @@ const ImageLayout: React.FC<Props> = ({ images }) => {
         {images.map((_, index) => (
           <div
             key={index}
-            className={`${currentImageIndex === index ? "ring-1 ring-white" : ""} relative aspect-square w-full cursor-pointer bg-black`}
+            className={`${currentImageIndex === index && ""} relative aspect-square w-full cursor-pointer bg-black`}
             onClick={() => setCurrentImageIndex(index)}
           >
             <img

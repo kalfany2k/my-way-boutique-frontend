@@ -8,6 +8,8 @@ import ShoppingPage from "./components/StoreFront/ShoppingPage.tsx";
 import ProductPage from "./components/StoreFront/ProductPage.tsx";
 import Dashboard from "./components/Dashboard/Dashboard.tsx";
 import ProtectedAdminRoute from "./components/Routing/ProtectedAdminRoute.tsx";
+import MeasurementsPage from "./components/AdditionalPages/MeasurementsPage.tsx";
+import ContactPage from "./components/AdditionalPages/ContactPage.tsx";
 const router = createBrowserRouter([
   {
     element: <App />,
@@ -25,6 +27,8 @@ const router = createBrowserRouter([
           </ProtectedAdminRoute>
         ),
       },
+      { path: "/ghid-marimi", element: <MeasurementsPage /> },
+      { path: "/contact", element: <ContactPage /> },
     ],
   },
 ]);

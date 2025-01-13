@@ -20,6 +20,8 @@ const ShoppingBag = () => {
       <button
         className="icon relative"
         aria-label="open shopping bag"
+        aria-checked="false"
+        role="button"
         onClick={() => {
           showOverlay();
           setShowCart(true);
@@ -27,7 +29,7 @@ const ShoppingBag = () => {
       >
         <Bag className="size-6" />
         <div className="absolute bottom-2 right-2 flex h-3 w-3 flex-row items-center justify-center rounded-full bg-inherit ring-1 ring-black">
-          <span className="mt-[1px] xl:ml-[1px] text-center font-nunito-regular text-xs">
+          <span className="mt-[1px] text-center font-nunito-regular text-xs xl:ml-[1px]">
             {cartItems.length}
           </span>
         </div>
@@ -35,12 +37,14 @@ const ShoppingBag = () => {
       <div
         className={`absolute ${showCart ? "translate-x-0" : "translate-x-full"} right-0 top-0 z-priority flex h-dvh w-full flex-col bg-rosy-nude-200 transition-transform duration-500 ease-in-out sm:w-1/2 md:w-1/3 xl:w-1/4`}
       >
-        <X
-          className="m-1 size-12"
-          onClick={() => {
-            hideOverlay();
-          }}
-        />
+        <button className="w-fit" role="button">
+          <X
+            className="m-1 size-12"
+            onClick={() => {
+              hideOverlay();
+            }}
+          />
+        </button>
         <ShoppingList />
       </div>
     </>

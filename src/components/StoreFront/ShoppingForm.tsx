@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import { ro } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import { CalendarFold, Minus, Plus } from "lucide-react";
+import { CalendarFold, Minus, Plus, ShoppingCart } from "lucide-react";
 import { postCartItem } from "../../services/cart";
 import { useCart } from "../../contexts/CartContext";
 import { AxiosError } from "axios";
@@ -114,7 +114,7 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {fields.includes("name") && (
-        <div className="mb-2 mt-3 flex w-52 flex-col">
+        <div className="mb-2 mt-1 flex w-52 flex-col">
           <label className="mb-1 text-lg">Numele copilului</label>
           <input
             {...register("name")}
@@ -206,13 +206,13 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
         <span className="text-rose-600">{errors.quantity.message}</span>
       )}
 
-      <div className="flex flex-row items-center">
+      <div className="mb-1 mt-5 flex flex-row items-center">
         <div className="mr-2 flex select-none flex-row items-center divide-x-[1px] divide-black rounded-lg bg-white shadow-lg">
           <div className="flex h-8 w-8">
-            <Plus
+            <Minus
               size={24}
               className="m-auto cursor-pointer"
-              onClick={handleAddQuantity}
+              onClick={handleDeductQuantity}
             />
           </div>
           <input
@@ -229,18 +229,18 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
             placeholder="1"
           />
           <div className="flex h-8 w-8">
-            <Minus
+            <Plus
               size={24}
               className="m-auto cursor-pointer"
-              onClick={handleDeductQuantity}
+              onClick={handleAddQuantity}
             />
           </div>
         </div>
         <button
           type="submit"
-          className="rounded-lg bg-rose-200 p-2 shadow-md transition-colors duration-300 ease-in-out hover:bg-rose-300"
+          className="rounded-lg bg-rose-200 px-12 py-2 shadow-md transition-colors duration-300 ease-in-out hover:bg-rose-300"
         >
-          <span className="font-signika-medium text-xl">Adauga in cos</span>
+          <ShoppingCart size={28} />
         </button>
       </div>
     </form>

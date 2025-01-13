@@ -8,6 +8,8 @@ import ErrorPage from "./ErrorPage";
 import ImageLayout from "./ImageLayout";
 import ShoppingForm from "./ShoppingForm";
 import { useCurrency } from "../../contexts/CurrencyContext";
+import { Minus, Plus } from "lucide-react";
+import Reviews from "./Reviews";
 
 const ProductPage = () => {
   const params = useParams<{ productID: string }>();
@@ -15,26 +17,26 @@ const ProductPage = () => {
   const [reviews, setReviews] = useState<ReviewData[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [reviewsToggled, toggleReviews] = useState<boolean>(false);
+  const [descriptionToggled, toggleDescription] = useState<boolean>(false);
+  const [shippingDetailsToggled, toggleShippingDetails] =
+    useState<boolean>(false);
+  const [additionalDetailsToggled, toggleAdditionalDetails] =
+    useState<boolean>(false);
+  useState<boolean>(false);
   const { formatPrice } = useCurrency();
+  const initialURL = "/products/" + params.productID;
 
   useEffect(() => {
     const fetchProduct = async () => {
       setIsLoading(true); // Set loading at start of async operation
       try {
         if (params.productID) {
-          const initialURL = "/products/" + params.productID;
-
           // Fetch product
           const fetchedProduct = await apiClient
             .get<ProductData>(initialURL)
             .then((res) => res.data);
           setProduct(fetchedProduct);
-
-          // Fetch reviews
-          const fetchedReviews = await apiClient
-            .get<ReviewData[]>(initialURL + "/reviews")
-            .then((res) => res.data);
-          setReviews(fetchedReviews);
         }
       } catch (error) {
         if (error instanceof AxiosError) {
@@ -54,6 +56,22 @@ const ProductPage = () => {
     fetchProduct();
   }, [params.productID]);
 
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        // Fetch reviews
+        const fetchedReviews = await apiClient
+          .get<ReviewData[]>(initialURL + "/reviews")
+          .then((res) => res.data);
+        setReviews(fetchedReviews);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (product?.rating) fetchReviews();
+  }, [product]);
+
   if (isLoading) return <div className="min-h-page-height"></div>;
 
   if (error) return <ErrorPage />;
@@ -71,8 +89,8 @@ const ProductPage = () => {
           />
         </div>
         <div className="flex flex-col items-center lg:ml-2 lg:items-start">
-          <div className="w-fit rounded-md p-4">
-            <span className="font-merriweather-light text-3xl text-gray-800">
+          <div className="rounded-md p-4 lg:w-3/5">
+            <span className="whitespace-nowrap font-merriweather-light text-3xl text-gray-800">
               {product.name}
             </span>
             <div className="mt-3 flex flex-row justify-between">
@@ -89,6 +107,67 @@ const ProductPage = () => {
               </div>
             </div>
             <ShoppingForm product={product} />
+            {reviews.length > 0 && (
+              <div className="h-fit w-full">
+                <div className="flex h-12 w-full items-center justify-between border-b-2 border-black">
+                  <span className="font-nunito-regular text-xl">
+                    Afiseaza recenziile ({reviews.length})
+                  </span>
+                  <button
+                    type="button"
+                    aria-pressed="false"
+                    onClick={() => toggleReviews(!reviewsToggled)}
+                  >
+                    {reviewsToggled ? <Minus /> : <Plus />}
+                  </button>
+                </div>
+                <Reviews toggled={reviewsToggled} reviews={reviews} />
+              </div>
+            )}
+            <div className="h-fit w-full">
+              <div className="flex h-12 w-full items-center justify-between border-b-2 border-black">
+                <span className="font-nunito-regular text-xl">
+                  Afiseaza descrierea
+                </span>
+                <button
+                  type="button"
+                  aria-pressed="false"
+                  onClick={() => toggleDescription(!descriptionToggled)}
+                >
+                  {descriptionToggled ? <Minus /> : <Plus />}
+                </button>
+              </div>
+            </div>
+            <div className="h-fit w-full">
+              <div className="flex h-12 w-full items-center justify-between border-b-2 border-black">
+                <span className="font-nunito-regular text-xl">
+                  Livrare si retur
+                </span>
+                <button
+                  type="button"
+                  aria-pressed="false"
+                  onClick={() => toggleShippingDetails(!shippingDetailsToggled)}
+                >
+                  {shippingDetailsToggled ? <Minus /> : <Plus />}
+                </button>
+              </div>
+            </div>
+            <div className="h-fit w-full">
+              <div className="flex h-12 w-full items-center justify-between border-b-2 border-black">
+                <span className="font-nunito-regular text-xl">
+                  Informatii aditionale
+                </span>
+                <button
+                  type="button"
+                  aria-pressed="false"
+                  onClick={() =>
+                    toggleAdditionalDetails(!additionalDetailsToggled)
+                  }
+                >
+                  {additionalDetailsToggled ? <Minus /> : <Plus />}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

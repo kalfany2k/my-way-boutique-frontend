@@ -1,6 +1,6 @@
 import { Search, X } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import apiClient from "../../services/apiClient";
 
 interface SearchResult {
@@ -118,6 +118,9 @@ const SearchBar = () => {
       >
         <button
           className="z-10 -ml-2 -mr-2 p-2"
+          role="button"
+          aria-label="open search bar"
+          aria-checked="false"
           onClick={(e) => {
             isOpen ? handleSearch(e) : openSearch();
           }}

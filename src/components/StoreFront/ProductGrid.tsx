@@ -19,6 +19,8 @@ export type ReviewData = {
   product_id: string;
   message: string | null;
   stars: number;
+  surname: string;
+  name: string;
   created_at: Date;
 };
 
@@ -32,7 +34,7 @@ const ProductGrid: React.FC<Props> = ({ items, count }) => {
 
   if (count > 0)
     return (
-      <div className="grid w-11/12 grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
         {items.map((item) => (
           <div key={item.id} className="flex flex-col">
             <ProductCard product={item} />
