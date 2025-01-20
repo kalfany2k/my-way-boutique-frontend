@@ -107,9 +107,10 @@ const ProductPage = () => {
               </div>
             </div>
             <ShoppingForm product={product} />
+
             {reviews.length > 0 && (
               <div className="h-fit w-full">
-                <div className="flex h-12 w-full items-center justify-between border-b-2 border-black">
+                <div className="flex h-12 w-full items-center justify-between border-b-[1px] border-black">
                   <span className="font-nunito-regular text-xl">
                     Afiseaza recenziile ({reviews.length})
                   </span>
@@ -124,8 +125,9 @@ const ProductPage = () => {
                 <Reviews toggled={reviewsToggled} reviews={reviews} />
               </div>
             )}
+
             <div className="h-fit w-full">
-              <div className="flex h-12 w-full items-center justify-between border-b-2 border-black">
+              <div className="flex h-12 w-full items-center justify-between border-b-[1px] border-black">
                 <span className="font-nunito-regular text-xl">
                   Afiseaza descrierea
                 </span>
@@ -138,8 +140,9 @@ const ProductPage = () => {
                 </button>
               </div>
             </div>
+
             <div className="h-fit w-full">
-              <div className="flex h-12 w-full items-center justify-between border-b-2 border-black">
+              <div className="flex h-12 w-full items-center justify-between border-b-[1px] border-black">
                 <span className="font-nunito-regular text-xl">
                   Livrare si retur
                 </span>
@@ -152,8 +155,9 @@ const ProductPage = () => {
                 </button>
               </div>
             </div>
+
             <div className="h-fit w-full">
-              <div className="flex h-12 w-full items-center justify-between border-b-2 border-black">
+              <div className="flex h-12 w-full items-center justify-between border-b-[1px] border-black">
                 <span className="font-nunito-regular text-xl">
                   Informatii aditionale
                 </span>

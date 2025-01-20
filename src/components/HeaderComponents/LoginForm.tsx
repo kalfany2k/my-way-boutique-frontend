@@ -37,6 +37,7 @@ const LoginForm = () => {
       // if login was successful, by now the authToken would have been updated
       data.keepLoggedIn ? setUserLong(response.user) : setUser(response.user);
       // then, update the session/local storage with the User object, alongside the stateful user we will be using
+      Cookies.remove("guestSessionToken", { domain: ".mwb.local", path: "/" });
       setError(null);
       hideOverlay();
     } catch (error) {

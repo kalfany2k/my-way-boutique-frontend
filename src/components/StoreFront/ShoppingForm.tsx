@@ -128,7 +128,7 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
         <div className="mb-2 flex flex-col justify-center">
           <div className="flex flex-row items-center">
             <label className="mb-1 text-lg">Data evenimentului</label>
-            <CalendarFold size={24} className="mb-1 ml-1" />
+            <CalendarFold size={20} strokeWidth={1.5} className="mb-1 ml-1" />
           </div>
           <Controller
             control={control}
@@ -206,11 +206,18 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
         <span className="text-rose-600">{errors.quantity.message}</span>
       )}
 
-      <div className="mb-1 mt-5 flex flex-row items-center">
-        <div className="mr-2 flex select-none flex-row items-center divide-x-[1px] divide-black rounded-lg bg-white shadow-lg">
-          <div className="flex h-8 w-8">
+      <div className="mb-1 mt-5 flex w-fit flex-col items-center">
+        <button
+          type="submit"
+          className="mb-2 w-fit rounded-lg bg-rose-200 px-12 py-2 shadow-md transition-colors duration-300 ease-in-out hover:bg-rose-300"
+        >
+          <ShoppingCart size={28} />
+        </button>
+
+        <div className="flex w-fit select-none flex-row items-center divide-x-[1px] divide-gray-500 rounded-sm bg-white shadow-xl">
+          <div className="flex h-7 w-7">
             <Minus
-              size={24}
+              size={20}
               className="m-auto cursor-pointer"
               onClick={handleDeductQuantity}
             />
@@ -225,23 +232,17 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
               },
             })}
             defaultValue={1}
-            className={`h-8 w-8 bg-white text-center text-xl focus:outline-none`}
+            className={`mb-[1px] h-7 w-7 bg-transparent px-1 text-center text-xl focus:outline-none`}
             placeholder="1"
           />
-          <div className="flex h-8 w-8">
+          <div className="flex h-7 w-7">
             <Plus
-              size={24}
+              size={20}
               className="m-auto cursor-pointer"
               onClick={handleAddQuantity}
             />
           </div>
         </div>
-        <button
-          type="submit"
-          className="rounded-lg bg-rose-200 px-12 py-2 shadow-md transition-colors duration-300 ease-in-out hover:bg-rose-300"
-        >
-          <ShoppingCart size={28} />
-        </button>
       </div>
     </form>
   );

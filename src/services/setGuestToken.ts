@@ -6,11 +6,10 @@ export const setGuestToken = async () => {
     const response = await apiClient.get("/login_guest");
     Cookies.set("guestSessionToken", response.data.guest_token, {
       path: "/",
-      sameSite: "Strict",
+      SameSite: "Strict",
       secure: true,
-      expires: 7,
+      expires: 1,
       domain: "mwb.local",
     });
-    console.log(document.cookie);
   }
 };

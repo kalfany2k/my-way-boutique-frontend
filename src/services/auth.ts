@@ -31,7 +31,7 @@ export const login = async (username: string, password: string) => {
     );
     Cookies.set("authToken", response.data.access_token, {
       expires: 1,
-      sameSite: "Strict",
+      SameSite: "Strict",
       secure: true,
       path: "/",
       domain: "mwb.local",

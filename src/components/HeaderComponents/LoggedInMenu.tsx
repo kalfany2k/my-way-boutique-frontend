@@ -17,8 +17,8 @@ const LoggedInMenu: React.FC<Props> = ({ user }) => {
 
   const handleLogOut = () => {
     setOpenMenu(false);
-    Cookies.remove("authToken");
-    Cookies.remove("guestSessionToken");
+    Cookies.remove("authToken", { path: "/", domain: ".mwb.local" });
+    Cookies.remove("guestSessionToken", { path: "/", domain: ".mwb.local" });
     setCartItems([]);
     setUser(null);
     setGuestToken();

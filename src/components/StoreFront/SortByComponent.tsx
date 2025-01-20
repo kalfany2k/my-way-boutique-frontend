@@ -1,4 +1,4 @@
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRightIcon, ChevronsRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -51,11 +51,11 @@ const SortByComponent = () => {
       type="button"
       aria-label="alege criteriul sortarii"
       aria-checked="false"
-      className="relative flex w-[25rem] flex-row items-center justify-between bg-gray-100 px-4 py-2 ring-1 ring-gray-500"
+      className={`relative flex ${sortByTerm == 2 || sortByTerm == 3 ? "w-[28rem]" : "w-[22rem]"} flex-row items-center justify-between bg-gray-100 px-1 py-2 ring-1 ring-gray-500`}
       onClick={() => toggleSortDropdown(!sortDropdownToggled)}
       ref={sortByRef}
     >
-      <span className="mr-1 text-sm">
+      <span className="ml-2 whitespace-nowrap font-nunito-medium text-base">
         Sorteaza dupa {sortCriterions.at(sortByTerm)}
       </span>
       <ArrowDown
@@ -63,14 +63,14 @@ const SortByComponent = () => {
         className={`${sortDropdownToggled ? "rotate-180" : "rotate-0"} transition-transform duration-300 ease-in-out`}
       />
       <div
-        className={`${sortDropdownToggled ? "" : "invisible"} absolute left-0 top-[calc(100%+1px)] z-10 flex h-fit w-full flex-col ring-1 ring-gray-500`}
+        className={`${sortDropdownToggled ? "" : "invisible"} absolute left-0 top-[calc(100%+1px)] z-10 flex h-fit w-full flex-col divide-y-[1px] divide-gray-400 font-nunito-regular ring-1 ring-gray-500`}
       >
         {sortCriterions.map((criterion, index) => (
           <div
             key={index}
             aria-label={"selecteaza sortarea dupa " + sortCriterions.at(index)}
             onClick={() => handleSortingCriterionChange(index)}
-            className={`${sortByTerm === index ? "bg-gray-200" : "bg-gray-100"} flex h-8 w-full items-center transition-colors duration-300 hover:bg-gray-300`}
+            className={`${sortByTerm === index ? "bg-rose-200" : "bg-rose-100"} flex h-8 w-full items-center transition-colors duration-300 hover:bg-rose-300`}
           >
             <span className="ml-2 text-sm">Sorteaza dupa {criterion}</span>
           </div>

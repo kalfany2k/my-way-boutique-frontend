@@ -55,7 +55,7 @@ const ShoppingPage = () => {
     <div className="flex min-h-page-height w-full flex-grow flex-col items-center">
       {(queryParams.categories || queryParams.type || queryParams.gender) && (
         <div className="mb-3 flex min-h-24 w-full items-center justify-center border-b-[1px] border-black px-2 shadow-xl lg:px-12">
-          <span className="font-signika-medium text-4xl text-gray-800 lg:text-5xl">
+          <span className="font-merriweather-light text-4xl text-gray-800 lg:text-5xl">
             {(
               queryParams.type &&
               queryParams.categories &&

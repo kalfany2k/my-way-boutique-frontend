@@ -34,7 +34,7 @@ const formSchema = z
       .string()
       .min(8, "Parola trebuie sa aiba minim 8 caractere")
       .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])[^\s]{8,}$/,
         "Parola trebuie sa contina cel putin o litera mare, o litera mica, un numar si un caracter special (e.g. !@#$%)",
       ),
     confirmPassword: z.string(),

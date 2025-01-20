@@ -11,6 +11,7 @@ export type ProductData = {
   rating: number;
   primary_image: string;
   secondary_images: string[] | null;
+  total_sales: number;
   created_at: Date;
 };
 

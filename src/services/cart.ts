@@ -10,17 +10,21 @@ export async function postCartItem(
   product_id: string,
 ): Promise<AxiosResponse> {
   const formData = new FormData();
-
   formData.append("product_id", product_id);
   formData.append("quantity", data.quantity.toString());
-  if (data.name) formData.append("personalised_name", data.name);
-  if (data.date) formData.append("personalised_date", data.date.toString());
-  if (data.message) formData.append("personalised_message", data.message);
-  else if (data.smallMessage)
-    formData.append("personalised_message", data.smallMessage);
-  if (data.size) formData.append("personalised_size", data.size);
-  if (data.familyMember)
-    formData.append("personalised_member", data.familyMember);
+
+  // Create a personalization object with only the fields that exist
+  const personalisedFields: Record<string, string> = {};
+
+  if (data.name) personalisedFields.name = data.name;
+  if (data.date) personalisedFields.date = data.date.toString();
+  if (data.message) personalisedFields.message = data.message;
+  else if (data.smallMessage) personalisedFields.message = data.smallMessage;
+  if (data.size) personalisedFields.size = data.size;
+  if (data.familyMember) personalisedFields.member = data.familyMember;
+
+  // Convert the object to a JSON string and append it
+  formData.append("personalised_fields", JSON.stringify(personalisedFields));
 
   return apiClient.post("/carts", formData, {
     headers: {
