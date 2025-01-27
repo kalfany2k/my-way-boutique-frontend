@@ -1,37 +1,61 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   images: string[];
+  onHeightChange?: (height: number) => void;
 }
 
-const ImageLayout: React.FC<Props> = ({ images }) => {
+const ImageLayout: React.FC<Props> = ({ images, onHeightChange }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updateImageHeight = () => {
+      if (imageContainerRef.current) {
+        const height = imageContainerRef.current.clientHeight;
+        if (onHeightChange) onHeightChange(height); // Pass height to parent
+      }
+    };
+
+    updateImageHeight();
+
+    window.addEventListener("resize", updateImageHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateImageHeight);
+    };
+  }, [onHeightChange]); // Re-run if onHeightChange changes
+
   return (
-    <div className="flex h-fit w-full flex-col items-center lg:items-end">
-      <div className="relative aspect-square w-4/5 bg-black lg:w-2/3">
+    <div
+      className="flex h-fit w-full flex-col gap-2 md:gap-4 lg:w-11/12 lg:gap-2"
+      ref={imageContainerRef}
+    >
+      <div className="aspect-square w-full overflow-hidden rounded-md ring-1 ring-gray-500">
         <img
-          className="absolute inset-0 h-full w-full object-cover object-center"
           src={images[currentImageIndex]}
-          loading="lazy"
+          className="h-full w-full bg-center object-cover"
+          alt="Poza produs"
+          draggable="false"
         />
       </div>
-      <div
-        className={`mt-4 grid w-11/12 lg:w-2/3 ${images.length > 4 ? "grid-cols-" + images.length : "grid-cols-4"} gap-4`}
-      >
-        {images.map((_, index) => (
-          <div
-            key={index}
-            className={`${currentImageIndex === index && ""} relative aspect-square w-full cursor-pointer bg-black`}
-            onClick={() => setCurrentImageIndex(index)}
-          >
-            <img
-              className="absolute inset-0 h-full w-full object-cover object-center"
-              src={images[index]}
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </div>
+      {images.length > 1 && (
+        <div className="grid w-full grid-cols-5 gap-2 md:gap-4 lg:gap-2">
+          {images.map((image, index) => (
+            <div
+              className={`aspect-square w-full cursor-pointer overflow-hidden rounded-md ring-1 ring-gray-500 ${currentImageIndex === index && "ring-rose-300"}`}
+              onClick={() => setCurrentImageIndex(index)}
+            >
+              <img
+                src={image}
+                className="h-full w-full bg-center object-cover"
+                alt="Poza produs"
+                draggable="false"
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

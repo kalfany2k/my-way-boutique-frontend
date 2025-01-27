@@ -82,6 +82,14 @@ export default {
         'overlock-regular': ['Overlock-Regular', 'sans-serif'],
         'merriweather-light': ['Merriweather-Light', 'serif'],
         'merriweather': ['Merriweather', 'serif'],
+        'helvetica-black': ['HelveticaNeueBlack', 'sans-serif'],
+        'helvetica-bold': ['HelveticaNeueBold', 'sans-serif'],
+        'helvetica-heavy': ['HelveticaNeueHeavy', 'sans-serif'],
+        'helvetica-light': ['HelveticaNeueLight', 'sans-serif'],
+        'helvetica-medium': ['HelveticaNeueMedium', 'sans-serif'],
+        'helvetica': ['HelveticaNeueRoman', 'sans-serif'],
+        'helvetica-thin': ['HelveticaNeueThin', 'sans-serif'],
+        'helvetica-ultralight': ['HelveticaNeueUltraLight', 'sans-serif'],
       },
       zIndex: {
         "background": 0,
@@ -93,11 +101,13 @@ export default {
       },
       height: {
         "page-height": "calc(100dvh - 12.5rem)",
+        "product-div": "calc(100dvh - 16.5rem)",
         "header": "5rem",
         "total-header": "7.5rem",
       },
       minHeight: {
-        "page-height": "calc(100dvh - 9.5rem)",
+        "page-height": "calc(100dvh - 11.5rem)",
+        "product-div": "calc(100dvh - 16.5rem)",
       },
       margin: {
         "header": "5rem",
@@ -112,10 +122,15 @@ export default {
           '0%': { transform: 'translateX(0)', opacity: '1' },
           '100%': { transform: 'translateX(50%)', opacity: '0' },
         },
+        spin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        }
       },
       animation: {
         slideIn: 'slideIn 0.3s ease-out forwards',
         slideOut: 'slideOut 0.3s ease-in forwards',
+        spin: 'spin 1s linear infinite',
       },
     },
   },

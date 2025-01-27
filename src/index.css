@@ -30,6 +30,10 @@
   .product-form-entry {
     @apply h-4/5 w-1/2 rounded-full p-2 text-xl;
   }
+
+  .accordion-btn {
+    @apply text-gray-500;
+  }
 }
 
 @layer base {
@@ -288,6 +292,86 @@
     src:
       url("./assets/fonts/Merriweather-Regular.woff2") format("woff2"),
       url("./assets/fonts/Merriweather-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HelveticaNeueBlack";
+    src:
+      url("./assets/fonts/HelveticaNeueBlack.woff2") format("woff2"),
+      url("./assets/fonts/HelveticaNeueBlack.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HelveticaNeueBold";
+    src:
+      url("./assets/fonts/HelveticaNeueBold.woff2") format("woff2"),
+      url("./assets/fonts/HelveticaNeueBold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HelveticaNeueHeavy";
+    src:
+      url("./assets/fonts/HelveticaNeueHeavy.woff2") format("woff2"),
+      url("./assets/fonts/HelveticaNeueHeavy.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HelveticaNeueLight";
+    src:
+      url("./assets/fonts/HelveticaNeueLight.woff2") format("woff2"),
+      url("./assets/fonts/HelveticaNeueLight.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HelveticaNeueMedium";
+    src:
+      url("./assets/fonts/HelveticaNeueMedium.woff2") format("woff2"),
+      url("./assets/fonts/HelveticaNeueMedium.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HelveticaNeueRoman";
+    src:
+      url("./assets/fonts/HelveticaNeueRoman.woff2") format("woff2"),
+      url("./assets/fonts/HelveticaNeueRoman.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HelveticaNeueThin";
+    src:
+      url("./assets/fonts/HelveticaNeueThin.woff2") format("woff2"),
+      url("./assets/fonts/HelveticaNeueThin.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HelveticaNeueUltraLight";
+    src:
+      url("./assets/fonts/HelveticaNeueUltraLight.woff2") format("woff2"),
+      url("./assets/fonts/HelveticaNeueUltraLight.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: swap;

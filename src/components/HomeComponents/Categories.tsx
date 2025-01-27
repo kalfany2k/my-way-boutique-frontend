@@ -17,14 +17,17 @@ const Categories = () => {
             onMouseEnter={() => setHoveredCategory(index)}
             onMouseLeave={() => setHoveredCategory(-1)}
           >
-            <Link to={category.path} className="mt-[2px] flex flex-row">
-              <span className="font-nunito-regular text-xl">
+            <Link
+              to={category.path}
+              className="mt-[2px] flex flex-row items-center"
+            >
+              <span className="mb-[3px] font-nunito-regular text-xl">
                 {category.name}
               </span>
               {category.subcategories.length > 0 && (
                 <ChevronLeft
                   size={20}
-                  className={`mt-[4.5px] ${hoveredCategory === index ? "-rotate-90" : "-rotate-0"} transition-transform duration-300 ease-in-out`}
+                  className={`${hoveredCategory === index ? "-rotate-90" : "-rotate-0"} transition-transform duration-300 ease-in-out`}
                 />
               )}
             </Link>

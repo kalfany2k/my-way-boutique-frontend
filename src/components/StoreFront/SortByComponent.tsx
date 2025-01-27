@@ -60,7 +60,7 @@ const SortByComponent = () => {
       </span>
       <ArrowDown
         size={20}
-        className={`${sortDropdownToggled ? "rotate-180" : "rotate-0"} transition-transform duration-300 ease-in-out`}
+        className={`${sortDropdownToggled ? "rotate-180" : "rotate-0"} mr-1 transition-transform duration-300 ease-in-out`}
       />
       <div
         className={`${sortDropdownToggled ? "" : "invisible"} absolute left-0 top-[calc(100%+1px)] z-10 flex h-fit w-full flex-col divide-y-[1px] divide-gray-400 font-nunito-regular ring-1 ring-gray-500`}
@@ -70,7 +70,7 @@ const SortByComponent = () => {
             key={index}
             aria-label={"selecteaza sortarea dupa " + sortCriterions.at(index)}
             onClick={() => handleSortingCriterionChange(index)}
-            className={`${sortByTerm === index ? "bg-rose-200" : "bg-rose-100"} flex h-8 w-full items-center transition-colors duration-300 hover:bg-rose-300`}
+            className={`${sortByTerm === index ? "bg-rose-100" : "bg-white"} flex h-8 w-full items-center transition-colors duration-300 hover:bg-rose-200`}
           >
             <span className="ml-2 text-sm">Sorteaza dupa {criterion}</span>
           </div>

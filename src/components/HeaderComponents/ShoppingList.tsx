@@ -6,6 +6,7 @@ import { Trash } from "lucide-react";
 import { useCart } from "../../contexts/CartContext";
 import { Link } from "react-router-dom";
 import { useOverlay } from "../../contexts/OverlayContext";
+import { AxiosError } from "axios";
 
 const ShoppingList = () => {
   const { cartItems, setCartItems, deleteCartItem } = useCart();
@@ -26,12 +27,15 @@ const ShoppingList = () => {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       setCartItems(response.data);
-    } catch (error) {}
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+      }
+    }
   };
 
   const handleDeleteItem = async (cartItemId: number) => {
     try {
-      const response = await apiClient.delete("/carts", {
+      await apiClient.delete("/carts", {
         params: { cart_item_id: cartItemId },
         headers: { Authorization: `Bearer ${authToken}` },
       });

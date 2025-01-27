@@ -97,28 +97,23 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
     }
   };
 
-  const handleAddQuantity = () => {
+  const handleChangeQuantity = (value: number) => {
     const currentQuantity = watch("quantity");
-    if (currentQuantity < 25) {
-      setValue("quantity", currentQuantity + 1);
-    }
-  };
-
-  const handleDeductQuantity = () => {
-    const currentQuantity = watch("quantity");
-    if (currentQuantity > 1) {
-      setValue("quantity", currentQuantity - 1);
+    if (
+      // prettier-ignore
+      (value === 1 && currentQuantity < 25) || (value === -1 && currentQuantity > 1)
+    ) {
+      setValue("quantity", currentQuantity + value);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="font-helvetica mt-1">
       {fields.includes("name") && (
         <div className="mb-2 mt-1 flex w-52 flex-col">
           <label className="mb-1 text-lg">Numele copilului</label>
           <input
             {...register("name")}
-            required={true}
             placeholder="ex. Andrei"
             className="rounded-md p-1 text-base shadow-lg ring-1 ring-gray-700 focus:outline-none focus:ring-black"
           />
@@ -206,41 +201,42 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
         <span className="text-rose-600">{errors.quantity.message}</span>
       )}
 
-      <div className="mb-1 mt-5 flex w-fit flex-col items-center">
+      <div className="mt-5 flex w-fit flex-col items-center shadow-md">
         <button
           type="submit"
-          className="mb-2 w-fit rounded-lg bg-rose-200 px-12 py-2 shadow-md transition-colors duration-300 ease-in-out hover:bg-rose-300"
+          className="rounded-t-lg bg-rose-200 px-12 py-2 shadow-sm transition-colors duration-300 ease-in-out hover:bg-rose-300"
         >
           <ShoppingCart size={28} />
         </button>
-
-        <div className="flex w-fit select-none flex-row items-center divide-x-[1px] divide-gray-500 rounded-sm bg-white shadow-xl">
-          <div className="flex h-7 w-7">
-            <Minus
-              size={20}
-              className="m-auto cursor-pointer"
-              onClick={handleDeductQuantity}
+        <div className="relative flex w-full items-center justify-center rounded-b-lg border-x-[1px] border-b-[1px] border-gray-400 py-1">
+          <div className="flex w-fit select-none flex-row items-center justify-between divide-x-[1px] divide-gray-500 rounded-lg bg-white">
+            <div className="flex h-8 w-8">
+              <Minus
+                size={20}
+                className="m-auto cursor-pointer"
+                onClick={() => handleChangeQuantity(-1)}
+              />
+            </div>
+            <input
+              type="text"
+              {...register("quantity", {
+                setValueAs: (v) => parseInt(v),
+                onChange: (e) => {
+                  const value = e.target.value.replace(/[^0-9]/g, "");
+                  setValue("quantity", parseInt(value) || 0);
+                },
+              })}
+              defaultValue={1}
+              className={`mb-[1px] h-8 w-8 bg-transparent px-1 text-center text-xl focus:outline-none`}
+              placeholder="1"
             />
-          </div>
-          <input
-            type="text"
-            {...register("quantity", {
-              setValueAs: (v) => parseInt(v),
-              onChange: (e) => {
-                const value = e.target.value.replace(/[^0-9]/g, "");
-                setValue("quantity", parseInt(value) || 0);
-              },
-            })}
-            defaultValue={1}
-            className={`mb-[1px] h-7 w-7 bg-transparent px-1 text-center text-xl focus:outline-none`}
-            placeholder="1"
-          />
-          <div className="flex h-7 w-7">
-            <Plus
-              size={20}
-              className="m-auto cursor-pointer"
-              onClick={handleAddQuantity}
-            />
+            <div className="flex h-8 w-8">
+              <Plus
+                size={20}
+                className="m-auto cursor-pointer"
+                onClick={() => handleChangeQuantity(1)}
+              />
+            </div>
           </div>
         </div>
       </div>

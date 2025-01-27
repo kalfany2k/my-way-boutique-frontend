@@ -1,7 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import Cookies from "js-cookie";
 import authService from "../services/authService";
-import { useCart } from "./CartContext";
 
 export interface User {
   id: number;

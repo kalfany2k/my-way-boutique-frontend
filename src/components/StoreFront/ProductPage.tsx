@@ -8,31 +8,23 @@ import ErrorPage from "./ErrorPage";
 import ImageLayout from "./ImageLayout";
 import ShoppingForm from "./ShoppingForm";
 import { useCurrency } from "../../contexts/CurrencyContext";
-import { Minus, Plus } from "lucide-react";
-import Reviews from "./Reviews";
+import AccordionDetails from "./AccordionDetails";
 
 const ProductPage = () => {
   const params = useParams<{ productID: string }>();
   const [product, setProduct] = useState<ProductData>();
   const [reviews, setReviews] = useState<ReviewData[]>([]);
+  const [imageHeight, setImageHeight] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [reviewsToggled, toggleReviews] = useState<boolean>(false);
-  const [descriptionToggled, toggleDescription] = useState<boolean>(false);
-  const [shippingDetailsToggled, toggleShippingDetails] =
-    useState<boolean>(false);
-  const [additionalDetailsToggled, toggleAdditionalDetails] =
-    useState<boolean>(false);
-  useState<boolean>(false);
   const { formatPrice } = useCurrency();
   const initialURL = "/products/" + params.productID;
 
   useEffect(() => {
     const fetchProduct = async () => {
-      setIsLoading(true); // Set loading at start of async operation
+      setIsLoading(true);
       try {
         if (params.productID) {
-          // Fetch product
           const fetchedProduct = await apiClient
             .get<ProductData>(initialURL)
             .then((res) => res.data);
@@ -47,9 +39,11 @@ const ProductPage = () => {
           } else {
             setError(`O eroare neasteptata s-a intamplat`);
           }
+
+          setIsLoading(false);
         }
       } finally {
-        setIsLoading(false); // Set loading false after everything is done
+        setIsLoading(false);
       }
     };
 
@@ -78,100 +72,25 @@ const ProductPage = () => {
 
   if (product)
     return (
-      <div className="mt-8 grid h-fit min-h-page-height grid-cols-1 lg:grid-cols-2">
-        <div className="lg:mr-2">
-          <ImageLayout
-            images={
-              product.secondary_images
-                ? [product.primary_image].concat(product.secondary_images)
-                : [product.primary_image]
-            }
-          />
-        </div>
-        <div className="flex flex-col items-center lg:ml-2 lg:items-start">
-          <div className="rounded-md p-4 lg:w-3/5">
-            <span className="whitespace-nowrap font-merriweather-light text-3xl text-gray-800">
-              {product.name}
-            </span>
-            <div className="mt-3 flex flex-row justify-between">
-              <span className="font-nunito-semibold text-2xl">
-                {formatPrice(product.price)}
-              </span>
-              <div className="flex flex-row items-center font-nunito-medium">
-                {product.rating && (
-                  <>
-                    <Rating rating={product.rating} size={20} />
-                    <span className="ml-1 mt-[1px]">{product.rating}</span>
-                  </>
-                )}
-              </div>
-            </div>
-            <ShoppingForm product={product} />
-
-            {reviews.length > 0 && (
-              <div className="h-fit w-full">
-                <div className="flex h-12 w-full items-center justify-between border-b-[1px] border-black">
-                  <span className="font-nunito-regular text-xl">
-                    Afiseaza recenziile ({reviews.length})
-                  </span>
-                  <button
-                    type="button"
-                    aria-pressed="false"
-                    onClick={() => toggleReviews(!reviewsToggled)}
-                  >
-                    {reviewsToggled ? <Minus /> : <Plus />}
-                  </button>
-                </div>
-                <Reviews toggled={reviewsToggled} reviews={reviews} />
-              </div>
-            )}
-
-            <div className="h-fit w-full">
-              <div className="flex h-12 w-full items-center justify-between border-b-[1px] border-black">
-                <span className="font-nunito-regular text-xl">
-                  Afiseaza descrierea
-                </span>
-                <button
-                  type="button"
-                  aria-pressed="false"
-                  onClick={() => toggleDescription(!descriptionToggled)}
-                >
-                  {descriptionToggled ? <Minus /> : <Plus />}
-                </button>
-              </div>
-            </div>
-
-            <div className="h-fit w-full">
-              <div className="flex h-12 w-full items-center justify-between border-b-[1px] border-black">
-                <span className="font-nunito-regular text-xl">
-                  Livrare si retur
-                </span>
-                <button
-                  type="button"
-                  aria-pressed="false"
-                  onClick={() => toggleShippingDetails(!shippingDetailsToggled)}
-                >
-                  {shippingDetailsToggled ? <Minus /> : <Plus />}
-                </button>
-              </div>
-            </div>
-
-            <div className="h-fit w-full">
-              <div className="flex h-12 w-full items-center justify-between border-b-[1px] border-black">
-                <span className="font-nunito-regular text-xl">
-                  Informatii aditionale
-                </span>
-                <button
-                  type="button"
-                  aria-pressed="false"
-                  onClick={() =>
-                    toggleAdditionalDetails(!additionalDetailsToggled)
-                  }
-                >
-                  {additionalDetailsToggled ? <Minus /> : <Plus />}
-                </button>
-              </div>
-            </div>
+      <div className="flex h-fit w-full flex-col items-center justify-start overflow-hidden pb-[1px]">
+        <span
+          className="mt-4 text-center font-helvetica-thin text-4xl lg:text-5xl"
+          id="product-name"
+        >
+          {product.name.slice(0, product.name.lastIndexOf(" "))}
+        </span>
+        <div className="mt-6 flex w-full flex-col items-center justify-center gap-2 md:gap-4 lg:flex-row lg:items-start lg:gap-8">
+          <div className="flex w-[90%] justify-end md:w-[75%] lg:h-full lg:w-2/5 xl:w-1/3">
+            <ImageLayout
+              images={[product.primary_image].concat(product.secondary_images)}
+              onHeightChange={(height) => setImageHeight(height)}
+            />
+          </div>
+          <div className="flex w-[90%] justify-center md:w-[75%] lg:h-full lg:w-2/5 lg:justify-start xl:w-1/3">
+            <div
+              className="w-full ring-1 ring-gray-500"
+              style={{ height: imageHeight ? `${imageHeight}px` : undefined }}
+            ></div>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ export type ProductData = {
   price: number;
   rating: number;
   primary_image: string;
-  secondary_images: string[] | null;
+  secondary_images: string[];
   total_sales: number;
   created_at: Date;
 };
@@ -20,8 +20,8 @@ export type ReviewData = {
   product_id: string;
   message: string | null;
   stars: number;
-  surname: string;
-  name: string;
+  author_surname: string;
+  author_name: string;
   created_at: Date;
 };
 
@@ -49,8 +49,6 @@ const ProductGrid: React.FC<Props> = ({ items, count }) => {
         ))}
       </div>
     );
-
-  return <span>Niciun produs cu filtrele selectate nu a putut fi gasit</span>;
 };
 
 export default ProductGrid;

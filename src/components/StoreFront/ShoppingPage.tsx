@@ -51,6 +51,14 @@ const ShoppingPage = () => {
     return <div>Error: {error}</div>;
   }
 
+  if (isLoading) {
+    return (
+      <div className="my-3 flex h-page-height w-full flex-col items-center justify-center">
+        <div className="h-12 w-12 animate-spin rounded-full border-r-2 border-t-2 border-rose-400" />
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-page-height w-full flex-grow flex-col items-center">
       {(queryParams.categories || queryParams.type || queryParams.gender) && (
@@ -79,11 +87,11 @@ const ShoppingPage = () => {
       )}
 
       <div
-        className={`${queryParams.search ? "mt-3" : ""} mb-6 flex h-fit w-dvw flex-col items-center lg:w-4/5`}
+        className={`${queryParams.search ? "mt-3" : ""} mb-6 flex h-fit w-11/12 flex-col items-center lg:w-4/5`}
       >
         <div className="mb-3 flex w-full flex-row items-center justify-between">
           {/* prettier-ignore */}
-          <span className="">
+          <span>
             {count} {count > 20 ? "de" : ""} produse gasite {queryParams.search ? "pentru cautarea termenului \"" + queryParams.search + "\"" : ""}
           </span>
           <SortByComponent />
@@ -128,7 +136,7 @@ const ShoppingPage = () => {
                 className={`mx-1 h-10 w-10 rounded transition-colors duration-300 ease-out ${
                   page === queryParams.skip
                     ? "bg-rose-500 text-white"
-                    : "bg-rose-100 hover:bg-rose-200"
+                    : "border-b-[1px] border-gray-400 bg-rose-100 hover:border-gray-500 hover:bg-rose-200"
                 }`}
               >
                 {page + 1}

@@ -29,18 +29,8 @@ export async function postCartItem(
   return apiClient.post("/carts", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
-      Authorization: Cookies.get("authToken")
-        ? `Bearer ${Cookies.get("authToken")}`
-        : null,
-    },
-  });
-}
-
-export async function mergeCarts(): Promise<AxiosResponse> {
-  return apiClient.post("/carts/merge", {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Bearer ${Cookies.get("authToken")}`,
+      Authorization:
+        Cookies.get("authToken") && `Bearer ${Cookies.get("authToken")}`,
     },
   });
 }

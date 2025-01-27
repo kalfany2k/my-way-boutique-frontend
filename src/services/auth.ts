@@ -1,7 +1,6 @@
 import { AxiosError } from "axios";
 import apiClient from "./apiClient";
 import Cookies from "js-cookie";
-import { mergeCarts } from "./cart";
 
 export interface ErrorResponse {
   detail: string;

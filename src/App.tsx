@@ -7,6 +7,7 @@ import { UserProvider } from "./contexts/UserContext";
 import { Outlet } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
 import { CurrencyProvider } from "./contexts/CurrencyContext";
+import { ApiProvider } from "./contexts/ApiContext";
 
 const App = () => {
   return (
@@ -14,17 +15,19 @@ const App = () => {
       <CartProvider>
         <OverlayProvider>
           <UserProvider>
-            <div className="z-header flex h-screen min-h-screen w-screen flex-col">
-              <Header />
-              <div
-                id="scrollable-div"
-                className="mt-total-header flex-grow overflow-y-auto scroll-smooth lg:mt-total-header"
-              >
-                <Categories />
-                <Outlet />
-                <Footer />
+            <ApiProvider>
+              <div className="z-header flex h-screen min-h-screen w-screen flex-col">
+                <Header />
+                <div
+                  id="scrollable-div"
+                  className="mt-total-header flex-grow overflow-y-auto scroll-smooth lg:mt-total-header"
+                >
+                  <Categories />
+                  <Outlet />
+                  <Footer />
+                </div>
               </div>
-            </div>
+            </ApiProvider>
           </UserProvider>
         </OverlayProvider>
       </CartProvider>
