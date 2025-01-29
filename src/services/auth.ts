@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import apiClient from "./apiClient";
+import apiClient, { url } from "./apiClient";
 import Cookies from "js-cookie";
 
 export interface ErrorResponse {
@@ -33,7 +33,7 @@ export const login = async (username: string, password: string) => {
       SameSite: "Strict",
       secure: true,
       path: "/",
-      domain: "mwb.local",
+      domain: url,
     });
     return response.data;
   } catch (error) {

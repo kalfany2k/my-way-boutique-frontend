@@ -1,4 +1,4 @@
-import apiClient from "./apiClient";
+import apiClient, { url } from "./apiClient";
 import Cookies from "js-cookie";
 
 export const setGuestToken = async () => {
@@ -9,7 +9,7 @@ export const setGuestToken = async () => {
       SameSite: "Strict",
       secure: true,
       expires: 1,
-      domain: "mwb.local",
+      domain: url,
     });
   }
 };

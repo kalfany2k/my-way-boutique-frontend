@@ -4,4 +4,6 @@ const apiClient = axios.create({
   withCredentials: true,
 });
 
+export const url = ".kalfany.xyz";
+
 export default apiClient;
