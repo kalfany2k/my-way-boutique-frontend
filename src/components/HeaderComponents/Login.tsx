@@ -7,9 +7,6 @@ import LoginForm from "./LoginForm";
 const Login = () => {
   const { showOverlay, hideOverlay, isOverlayVisible } = useOverlay();
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
-  {
-    /* For menuOption, true is login and false is register */
-  }
   const [menuOption, setMenuOption] = useState<boolean>(true);
 
   useEffect(() => {

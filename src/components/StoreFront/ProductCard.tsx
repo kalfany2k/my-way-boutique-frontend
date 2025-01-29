@@ -9,7 +9,7 @@ interface Props {
 const ProductCard: React.FC<Props> = ({ product }) => {
   return (
     <Link to={"/produse/" + product.type + "/" + product.id}>
-      <div className="relative flex aspect-square flex-col items-center justify-between bg-rosy-nude-300">
+      <div className="relative flex aspect-square flex-col items-center justify-between rounded-sm bg-rosy-nude-300">
         <div className="absolute right-0 top-0 m-2">
           {product.rating && <Rating rating={product.rating} size={16} />}
         </div>

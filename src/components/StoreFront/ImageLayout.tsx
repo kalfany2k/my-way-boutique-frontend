@@ -27,11 +27,11 @@ const ImageLayout: React.FC<Props> = ({ images, onHeightChange }) => {
   }, [onHeightChange]); // Re-run if onHeightChange changes
 
   return (
-    <div
-      className="flex h-fit w-full flex-col gap-2 md:gap-4 lg:w-11/12 lg:gap-2"
-      ref={imageContainerRef}
-    >
-      <div className="aspect-square w-full overflow-hidden rounded-md ring-1 ring-gray-500">
+    <div className="flex h-fit w-full flex-col gap-2 md:gap-4 lg:w-11/12 lg:gap-2">
+      <div
+        className="aspect-square w-full overflow-hidden rounded-md ring-1 ring-gray-500"
+        ref={imageContainerRef}
+      >
         <img
           src={images[currentImageIndex]}
           className="h-full w-full bg-center object-cover"

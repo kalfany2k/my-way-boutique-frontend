@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ItemCard from "./ItemCard";
 import useData from "../../hooks/useData";
 import { ProductData } from "../StoreFront/ProductGrid";
@@ -21,11 +21,18 @@ const HomeProductGrid: React.FC<GridProps> = ({
     params: { type: type, limit: 8 },
   });
 
+  const navigate = useNavigate();
+
   const handleShowMore = () => {
     const scrollableDiv = document.getElementById("scrollable-div");
+
     if (scrollableDiv) {
       scrollableDiv.scrollTo({ top: 0, behavior: "auto" });
     }
+
+    setTimeout(() => {
+      navigate(path);
+    }, 400);
   };
 
   return (
@@ -48,8 +55,11 @@ const HomeProductGrid: React.FC<GridProps> = ({
         <div className="hero-item flex justify-center">
           <Link
             to={path}
+            onClick={(e) => {
+              e.preventDefault();
+              handleShowMore();
+            }}
             className="font-ethereal-light text-lg font-bold hover:underline lg:text-xl"
-            onClick={handleShowMore}
           >
             Apasa aici pentru a vedea mai multe
           </Link>

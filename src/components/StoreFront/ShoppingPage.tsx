@@ -4,6 +4,7 @@ import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { pluralToSingular, singularToPlural } from "../../assets/types/plurals";
 import SortByComponent from "./SortByComponent";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import SkeletonGrid from "./SkeletonGrid";
 
 const ITEMS_PER_PAGE = 16;
 
@@ -51,14 +52,6 @@ const ShoppingPage = () => {
     return <div>Error: {error}</div>;
   }
 
-  if (isLoading) {
-    return (
-      <div className="my-3 flex h-page-height w-full flex-col items-center justify-center">
-        <div className="h-12 w-12 animate-spin rounded-full border-r-2 border-t-2 border-rose-400" />
-      </div>
-    );
-  }
-
   return (
     <div className="flex min-h-page-height w-full flex-grow flex-col items-center">
       {(queryParams.categories || queryParams.type || queryParams.gender) && (
@@ -73,7 +66,7 @@ const ShoppingPage = () => {
             )?.toUpperCase() ||
               (
                 queryParams.categories &&
-                "Articole " + queryParams.categories.replace("_", " ")
+                "ARTICOLE " + queryParams.categories.replace("_", " ")
               )?.toUpperCase() ||
               (
                 queryParams.type &&
@@ -96,7 +89,11 @@ const ShoppingPage = () => {
           </span>
           <SortByComponent />
         </div>
-        <ProductGrid items={data} count={count} />
+        {isLoading ? (
+          <SkeletonGrid />
+        ) : (
+          <ProductGrid items={data} count={count} />
+        )}
       </div>
 
       {totalPages > 1 && (

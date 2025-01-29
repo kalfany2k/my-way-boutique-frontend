@@ -9,6 +9,7 @@ import ImageLayout from "./ImageLayout";
 import ShoppingForm from "./ShoppingForm";
 import { useCurrency } from "../../contexts/CurrencyContext";
 import AccordionDetails from "./AccordionDetails";
+import Spinner from "../Utility/Spinner";
 
 const ProductPage = () => {
   const params = useParams<{ productID: string }>();
@@ -66,7 +67,12 @@ const ProductPage = () => {
     if (product?.rating) fetchReviews();
   }, [product]);
 
-  if (isLoading) return <div className="min-h-page-height"></div>;
+  if (isLoading)
+    return (
+      <div className="flex min-h-page-height items-center justify-center">
+        <Spinner size={12} />
+      </div>
+    );
 
   if (error) return <ErrorPage />;
 
@@ -86,11 +92,25 @@ const ProductPage = () => {
               onHeightChange={(height) => setImageHeight(height)}
             />
           </div>
-          <div className="flex w-[90%] justify-center md:w-[75%] lg:h-full lg:w-2/5 lg:justify-start xl:w-1/3">
+          <div className="flex w-full justify-center md:w-[75%] lg:h-full lg:w-2/5 lg:justify-start xl:w-1/3">
             <div
-              className="w-full ring-1 ring-gray-500"
-              style={{ height: imageHeight ? `${imageHeight}px` : undefined }}
-            ></div>
+              className="flex h-fit w-11/12 flex-col items-center rounded-md px-3 py-3 ring-1 ring-gray-500 lg:py-1 xl:w-2/3"
+              style={{
+                minHeight: imageHeight ? `${imageHeight}px` : undefined,
+              }}
+            >
+              {reviews.length > 0 && (
+                <Rating size={24} rating={product.rating} />
+              )}
+
+              <span className="w-full border-b-[1px] border-gray-500 pb-1 text-center font-helvetica text-2xl">
+                {formatPrice(product.price)}
+              </span>
+
+              <div className="mt-1 w-full">
+                <ShoppingForm product={product} />
+              </div>
+            </div>
           </div>
         </div>
       </div>

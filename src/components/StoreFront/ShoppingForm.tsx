@@ -43,7 +43,7 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
   var date = new Date();
   var todayDate = moment(date).format("DD/MM/YYYY");
-  const { addCartItem, deleteCartItem, cartItems } = useCart();
+  const { addCartItem, deleteCartItem } = useCart();
 
   useEffect(() => {
     switch (product.type) {
@@ -108,9 +108,9 @@ const ShoppingForm: React.FC<Props> = ({ product }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="font-helvetica mt-1">
+    <form onSubmit={handleSubmit(onSubmit)} className="font-helvetica">
       {fields.includes("name") && (
-        <div className="mb-2 mt-1 flex w-52 flex-col">
+        <div className="mb-2 flex w-52 flex-col">
           <label className="mb-1 text-lg">Numele copilului</label>
           <input
             {...register("name")}
