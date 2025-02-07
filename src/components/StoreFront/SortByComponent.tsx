@@ -5,8 +5,8 @@ import { useSearchParams } from "react-router-dom";
 const sortCriterions = [
   "cele mai recente",
   "popularitatea vanzarilor",
-  "pret, de la cel mai mic la cel mai mare",
-  "pret, de la cel mai mare la cel mai mic",
+  "pret, crescator",
+  "pret, descrescator",
 ];
 
 const sortCriterionsParams = [
@@ -51,11 +51,11 @@ const SortByComponent = () => {
       type="button"
       aria-label="alege criteriul sortarii"
       aria-checked="false"
-      className={`relative flex ${sortByTerm == 2 || sortByTerm == 3 ? "w-[28rem]" : "w-[22rem]"} flex-row items-center justify-between bg-gray-100 px-1 py-2 ring-1 ring-gray-500`}
+      className={`relative mt-2 flex lg:mt-0 ${sortDropdownToggled ? "rounded-t-sm" : "rounded-sm"} w-full flex-row items-center justify-between bg-gray-100 px-1 py-2 ring-1 ring-gray-500 md:w-[22rem]`}
       onClick={() => toggleSortDropdown(!sortDropdownToggled)}
       ref={sortByRef}
     >
-      <span className="ml-2 whitespace-nowrap font-nunito-medium text-base">
+      <span className="ml-2 whitespace-nowrap font-nunito-medium text-sm">
         Sorteaza dupa {sortCriterions.at(sortByTerm)}
       </span>
       <ArrowDown
@@ -63,7 +63,7 @@ const SortByComponent = () => {
         className={`${sortDropdownToggled ? "rotate-180" : "rotate-0"} mr-1 transition-transform duration-300 ease-in-out`}
       />
       <div
-        className={`${sortDropdownToggled ? "" : "invisible"} absolute left-0 top-[calc(100%+1px)] z-10 flex h-fit w-full flex-col divide-y-[1px] divide-gray-400 font-nunito-regular ring-1 ring-gray-500`}
+        className={`${sortDropdownToggled ? "rounded-b-sm" : "invisible"} absolute left-0 top-[calc(100%+1px)] z-10 flex h-fit w-full flex-col divide-y-[1px] divide-gray-400 font-nunito-regular ring-1 ring-gray-500`}
       >
         {sortCriterions.map((criterion, index) => (
           <div

@@ -10,6 +10,7 @@ import Dashboard from "./components/Dashboard/Dashboard.tsx";
 import ProtectedAdminRoute from "./components/Routing/ProtectedAdminRoute.tsx";
 import MeasurementsPage from "./components/AdditionalPages/MeasurementsPage.tsx";
 import ContactPage from "./components/AdditionalPages/ContactPage.tsx";
+import OrderPage from "./components/Dashboard/OrderPage.tsx";
 const router = createBrowserRouter([
   {
     element: <App />,
@@ -24,6 +25,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedAdminRoute>
             <Dashboard />
+          </ProtectedAdminRoute>
+        ),
+      },
+      {
+        path: "/comenzi",
+        element: (
+          <ProtectedAdminRoute>
+            <OrderPage />
           </ProtectedAdminRoute>
         ),
       },

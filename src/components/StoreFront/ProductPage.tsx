@@ -16,6 +16,8 @@ const ProductPage = () => {
   const [product, setProduct] = useState<ProductData>();
   const [reviews, setReviews] = useState<ReviewData[]>([]);
   const [imageHeight, setImageHeight] = useState<number | null>(null);
+  const [imageLeftMargin, setImageLeftMargin] = useState<number | null>(null);
+  const [imageWidth, setImageWidth] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { formatPrice } = useCurrency();
@@ -90,6 +92,8 @@ const ProductPage = () => {
             <ImageLayout
               images={[product.primary_image].concat(product.secondary_images)}
               onHeightChange={(height) => setImageHeight(height)}
+              onLeftMarginChange={(margin) => setImageLeftMargin(margin)}
+              onWidthChange={(width) => setImageWidth(width)}
             />
           </div>
           <div className="flex w-full justify-center md:w-[75%] lg:h-full lg:w-2/5 lg:justify-start xl:w-1/3">
@@ -111,6 +115,16 @@ const ProductPage = () => {
                 <ShoppingForm product={product} />
               </div>
             </div>
+          </div>
+        </div>
+        <div className="w-full">
+          <div
+            style={{
+              marginLeft: imageLeftMargin ? `${imageLeftMargin}px` : undefined,
+              width: imageWidth ? `${imageWidth}px` : undefined,
+            }}
+          >
+            <AccordionDetails reviews={reviews} />
           </div>
         </div>
       </div>

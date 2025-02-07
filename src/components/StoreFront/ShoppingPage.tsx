@@ -55,8 +55,8 @@ const ShoppingPage = () => {
   return (
     <div className="flex min-h-page-height w-full flex-grow flex-col items-center">
       {(queryParams.categories || queryParams.type || queryParams.gender) && (
-        <div className="mb-3 flex min-h-24 w-full items-center justify-center border-b-[1px] border-black px-2 shadow-xl lg:px-12">
-          <span className="font-merriweather-light text-4xl text-gray-800 lg:text-5xl">
+        <div className="mb-3 flex min-h-24 w-full border-b-[1px] border-black px-2 shadow-xl lg:px-12">
+          <span className="m-auto text-center font-merriweather-light text-4xl text-gray-800 lg:text-5xl">
             {(
               queryParams.type &&
               queryParams.categories &&
@@ -82,7 +82,7 @@ const ShoppingPage = () => {
       <div
         className={`${queryParams.search ? "mt-3" : ""} mb-6 flex h-fit w-11/12 flex-col items-center lg:w-4/5`}
       >
-        <div className="mb-3 flex w-full flex-row items-center justify-between">
+        <div className="mb-3 flex w-full flex-col justify-between lg:flex-row lg:items-center">
           {/* prettier-ignore */}
           <span>
             {count} {count > 20 ? "de" : ""} produse gasite {queryParams.search ? "pentru cautarea termenului \"" + queryParams.search + "\"" : ""}

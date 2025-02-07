@@ -3,26 +3,38 @@ import { useEffect, useRef, useState } from "react";
 interface Props {
   images: string[];
   onHeightChange?: (height: number) => void;
+  onLeftMarginChange?: (leftMargin: number) => void;
+  onWidthChange?: (leftMargin: number) => void;
 }
 
-const ImageLayout: React.FC<Props> = ({ images, onHeightChange }) => {
+const ImageLayout: React.FC<Props> = ({
+  images,
+  onHeightChange,
+  onLeftMarginChange,
+  onWidthChange,
+}) => {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const updateImageHeight = () => {
+    const updateValues = () => {
       if (imageContainerRef.current) {
         const height = imageContainerRef.current.clientHeight;
-        if (onHeightChange) onHeightChange(height); // Pass height to parent
+        const leftMargin =
+          imageContainerRef.current.getBoundingClientRect().left;
+        const width = imageContainerRef.current.clientWidth;
+        if (onHeightChange) onHeightChange(height);
+        if (onLeftMarginChange) onLeftMarginChange(leftMargin);
+        if (onWidthChange) onWidthChange(width);
       }
     };
 
-    updateImageHeight();
+    updateValues();
 
-    window.addEventListener("resize", updateImageHeight);
+    window.addEventListener("resize", updateValues);
 
     return () => {
-      window.removeEventListener("resize", updateImageHeight);
+      window.removeEventListener("resize", updateValues);
     };
   }, [onHeightChange]); // Re-run if onHeightChange changes
 

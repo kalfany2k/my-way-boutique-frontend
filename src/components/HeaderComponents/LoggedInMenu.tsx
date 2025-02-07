@@ -1,10 +1,17 @@
-import { UserCheck, LayoutDashboard, LogOut, UserPen } from "lucide-react";
+import {
+  UserCheck,
+  LayoutDashboard,
+  LogOut,
+  UserPen,
+  ScrollText,
+} from "lucide-react";
 import { User as UserType, useUser } from "../../contexts/UserContext";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import { useCart } from "../../contexts/CartContext";
 import { setGuestToken } from "../../services/setGuestToken";
+import { cookieUrl } from "../../services/apiClient";
 
 interface Props {
   user: UserType;
@@ -17,8 +24,8 @@ const LoggedInMenu: React.FC<Props> = ({ user }) => {
 
   const handleLogOut = () => {
     setOpenMenu(false);
-    Cookies.remove("authToken", { path: "/", domain: ".mwb.local" });
-    Cookies.remove("guestSessionToken", { path: "/", domain: ".mwb.local" });
+    Cookies.remove("authToken", { path: "/", domain: cookieUrl });
+    Cookies.remove("guestSessionToken", { path: "/", domain: cookieUrl });
     setCartItems([]);
     setUser(null);
     setGuestToken();
@@ -47,15 +54,26 @@ const LoggedInMenu: React.FC<Props> = ({ user }) => {
             Profil
           </Link>
           {user.role === "admin" && (
-            <Link
-              className="flex w-full flex-row items-center justify-start px-2 py-1"
-              to="/centru-admin"
-            >
-              <div className="mr-1 flex h-6 w-6 items-center justify-center">
-                <LayoutDashboard size={24} />
-              </div>
-              Panou
-            </Link>
+            <>
+              <Link
+                className="flex w-full flex-row items-center justify-start px-2 py-1"
+                to="/centru-admin"
+              >
+                <div className="mr-1 flex h-6 w-6 items-center justify-center">
+                  <LayoutDashboard size={24} />
+                </div>
+                Panou
+              </Link>
+              <Link
+                className="flex w-full flex-row items-center justify-start px-2 py-1"
+                to="/comenzi"
+              >
+                <div className="mr-1 flex h-6 w-6 items-center justify-center">
+                  <ScrollText size={24} />
+                </div>
+                Comenzi
+              </Link>
+            </>
           )}
           <button
             className="flex w-full flex-row items-center justify-start px-2 pb-2 pt-1 text-red-500"

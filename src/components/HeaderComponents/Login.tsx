@@ -3,11 +3,13 @@ import { useOverlay } from "../../contexts/OverlayContext";
 import { useEffect, useState } from "react";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
+import ForgottenPasswordForm from "./ForgottenPasswordForm";
 
 const Login = () => {
   const { showOverlay, hideOverlay, isOverlayVisible } = useOverlay();
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
   const [menuOption, setMenuOption] = useState<boolean>(true);
+  const [forgottenPassword, setForgottenPassword] = useState<boolean>(false);
 
   useEffect(() => {
     if (loginOpen && !isOverlayVisible) {
@@ -52,7 +54,17 @@ const Login = () => {
           </button>
         </div>
         <div className="h-[3px] w-full bg-gradient-to-r from-rosy-nude-300 via-rosy-nude-500 to-rosy-nude-300" />
-        {menuOption ? <LoginForm /> : <RegisterForm />}
+        {menuOption ? (
+          forgottenPassword ? (
+            <ForgottenPasswordForm
+              setForgottenPassword={setForgottenPassword}
+            />
+          ) : (
+            <LoginForm setForgottenPassword={setForgottenPassword} />
+          )
+        ) : (
+          <RegisterForm />
+        )}
         <X
           className="absolute right-0 top-0 m-1 size-12 cursor-pointer md:size-8"
           onClick={() => {

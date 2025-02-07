@@ -177,31 +177,34 @@ const RegisterForm = () => {
           type="password"
           className="login-entry"
         />
+
+        <span className="ml-10 self-start">Confirma parola</span>
+        {errors.confirmPassword && (
+          <p className="mb-1 ml-10 self-start text-sm text-red-500">
+            {errors.confirmPassword.message}
+          </p>
+        )}
+        <input
+          {...register("confirmPassword")}
+          type="password"
+          className="login-entry"
+        />
       </div>
 
-      <span className="ml-10 self-start">Confirma parola</span>
-      {errors.confirmPassword && (
-        <p className="mb-1 ml-10 self-start text-sm text-red-500">
-          {errors.confirmPassword.message}
-        </p>
-      )}
-      <input
-        {...register("confirmPassword")}
-        type="password"
-        className="login-entry"
-      />
-
-      <div className="mt-4 flex items-center">
-        <input type="checkbox" {...register("terms")} className="mr-2" />
-        <label>Accept termenii si conditiile</label>
-      </div>
-      {errors.terms && (
-        <p className="mb-1 self-center text-sm text-red-500">
-          {errors.terms.message}
-        </p>
-      )}
-
-      <div className="flex flex-col">
+      <div className="flex flex-col items-center">
+        <div className="mt-4 flex items-center">
+          <input
+            type="checkbox"
+            {...register("terms")}
+            className="mr-2 mt-[2px]"
+          />
+          <label>Accept termenii si conditiile</label>
+        </div>
+        {errors.terms && (
+          <p className="mb-1 self-center text-sm text-red-500">
+            {errors.terms.message}
+          </p>
+        )}
         {existingEmailError && (
           <p className="self-center text-sm text-red-500">
             {existingEmailError}
@@ -209,7 +212,7 @@ const RegisterForm = () => {
         )}
         <button
           type="submit"
-          className="m-3 rounded-full bg-rose-200 px-4 py-2 text-2xl"
+          className="m-3 w-fit rounded-2xl bg-rose-200 px-4 py-2 text-2xl"
         >
           Creeaza cont
         </button>

@@ -5,7 +5,6 @@ import { z } from "zod";
 import { useOverlay } from "../../contexts/OverlayContext";
 import { login } from "../../services/auth";
 import { useUser } from "../../contexts/UserContext";
-import { mergeCarts } from "../../services/cart";
 import Cookies from "js-cookie";
 
 const formSchema = z.object({
@@ -20,7 +19,11 @@ const formSchema = z.object({
 
 type FormFields = z.infer<typeof formSchema>;
 
-const LoginForm = () => {
+interface Props {
+  setForgottenPassword: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const LoginForm: React.FC<Props> = ({ setForgottenPassword }) => {
   const { hideOverlay } = useOverlay();
   const { setUser, setUserLong } = useUser();
   const [error, setError] = useState<string | null>(null);
@@ -29,7 +32,6 @@ const LoginForm = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<FormFields>({ resolver: zodResolver(formSchema) });
-  const [forgottenPassword, setForgottenPassword] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
@@ -88,9 +90,9 @@ const LoginForm = () => {
         {error && <span className="text-center text-red-500">{error}</span>}
         <button
           type="submit"
-          className="my-2 rounded-full bg-rose-200 px-4 py-2 text-2xl"
+          className="my-2 rounded-2xl bg-rose-200 px-4 py-2 text-2xl"
         >
-          Logheaza-te
+          Trimite
         </button>
         <span
           className="w-full cursor-pointer text-center text-gray-500"

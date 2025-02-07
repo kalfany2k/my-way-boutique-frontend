@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import apiClient, { url } from "./apiClient";
+import apiClient, { cookieUrl } from "./apiClient";
 import Cookies from "js-cookie";
 
 export interface ErrorResponse {
@@ -33,7 +33,7 @@ export const login = async (username: string, password: string) => {
       SameSite: "Strict",
       secure: true,
       path: "/",
-      domain: url,
+      domain: cookieUrl,
     });
     return response.data;
   } catch (error) {

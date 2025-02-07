@@ -4,6 +4,7 @@ const apiClient = axios.create({
   withCredentials: true,
 });
 
-export const url = ".kalfany.xyz";
+export const cookieUrl = ".mwb.local";
+export const backendUrl = "api.mwb.local";
 
 export default apiClient;

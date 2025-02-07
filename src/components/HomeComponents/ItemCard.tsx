@@ -19,6 +19,7 @@ const ItemCard: React.FC<Props> = ({ product }) => {
             alt={product.name}
             src={product.primary_image}
             draggable="false"
+            loading="lazy"
           />
         </div>
       </Link>

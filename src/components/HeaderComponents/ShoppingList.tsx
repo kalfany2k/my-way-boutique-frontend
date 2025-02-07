@@ -11,12 +11,12 @@ import { AxiosError } from "axios";
 const ShoppingList = () => {
   const { cartItems, setCartItems, deleteCartItem } = useCart();
   const { hideOverlay } = useOverlay();
-  const [authToken, setAuthToken] = useState<string | undefined>(undefined);
+  const [token, setToken] = useState<string | undefined>(undefined);
   const { user } = useUser();
 
   useEffect(() => {
-    const token = Cookies.get("authToken");
-    setAuthToken(token);
+    const token = Cookies.get("authToken") || Cookies.get("guestSessionToken");
+    setToken(token);
     token ? retrieveCart(token) : setCartItems([]);
   }, [user]);
 
@@ -37,7 +37,7 @@ const ShoppingList = () => {
     try {
       await apiClient.delete("/carts", {
         params: { cart_item_id: cartItemId },
-        headers: { Authorization: `Bearer ${authToken}` },
+        headers: { Authorization: token && `Bearer ${token}` },
       });
       deleteCartItem(cartItemId);
     } catch (error) {}
