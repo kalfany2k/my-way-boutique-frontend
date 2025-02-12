@@ -6,6 +6,7 @@ import { useOverlay } from "../../contexts/OverlayContext";
 import { login } from "../../services/auth";
 import { useUser } from "../../contexts/UserContext";
 import Cookies from "js-cookie";
+import { LockKeyhole, Mail } from "lucide-react";
 
 const formSchema = z.object({
   email: z
@@ -58,24 +59,32 @@ const LoginForm: React.FC<Props> = ({ setForgottenPassword }) => {
             {errors.email.message}
           </p>
         )}
-        <input
-          {...register("email")}
-          type="text"
-          className="login-entry"
-          autoComplete="email"
-        />
+        <div className="relative flex w-10/12 flex-row items-center">
+          <input
+            {...register("email")}
+            type="text"
+            className="login-entry"
+            autoComplete="email"
+          />
+          <Mail className="absolute right-3" size={24} />
+        </div>
+
         <label className="ml-10 self-start">Parola</label>
         {errors.password && (
           <p className="mb-1 ml-10 self-start text-sm text-red-500">
             {errors.password.message}
           </p>
         )}
-        <input
-          {...register("password")}
-          type="password"
-          className="login-entry"
-          autoComplete="current-password"
-        />
+        <div className="relative flex w-10/12 flex-row items-center">
+          <input
+            {...register("password")}
+            type="password"
+            className="login-entry"
+            autoComplete="current-password"
+          />
+          <LockKeyhole className="absolute right-3" size={24} />
+        </div>
+
         <div className="my-2 flex w-full flex-row">
           <label className="ml-10 self-start">Tine minte detaliile</label>
           <input

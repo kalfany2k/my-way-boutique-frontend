@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useOverlay } from "../../contexts/OverlayContext";
 import apiClient from "../../services/apiClient";
+import { Mail } from "lucide-react";
 
 const formSchema = z.object({
   email: z
@@ -34,10 +35,7 @@ const LoginForm: React.FC<Props> = ({ setForgottenPassword }) => {
       const formData = new FormData();
       formData.append("email", data.email);
       const response = await apiClient.post("/users/reset-password", formData);
-      if (response.status === 200)
-        setResetSuccess(
-          "Email-ul a fost trimis cu succes, verifica-ti inbox-ul",
-        );
+      if (response.status === 200) setResetSuccess(response.data.detail);
     } catch (error) {
       error instanceof Error
         ? setError(error.message)
@@ -54,12 +52,15 @@ const LoginForm: React.FC<Props> = ({ setForgottenPassword }) => {
             {errors.email.message}
           </p>
         )}
-        <input
-          {...register("email")}
-          type="text"
-          className="login-entry"
-          autoComplete="email"
-        />
+        <div className="relative flex w-10/12 flex-row items-center">
+          <input
+            {...register("email")}
+            type="text"
+            className="login-entry"
+            autoComplete="email"
+          />
+          <Mail className="absolute right-3" size={24} />
+        </div>
       </div>
       <div className="flex w-full flex-col items-center justify-center">
         {resetSuccess && (

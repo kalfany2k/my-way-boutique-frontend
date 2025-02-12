@@ -5,6 +5,13 @@ import { useOverlay } from "../../contexts/OverlayContext";
 import { login, register as registerUser } from "../../services/auth";
 import { useUser } from "../../contexts/UserContext";
 import { useState } from "react";
+import {
+  User,
+  LockKeyhole,
+  Mail,
+  MailCheck,
+  LockKeyholeOpen,
+} from "lucide-react"; // Import the icons
 
 const formSchema = z
   .object({
@@ -87,33 +94,46 @@ const RegisterForm = () => {
   return (
     <form className="login-container" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex w-full flex-col items-center justify-center">
+        {/* Email Field */}
         <span className="ml-10 self-start">Adresa de e-mail</span>
         {errors.email && (
           <p className="mb-1 ml-10 self-start text-sm text-red-500">
             {errors.email.message}
           </p>
         )}
-        <input {...register("email")} type="text" className="login-entry" />
+        <div className="relative flex w-10/12 flex-row items-center">
+          <input
+            {...register("email")}
+            type="text"
+            className="login-entry"
+            autoComplete="email"
+          />
+          <Mail className="absolute right-3" size={24} />
+        </div>
 
+        {/* Confirm Email Field */}
         <span className="ml-10 self-start">Confirma adresa de e-mail</span>
         {errors.confirmEmail && (
           <p className="mb-1 ml-10 self-start text-sm text-red-500">
             {errors.confirmEmail.message}
           </p>
         )}
+        <div className="relative flex w-10/12 flex-row items-center">
+          <input
+            {...register("confirmEmail")}
+            type="text"
+            className="login-entry"
+          />
+          <MailCheck className="absolute right-3" size={24} />
+        </div>
 
-        <input
-          {...register("confirmEmail")}
-          type="text"
-          className="login-entry"
-        />
-
+        {/* Gender Field */}
         {errors.gender && (
           <p className="mb-1 ml-10 self-start text-sm text-red-500">
             {errors.gender.message}
           </p>
         )}
-        <div className="flex flex-row self-start">
+        <div className="ml-3 flex flex-row self-start">
           <label className="ml-8 mr-1 self-start">
             <input
               {...register("gender")}
@@ -135,9 +155,9 @@ const RegisterForm = () => {
           </label>
         </div>
 
-        <div className="flex w-11/12 flex-row">
-          <div className="flex w-1/2 flex-col items-center">
-            {/* <label className="ml-5 self-start">Nume</label> */}
+        {/* Surname and Name Fields */}
+        <div className="flex w-10/12 flex-row">
+          <div className="ml-1 mr-2 flex w-1/2 flex-col items-center">
             {errors.surname && (
               <p className="ml-5 self-start text-sm text-red-500">
                 Camp obligatoriu
@@ -146,12 +166,11 @@ const RegisterForm = () => {
             <input
               {...register("surname")}
               type="text"
-              className="m-1 w-10/12 rounded-2xl px-4 py-[6px] text-xl ring-2 ring-gray-500 focus:outline-none focus:ring-gray-800"
+              className="no-icon-login-entry"
               placeholder="Nume..."
             />
           </div>
-          <div className="flex w-1/2 flex-col items-center">
-            {/* <span className="ml-5 self-start">Prenume</span> */}
+          <div className="ml-2 flex w-1/2 flex-col items-center">
             {errors.name && (
               <p className="ml-5 self-start text-sm text-red-500">
                 {errors.name.message}
@@ -160,37 +179,46 @@ const RegisterForm = () => {
             <input
               {...register("name")}
               type="text"
-              className="login-entry"
+              className="no-icon-login-entry"
               placeholder="Prenume..."
             />
           </div>
         </div>
 
+        {/* Password Field */}
         <span className="ml-10 self-start">Parola</span>
         {errors.password && (
           <p className="mb-1 ml-10 self-start text-sm text-red-500">
             {errors.password.message}
           </p>
         )}
-        <input
-          {...register("password")}
-          type="password"
-          className="login-entry"
-        />
+        <div className="relative flex w-10/12 flex-row items-center">
+          <input
+            {...register("password")}
+            type="password"
+            className="login-entry"
+          />
+          <LockKeyhole className="absolute right-3" size={24} />
+        </div>
 
+        {/* Confirm Password Field */}
         <span className="ml-10 self-start">Confirma parola</span>
         {errors.confirmPassword && (
           <p className="mb-1 ml-10 self-start text-sm text-red-500">
             {errors.confirmPassword.message}
           </p>
         )}
-        <input
-          {...register("confirmPassword")}
-          type="password"
-          className="login-entry"
-        />
+        <div className="relative flex w-10/12 flex-row items-center">
+          <input
+            {...register("confirmPassword")}
+            type="password"
+            className="login-entry"
+          />
+          <LockKeyholeOpen className="absolute right-3" size={24} />
+        </div>
       </div>
 
+      {/* Terms and Conditions */}
       <div className="flex flex-col items-center">
         <div className="mt-4 flex items-center">
           <input
