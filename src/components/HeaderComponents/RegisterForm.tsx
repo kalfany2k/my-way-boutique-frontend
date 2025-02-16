@@ -60,7 +60,11 @@ const formSchema = z
 
 type FormFields = z.infer<typeof formSchema>;
 
-const RegisterForm = () => {
+interface Props {
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const RegisterForm: React.FC<Props> = ({ setIsLoading }) => {
   const [existingEmailError, setExistingEmailError] = useState<string | null>(
     null,
   );
@@ -74,6 +78,7 @@ const RegisterForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
+      setIsLoading(true);
       await registerUser(
         data.email,
         data.surname,
@@ -88,6 +93,8 @@ const RegisterForm = () => {
       error instanceof Error
         ? setExistingEmailError(error.message)
         : setExistingEmailError("O eroare neasteptata s-a intamplat");
+    } finally {
+      setIsLoading(false);
     }
   };
 

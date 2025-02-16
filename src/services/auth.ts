@@ -35,6 +35,7 @@ export const login = async (username: string, password: string) => {
       path: "/",
       domain: cookieUrl,
     });
+    Cookies.remove("guestSessionToken", { domain: cookieUrl, path: "/" });
     return response.data;
   } catch (error) {
     throwError(error);

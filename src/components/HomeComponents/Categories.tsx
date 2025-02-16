@@ -33,7 +33,7 @@ const Categories = () => {
             </Link>
             {category.subcategories.length > 0 && (
               <div
-                className={`${hoveredCategory === index ? "translate-y-0 opacity-100" : "pointer-events-none invisible translate-y-4 opacity-0"} absolute left-1/2 top-full z-10 flex h-fit w-fit min-w-36 -translate-x-1/2 flex-row divide-x-[1px] divide-black rounded-b-md border-[1px] border-black bg-white transition-all duration-[400ms] ease-in-out`}
+                className={`${hoveredCategory === index ? "scale-x-100 scale-y-100 opacity-100" : "pointer-events-none scale-x-90 scale-y-50 opacity-0"} absolute left-1/2 top-full z-10 flex h-fit w-fit min-w-36 origin-top -translate-x-1/2 flex-row divide-x-[1px] divide-black rounded-b-md border-[1px] border-black bg-white transition-all duration-300 ease-in-out`}
               >
                 <div className="flex w-fit flex-col gap-y-[2px] p-4 font-nunito-medium text-lg">
                   {category.subcategories.map((subcategory, secondaryIndex) => (

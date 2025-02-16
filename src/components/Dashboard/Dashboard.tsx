@@ -24,7 +24,7 @@ const Dashboard = () => {
           />
         </div>
         <div
-          className={`-z-10 h-fit w-full transition-all duration-300 ease-in-out lg:w-1/2 ${productOpen ? "-translate-y-0 opacity-100" : "pointer-events-none h-0 -translate-y-4 opacity-0"}`}
+          className={`-z-10 w-full origin-top-left transition-all duration-300 ease-in-out lg:w-1/2 ${productOpen ? "h-fit scale-x-100 scale-y-100 opacity-100" : "pointer-events-none h-0 scale-x-90 scale-y-50 opacity-0"}`}
         >
           <ProductForm />
         </div>

@@ -18,9 +18,10 @@ type FormFields = z.infer<typeof formSchema>;
 
 interface Props {
   setForgottenPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LoginForm: React.FC<Props> = ({ setForgottenPassword }) => {
+const LoginForm: React.FC<Props> = ({ setForgottenPassword, setIsLoading }) => {
   const { hideOverlay } = useOverlay();
   const [error, setError] = useState<string | null>(null);
   const [resetSuccess, setResetSuccess] = useState<string | null>(null);
@@ -32,10 +33,12 @@ const LoginForm: React.FC<Props> = ({ setForgottenPassword }) => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
+      setIsLoading(true);
       const formData = new FormData();
       formData.append("email", data.email);
       const response = await apiClient.post("/users/reset-password", formData);
       if (response.status === 200) setResetSuccess(response.data.detail);
+      setIsLoading(false);
     } catch (error) {
       error instanceof Error
         ? setError(error.message)

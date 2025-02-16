@@ -63,7 +63,7 @@ const SortByComponent = () => {
         className={`${sortDropdownToggled ? "rotate-180" : "rotate-0"} mr-1 transition-transform duration-300 ease-in-out`}
       />
       <div
-        className={`${sortDropdownToggled ? "rounded-b-sm" : "invisible"} absolute left-0 top-[calc(100%+1px)] z-10 flex h-fit w-full flex-col divide-y-[1px] divide-gray-400 font-nunito-regular ring-1 ring-gray-500`}
+        className={`${sortDropdownToggled ? "scale-x-100 rounded-b-sm opacity-100" : "pointer-events-none scale-x-90 scale-y-50 opacity-0"} absolute left-0 top-[calc(100%+1px)] z-10 flex h-fit w-full origin-top flex-col divide-y-[1px] divide-gray-400 font-nunito-regular ring-1 ring-gray-500 transition-all duration-200 ease-in-out`}
       >
         {sortCriterions.map((criterion, index) => (
           <div

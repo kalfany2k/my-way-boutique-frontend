@@ -18,7 +18,9 @@ interface QueryParams {
 }
 
 const ShoppingPage = () => {
+  // retrieved from router /produse/:type and /categorii/:category
   const { category, type } = useParams();
+  console.log(category, type);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 

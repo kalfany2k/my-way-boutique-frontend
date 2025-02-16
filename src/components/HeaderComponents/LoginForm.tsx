@@ -7,6 +7,8 @@ import { login } from "../../services/auth";
 import { useUser } from "../../contexts/UserContext";
 import Cookies from "js-cookie";
 import { LockKeyhole, Mail } from "lucide-react";
+import { cookieUrl } from "../../services/apiClient";
+import Spinner from "../Utility/Spinner";
 
 const formSchema = z.object({
   email: z
@@ -22,12 +24,14 @@ type FormFields = z.infer<typeof formSchema>;
 
 interface Props {
   setForgottenPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LoginForm: React.FC<Props> = ({ setForgottenPassword }) => {
+const LoginForm: React.FC<Props> = ({ setForgottenPassword, setIsLoading }) => {
   const { hideOverlay } = useOverlay();
   const { setUser, setUserLong } = useUser();
   const [error, setError] = useState<string | null>(null);
+
   const {
     register,
     formState: { errors },
@@ -36,17 +40,19 @@ const LoginForm: React.FC<Props> = ({ setForgottenPassword }) => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
+      setIsLoading(true);
       const response = await login(data.email, data.password);
       // if login was successful, by now the authToken would have been updated
-      data.keepLoggedIn ? setUserLong(response.user) : setUser(response.user);
       // then, update the session/local storage with the User object, alongside the stateful user we will be using
-      Cookies.remove("guestSessionToken", { domain: ".mwb.local", path: "/" });
+      data.keepLoggedIn ? setUserLong(response.user) : setUser(response.user);
       setError(null);
       hideOverlay();
     } catch (error) {
       error instanceof Error
         ? setError(error.message)
         : setError("O eroare neasteptata s-a intamplat");
+    } finally {
+      setIsLoading(false);
     }
   };
 

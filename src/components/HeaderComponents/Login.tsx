@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import ForgottenPasswordForm from "./ForgottenPasswordForm";
+import Spinner from "../Utility/Spinner";
 
 const Login = () => {
   const { showOverlay, hideOverlay, isOverlayVisible } = useOverlay();
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
   const [menuOption, setMenuOption] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [forgottenPassword, setForgottenPassword] = useState<boolean>(false);
 
   useEffect(() => {
@@ -58,12 +60,16 @@ const Login = () => {
           forgottenPassword ? (
             <ForgottenPasswordForm
               setForgottenPassword={setForgottenPassword}
+              setIsLoading={setIsLoading}
             />
           ) : (
-            <LoginForm setForgottenPassword={setForgottenPassword} />
+            <LoginForm
+              setForgottenPassword={setForgottenPassword}
+              setIsLoading={setIsLoading}
+            />
           )
         ) : (
-          <RegisterForm />
+          <RegisterForm setIsLoading={setIsLoading} />
         )}
         <X
           className="absolute right-0 top-0 m-1 size-12 cursor-pointer md:size-8"
@@ -71,6 +77,13 @@ const Login = () => {
             hideOverlay();
           }}
         />
+        {isLoading && (
+          <div
+            className={`absolute flex h-full w-full items-center justify-center backdrop-blur-[2px] transition-opacity duration-100 ease-in-out ${isLoading && loginOpen ? "opacity-100" : "opacity-0"}`}
+          >
+            <Spinner size={32} />
+          </div>
+        )}
       </div>
     </>
   );

@@ -72,7 +72,7 @@ const ProductPage = () => {
   if (isLoading)
     return (
       <div className="flex min-h-page-height items-center justify-center">
-        <Spinner size={12} />
+        <Spinner size={48} />
       </div>
     );
 
@@ -80,14 +80,14 @@ const ProductPage = () => {
 
   if (product)
     return (
-      <div className="flex h-fit w-full flex-col items-center justify-start overflow-hidden pb-[1px]">
+      <div className="flex h-fit min-h-page-height w-full flex-col items-center justify-start overflow-hidden pb-[1px]">
         <span
           className="mt-4 text-center font-helvetica-thin text-4xl lg:text-5xl"
           id="product-name"
         >
           {product.name.slice(0, product.name.lastIndexOf(" "))}
         </span>
-        <div className="mt-6 flex w-full flex-col items-center justify-center gap-2 md:gap-4 lg:flex-row lg:items-start lg:gap-8">
+        <div className="mt-4 flex w-full flex-col items-center justify-center gap-2 md:mt-6 md:gap-4 lg:flex-row lg:items-start lg:gap-8">
           <div className="flex w-[90%] justify-end md:w-[75%] lg:h-full lg:w-2/5 xl:w-1/3">
             <ImageLayout
               images={[product.primary_image].concat(product.secondary_images)}
