@@ -8,6 +8,7 @@ import { Outlet } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
 import { CurrencyProvider } from "./contexts/CurrencyContext";
 import { ApiProvider } from "./contexts/ApiContext";
+import Overlay from "./components/Utility/Overlay";
 
 const App = () => {
   return (

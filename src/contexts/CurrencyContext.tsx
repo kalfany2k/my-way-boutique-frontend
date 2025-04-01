@@ -4,6 +4,7 @@ import React, {
   useState,
   useCallback,
   useMemo,
+  useEffect,
 } from "react";
 
 type Currency = "RON" | "EUR";
@@ -38,6 +39,12 @@ export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [currency, setCurrency] = useState<Currency>("RON");
+
+  useEffect(() => {
+    const preferenceValue = localStorage.getItem("currency_preference");
+    if (preferenceValue === "RON" || preferenceValue === "EUR")
+      setCurrency(preferenceValue);
+  }, []);
 
   const convertPrice = useCallback(
     (amount: number): number => {

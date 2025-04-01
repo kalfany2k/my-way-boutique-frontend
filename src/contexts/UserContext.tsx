@@ -34,20 +34,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const updateUser = (newUser: User | null) => {
     setUser(newUser);
-    if (newUser) {
-      authService.storeUser(newUser, false);
-    } else {
-      authService.clearAuth();
-    }
+    if (newUser) authService.storeUser(newUser, false);
   };
 
   const updateUserLong = (newUser: User | null) => {
     setUser(newUser);
-    if (newUser) {
-      authService.storeUser(newUser, true);
-    } else {
-      authService.clearAuth();
-    }
+    if (newUser) authService.storeUser(newUser, true);
   };
 
   return (

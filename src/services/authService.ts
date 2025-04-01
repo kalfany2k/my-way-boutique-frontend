@@ -2,6 +2,8 @@ import Cookies from "js-cookie";
 import { User } from "../contexts/UserContext";
 
 const authService = {
+  // utility functions that are to be used in the scope of UserContext
+
   getStoredUser(): User | null {
     const sessionUser = sessionStorage.getItem("user");
     const localUser = localStorage.getItem("user");
@@ -10,13 +12,6 @@ const authService = {
       : localUser
         ? JSON.parse(localUser)
         : null;
-  },
-
-  clearAuth() {
-    Cookies.remove("authToken");
-    Cookies.remove("guestSessionToken");
-    sessionStorage.removeItem("user");
-    localStorage.removeItem("user");
   },
 
   storeUser(user: User, longTerm: boolean) {

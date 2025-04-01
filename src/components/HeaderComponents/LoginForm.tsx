@@ -44,9 +44,11 @@ const LoginForm: React.FC<Props> = ({ setForgottenPassword, setIsLoading }) => {
       const response = await login(data.email, data.password);
       // if login was successful, by now the authToken would have been updated
       // then, update the session/local storage with the User object, alongside the stateful user we will be using
-      data.keepLoggedIn ? setUserLong(response.user) : setUser(response.user);
       setError(null);
       hideOverlay();
+      setTimeout(() => {
+        data.keepLoggedIn ? setUserLong(response.user) : setUser(response.user);
+      }, 400);
     } catch (error) {
       error instanceof Error
         ? setError(error.message)

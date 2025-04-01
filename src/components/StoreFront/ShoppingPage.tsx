@@ -11,6 +11,7 @@ const ITEMS_PER_PAGE = 16;
 interface QueryParams {
   categories?: string | null;
   type?: string | null;
+  set_type?: string | null;
   gender?: string | null;
   search?: string | null;
   sort_by?: string | null;
@@ -18,15 +19,19 @@ interface QueryParams {
 }
 
 const ShoppingPage = () => {
-  // retrieved from router /produse/:type and /categorii/:category
-  const { category, type } = useParams();
-  console.log(category, type);
+  // retrieved from router /produse/:type, /categorii/:category and /seturi/:setType
+  const { category, type, setType } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 
   const queryParams: QueryParams = {
     categories: category || searchParams.get("categories") || null,
-    type: (type && pluralToSingular[type]) || searchParams.get("type") || null,
+    type:
+      (type && pluralToSingular[type]) ||
+      (setType && "set") ||
+      searchParams.get("type") ||
+      null,
+    set_type: setType || searchParams.get("set_type") || null,
     search: searchParams.get("search"),
     gender: searchParams.get("gender"),
     sort_by: searchParams.get("sort_by"),
@@ -34,7 +39,7 @@ const ShoppingPage = () => {
   };
 
   // prettier-ignore
-  const { data, count, error, isLoading } = useData<ProductData>("/products", { params: queryParams }, [location], );
+  const { data, count, error, isLoading } = useData<ProductData>("/products", { params: queryParams }, [location]);
 
   const totalPages = Math.ceil((count || 0) / ITEMS_PER_PAGE);
 

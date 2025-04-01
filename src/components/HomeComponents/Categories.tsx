@@ -8,11 +8,11 @@ const Categories = () => {
   const [hoveredCategory, setHoveredCategory] = useState<number>(-1);
 
   return (
-    <div className="z-header hidden w-full border-b-[1px] border-black lg:block">
-      <div className="mx-auto flex h-8 w-4/5 items-center justify-between bg-white xl:w-2/3">
+    <div className="relative z-header hidden w-full border-b-[1px] border-black lg:block">
+      <div className="mx-auto flex h-8 w-4/5 items-center justify-center bg-white xl:w-1/2">
         {categories.map((category, index) => (
           <div
-            className="relative flex h-full flex-col items-center justify-center"
+            className="flex h-full flex-col items-center justify-center px-8"
             key={index}
             onMouseEnter={() => setHoveredCategory(index)}
             onMouseLeave={() => setHoveredCategory(-1)}
@@ -21,7 +21,7 @@ const Categories = () => {
               to={category.path}
               className="mt-[2px] flex flex-row items-center"
             >
-              <span className="mb-[3px] font-nunito-regular text-xl">
+              <span className="mb-[3px] whitespace-nowrap font-nunito-regular text-xl">
                 {category.name}
               </span>
               {category.subcategories.length > 0 && (
@@ -33,21 +33,44 @@ const Categories = () => {
             </Link>
             {category.subcategories.length > 0 && (
               <div
-                className={`${hoveredCategory === index ? "scale-x-100 scale-y-100 opacity-100" : "pointer-events-none scale-x-90 scale-y-50 opacity-0"} absolute left-1/2 top-full z-10 flex h-fit w-fit min-w-36 origin-top -translate-x-1/2 flex-row divide-x-[1px] divide-black rounded-b-md border-[1px] border-black bg-white transition-all duration-300 ease-in-out`}
+                className={`${index === hoveredCategory ? "block" : "hidden"} absolute left-0 top-full flex h-96 w-[100dvw] flex-row items-center divide-x-[2px] divide-dotted divide-gray-500 border-b-[1px] border-black bg-white pb-4`}
               >
-                <div className="flex w-fit flex-col gap-y-[2px] p-4 font-nunito-medium text-lg">
-                  {category.subcategories.map((subcategory, secondaryIndex) => (
-                    <Link
-                      key={index + "-" + secondaryIndex}
-                      to={subcategory.path}
-                      onClick={() => setHoveredCategory(-1)}
-                      className="w-fit"
-                    >
-                      <span className="hover:text-rose-900 xl:whitespace-nowrap">
-                        {subcategory.name}
-                      </span>
-                    </Link>
-                  ))}
+                <div className="flex h-[90%] w-1/2 items-start justify-end pr-12">
+                  <div className="flex h-4/5 w-11/12 flex-row items-center justify-center xl:w-4/5 2xl:w-3/5">
+                    <div className="h-full w-1/3 rounded-lg ring-1 ring-black"></div>
+                    <div className="h-full w-2/3 border-2 border-dashed border-black"></div>
+                  </div>
+                </div>
+                <div className="flex h-[90%] w-1/2 items-center justify-start pl-12">
+                  <div className="flex h-full flex-row gap-8">
+                    <div className="flex w-fit flex-col">
+                      <span className="p-2 font-helvetica text-lg">Baieti</span>
+                      <div className="mb-1 w-full border-b-[2px] border-dotted border-gray-500" />
+                      {category.subcategories.map((subcategory, index) => (
+                        <Link
+                          to={subcategory.path}
+                          key={index}
+                          className="mx-2 font-helvetica text-lg"
+                          onClick={() => setHoveredCategory(-1)}
+                        >
+                          <span className="text-base">{subcategory.name}</span>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="flex w-fit flex-col">
+                      <span className="p-2 font-helvetica text-lg"> Fete </span>
+                      <div className="mb-1 w-full border-b-[2px] border-dotted border-gray-500" />
+                      {category.subcategories.map((subcategory, index) => (
+                        <Link
+                          to={subcategory.path}
+                          key={index}
+                          className="mx-2 font-helvetica text-lg"
+                        >
+                          <span className="text-base">{subcategory.name}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             )}

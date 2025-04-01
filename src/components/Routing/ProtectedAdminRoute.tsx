@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import apiClient from "../../services/apiClient";
 import Cookies from "js-cookie";
-import authService from "../../services/authService";
+import { useApi } from "../../contexts/ApiContext";
 
 interface ProtectedAdminRouteProps {
   children: React.ReactNode;
@@ -13,6 +13,7 @@ const ProtectedAdminRoute: React.FC<ProtectedAdminRouteProps> = ({
   children,
 }) => {
   const { user, setUser } = useUser();
+  const { handleLogOut } = useApi();
   const location = useLocation();
   const [isVerifying, setIsVerifying] = useState<boolean>(true);
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
@@ -38,7 +39,7 @@ const ProtectedAdminRoute: React.FC<ProtectedAdminRouteProps> = ({
       } catch (error: any) {
         if (error.response?.status === 401) {
           // Clear auth state if token is expired/invalid
-          authService.clearAuth();
+          handleLogOut();
           setUser(null);
         }
         setIsAuthorized(false);

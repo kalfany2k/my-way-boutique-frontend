@@ -88,7 +88,9 @@ const RegisterForm: React.FC<Props> = ({ setIsLoading }) => {
       );
       hideOverlay();
       const loginResponse = await login(data.email, data.password);
-      setUser(loginResponse.user);
+      setTimeout(() => {
+        setUser(loginResponse.user);
+      }, 400);
     } catch (error) {
       error instanceof Error
         ? setExistingEmailError(error.message)

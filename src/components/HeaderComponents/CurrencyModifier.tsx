@@ -7,16 +7,22 @@ const CurrencyModifier = () => {
   const [detailsHovered, setDetailsHovered] = useState<boolean>(false);
 
   return (
-    <div className="hidden lg:flex flex-row">
+    <div className="hidden flex-row lg:flex">
       <button
         className={`${currency === "RON" && "underline"} mr-2`}
-        onClick={() => setCurrency("RON")}
+        onClick={() => {
+          setCurrency("RON");
+          localStorage.setItem("currency_preference", "RON");
+        }}
       >
         <span>RON</span>
       </button>
       <button
         className={`${currency === "EUR" && "underline"} mr-2`}
-        onClick={() => setCurrency("EUR")}
+        onClick={() => {
+          setCurrency("EUR");
+          localStorage.setItem("currency_preference", "EUR");
+        }}
       >
         <span>EUR</span>
       </button>
@@ -25,7 +31,7 @@ const CurrencyModifier = () => {
         onMouseEnter={() => setDetailsHovered(true)}
         onMouseLeave={() => setDetailsHovered(false)}
       >
-        <CircleHelp strokeWidth={2} />
+        <CircleHelp />
         <div
           className={`absolute left-1/2 flex -translate-x-1/2 rounded-lg border border-gray-500/50 bg-white/30 p-2 backdrop-blur-sm ${detailsHovered ? "opacity-100" : "invisible opacity-0"} mt-1 transition-all duration-300 ease-in-out`}
         >

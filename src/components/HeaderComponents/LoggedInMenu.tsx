@@ -5,30 +5,22 @@ import {
   UserPen,
   ScrollText,
 } from "lucide-react";
-import { User as UserType, useUser } from "../../contexts/UserContext";
+import { User as UserType } from "../../contexts/UserContext";
 import { useState } from "react";
-import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
-import { useCart } from "../../contexts/CartContext";
-import { setGuestToken } from "../../services/setGuestToken";
-import { cookieUrl } from "../../services/apiClient";
+import { useApi } from "../../contexts/ApiContext";
 
 interface Props {
   user: UserType;
 }
 
 const LoggedInMenu: React.FC<Props> = ({ user }) => {
-  const { setUser } = useUser();
-  const { setCartItems } = useCart();
+  const { handleLogOut } = useApi();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
-  const handleLogOut = () => {
+  const logOut = () => {
     setOpenMenu(false);
-    Cookies.remove("authToken", { path: "/", domain: cookieUrl });
-    Cookies.remove("guestSessionToken", { path: "/", domain: cookieUrl });
-    setCartItems([]);
-    setUser(null);
-    setGuestToken();
+    handleLogOut();
   };
 
   return (
@@ -78,7 +70,7 @@ const LoggedInMenu: React.FC<Props> = ({ user }) => {
           <button
             className="flex w-full flex-row items-center justify-start px-2 pb-2 pt-1 text-red-500"
             onClick={() => {
-              handleLogOut();
+              logOut();
             }}
           >
             <LogOut className="mr-1 size-6" />

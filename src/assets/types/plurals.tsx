@@ -10,6 +10,7 @@ export const pluralToSingular: Record<string, string> = {
   prosoape: "prosop",
   perii: "perie",
   oglinzi: "oglinda",
+  seturi: "set",
 } as const;
 
 export const singularToPlural: Record<string, string> = Object.entries(
