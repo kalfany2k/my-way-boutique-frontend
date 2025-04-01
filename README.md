@@ -1,7 +1,9 @@
 ````markdown
+Available preview: https://kalfany.xyz/
+
 # MWB Frontend
 
-Frontend application for MWB (My Wedding Boutique) e-commerce platform.
+Frontend application for MWB e-commerce platform.
 
 ## Tech Stack
 
