@@ -11,7 +11,7 @@ const HeroSection = () => {
       <Carousel />
       <DashedLine />
       {/* Produse pentru fetite */}
-      <div className="hero-item flex h-[652px] flex-col rounded-lg bg-rosy-nude-200 shadow-lg lg:h-page-height lg:flex-row">
+      <div className="hero-item flex h-[652px] flex-col rounded-lg bg-rosy-nude-200 shadow-lg lg:h-[calc(100dvh-16rem)] lg:flex-row">
         <div
           className="min-h-[50%] flex-1 rounded-lg bg-cover bg-center"
           style={{ backgroundImage: "url(" + placeholder + ")" }}

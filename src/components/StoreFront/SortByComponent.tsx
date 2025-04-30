@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRightIcon, ChevronsRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 

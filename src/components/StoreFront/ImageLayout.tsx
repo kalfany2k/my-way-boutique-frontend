@@ -57,6 +57,7 @@ const ImageLayout: React.FC<Props> = ({
             <div
               className={`aspect-square w-full cursor-pointer overflow-hidden rounded-md ring-1 ring-gray-500 ${currentImageIndex === index && "ring-rose-300"}`}
               onClick={() => setCurrentImageIndex(index)}
+              key={index}
             >
               <img
                 src={image}

@@ -33,7 +33,7 @@ const LoggedInMenu: React.FC<Props> = ({ user }) => {
       <span className="ml-[1px] mt-[2px] flex-1 text-center font-nunito-regular text-xl">
         {user.surname}
       </span>
-      <div className={`${openMenu ? "" : "invisible"} bg-inherit`}>
+      <div className={`${openMenu ? "" : "invisible"} z-10 bg-inherit`}>
         <div className="absolute left-0 top-full h-[1px] w-full bg-black" />
         <div
           className={`absolute right-0 top-[calc(100%+1px)] h-fit w-full rounded-b-xl bg-inherit transition-colors duration-500 ease-in-out`}

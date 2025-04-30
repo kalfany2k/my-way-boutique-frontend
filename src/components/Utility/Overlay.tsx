@@ -5,7 +5,7 @@ const Overlay: React.FC = () => {
   const { isOverlayVisible, hideOverlay } = useOverlay();
   return (
     <div
-      className={`fixed inset-0 z-overlay ${isOverlayVisible ? "bg-black/20" : "pointer-events-none bg-black/0"} transition-colors duration-500 ease-in-out`}
+      className={`fixed inset-0 z-overlay h-screen w-screen ${isOverlayVisible ? "bg-black/20" : "pointer-events-none bg-black/0"} transition-colors duration-500 ease-in-out`}
       onClick={hideOverlay}
     />
   );

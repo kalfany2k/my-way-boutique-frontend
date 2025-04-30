@@ -8,20 +8,23 @@ const Categories = () => {
   const [hoveredCategory, setHoveredCategory] = useState<number>(-1);
 
   return (
-    <div className="relative z-header hidden w-full border-b-[1px] border-black lg:block">
-      <div className="mx-auto flex h-8 w-4/5 items-center justify-center bg-white xl:w-1/2">
+    <div className="relative hidden w-full border-b-[1px] border-black lg:block">
+      <div className="mx-auto flex h-8 w-4/5 items-center justify-center xl:w-1/2">
         {categories.map((category, index) => (
           <div
             className="flex h-full flex-col items-center justify-center px-8"
             key={index}
             onMouseEnter={() => setHoveredCategory(index)}
-            onMouseLeave={() => setHoveredCategory(-1)}
+            onMouseLeave={() => {
+              setHoveredCategory(-1);
+              console.log(hoveredCategory);
+            }}
           >
             <Link
               to={category.path}
               className="mt-[2px] flex flex-row items-center"
             >
-              <span className="mb-[3px] whitespace-nowrap font-nunito-regular text-xl">
+              <span className="whitespace-nowrap pb-1 font-nunito-regular text-xl">
                 {category.name}
               </span>
               {category.subcategories.length > 0 && (
@@ -33,7 +36,7 @@ const Categories = () => {
             </Link>
             {category.subcategories.length > 0 && (
               <div
-                className={`${index === hoveredCategory ? "block" : "hidden"} absolute left-0 top-full flex h-96 w-[100dvw] flex-row items-center divide-x-[2px] divide-dotted divide-gray-500 border-b-[1px] border-black bg-white pb-4`}
+                className={`${index === hoveredCategory ? "scale-y-100 opacity-100" : "pointer-events-none scale-y-75 opacity-0"} absolute left-0 top-full flex h-96 w-[100dvw] origin-top flex-row items-center divide-x-[2px] divide-dotted divide-gray-500 border-b-[1px] border-black bg-white pb-4 transition-all duration-300 ease-in-out`}
               >
                 <div className="flex h-[90%] w-1/2 items-start justify-end pr-12">
                   <div className="flex h-4/5 w-11/12 flex-row items-center justify-center xl:w-4/5 2xl:w-3/5">

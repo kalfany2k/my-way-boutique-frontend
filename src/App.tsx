@@ -1,14 +1,13 @@
 import "./index.css";
 import Header from "./components/HeaderComponents/Header";
 import Footer from "./components/Footer";
-import Categories from "./components/HomeComponents/Categories";
 import { OverlayProvider } from "./contexts/OverlayContext";
 import { UserProvider } from "./contexts/UserContext";
 import { Outlet } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
 import { CurrencyProvider } from "./contexts/CurrencyContext";
 import { ApiProvider } from "./contexts/ApiContext";
-import Overlay from "./components/Utility/Overlay";
+import Banner from "./components/HeaderComponents/Banner";
 
 const App = () => {
   return (
@@ -17,13 +16,13 @@ const App = () => {
         <OverlayProvider>
           <UserProvider>
             <ApiProvider>
-              <div className="z-header flex h-screen min-h-screen w-screen flex-col">
+              <div
+                className="flex h-screen min-h-screen w-screen flex-col overflow-y-auto scroll-smooth"
+                id="scrollable-div"
+              >
+                <Banner />
                 <Header />
-                <div
-                  id="scrollable-div"
-                  className="mt-total-header flex-grow overflow-y-auto scroll-smooth lg:mt-total-header"
-                >
-                  <Categories />
+                <div className="min-h-page-height flex-grow">
                   <Outlet />
                   <Footer />
                 </div>

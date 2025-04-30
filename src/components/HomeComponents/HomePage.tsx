@@ -4,7 +4,7 @@ import HeroSection from "./HeroSection";
 
 const HomePage = () => {
   return (
-    <>
+    <div className="z-0">
       <HeroSection />
       <HomeProductGrid
         name="Trusouri botez"
@@ -20,7 +20,7 @@ const HomePage = () => {
         path="/produse/prosoape"
       />
       <DashedLine />
-    </>
+    </div>
   );
 };
 

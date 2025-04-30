@@ -100,17 +100,15 @@ export default {
         "priority": 60,
       },
       height: {
-        "page-height": "calc(100dvh - 11.5rem)",
-        "product-div": "calc(100dvh - 16.5rem)",
+        "page-height": "calc(100dvh - 8.75rem)",
         "header": "5rem",
-        "total-header": "7.5rem",
+        "total-header": "8.75rem",
       },
       minHeight: {
-        "page-height": "calc(100dvh - 11.5rem)",
-        "product-div": "calc(100dvh - 16.5rem)",
+        "page-height": "calc(100dvh - 8.75rem)",
       },
       margin: {
-        "header": "5rem",
+        "header": "8.75rem",
         "total-header": "7.5rem",
       },
       keyframes: {

@@ -45,8 +45,9 @@ const ShoppingPage = () => {
 
   const handlePageChange = (newPage: number) => {
     const scrollableDiv = document.getElementById("scrollable-div");
+    console.log(scrollableDiv);
     if (scrollableDiv) {
-      scrollableDiv.scrollTo({ top: 0, behavior: "auto" });
+      scrollableDiv.scrollTo({ top: 0 });
     }
     setTimeout(() => {
       const newParams = new URLSearchParams(searchParams);

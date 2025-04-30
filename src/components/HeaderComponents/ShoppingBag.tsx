@@ -28,8 +28,10 @@ const ShoppingBag = () => {
         }}
       >
         <Bag className="size-6" />
-        <div className="absolute bottom-2 right-2 flex h-3 w-3 flex-row items-center justify-center rounded-full bg-inherit ring-1 ring-black">
-          <span className="mt-[1px] text-center font-nunito-regular text-xs tracking-tighter xl:ml-[1px]">
+        <div
+          className={`absolute bottom-2 right-2 flex ${cartItems.length > 9 ? "h-[14px] w-[14px]" : "h-3 w-3"} flex-row items-center justify-center rounded-full bg-inherit ring-1 ring-black`}
+        >
+          <span className="mt-[1.75px] text-center font-nunito-regular text-xs tracking-tighter xl:ml-[0.5px]">
             {cartItems.length > 9 ? "9+" : cartItems.length}
           </span>
         </div>
