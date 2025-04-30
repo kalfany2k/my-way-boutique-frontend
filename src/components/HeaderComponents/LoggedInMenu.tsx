@@ -6,7 +6,7 @@ import {
   ScrollText,
 } from "lucide-react";
 import { User as UserType } from "../../contexts/UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useApi } from "../../contexts/ApiContext";
 
@@ -17,15 +17,20 @@ interface Props {
 const LoggedInMenu: React.FC<Props> = ({ user }) => {
   const { handleLogOut } = useApi();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [currentColor, setCurrentColor] = useState<string>("bg-rosy-nude-200");
 
   const logOut = () => {
     setOpenMenu(false);
     handleLogOut();
   };
 
+  useEffect(() => {
+    setCurrentColor(openMenu ? "bg-rosy-nude-300" : "bg-rosy-nude-200");
+  }, [openMenu]);
+
   return (
     <div
-      className={`relative mr-4 hidden w-fit min-w-28 flex-row items-center md:flex ${openMenu ? "cursor-default rounded-t-xl bg-rosy-nude-300" : "rounded-full bg-rosy-nude-200"} px-3 py-2 drop-shadow-lg transition-colors duration-500 ease-in-out`}
+      className={`relative z-10 mr-4 hidden w-fit min-w-28 flex-row items-center shadow-lg md:flex ${currentColor} ${openMenu ? "cursor-default rounded-t-xl" : "rounded-full"} animated-300ms px-3 py-2`}
       onMouseEnter={() => setOpenMenu(!openMenu)}
       onMouseLeave={() => setOpenMenu(!openMenu)}
     >
@@ -33,10 +38,18 @@ const LoggedInMenu: React.FC<Props> = ({ user }) => {
       <span className="ml-[1px] mt-[2px] flex-1 text-center font-nunito-regular text-xl">
         {user.surname}
       </span>
-      <div className={`${openMenu ? "" : "invisible"} z-10 bg-inherit`}>
+      <div
+        className={`${openMenu ? "opacity-1" : "pointer-events-none opacity-0"}`}
+        onMouseEnter={() => {
+          if (openMenu) setCurrentColor("bg-rosy-nude-200");
+        }}
+        onMouseLeave={() => {
+          if (openMenu) setCurrentColor("bg-rosy-nude-300");
+        }}
+      >
         <div className="absolute left-0 top-full h-[1px] w-full bg-black" />
         <div
-          className={`absolute right-0 top-[calc(100%+1px)] h-fit w-full rounded-b-xl bg-inherit transition-colors duration-500 ease-in-out`}
+          className={`absolute right-0 top-[calc(100%+1px)] ${currentColor} animated-300ms h-fit w-full rounded-b-xl`}
         >
           <Link
             className="flex w-full flex-row items-center justify-start px-2 py-1"

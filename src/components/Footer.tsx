@@ -1,23 +1,27 @@
-import { Clock, Mail, Phone } from "lucide-react";
+import { ChevronRight, Clock, Mail, Phone } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   const links = [
-    { text: "Gaseste-mi marimea", path: "/ghid-marimi" },
     { text: "Termeni si conditii", path: "/termeni-si-conditii" },
     { text: "Contact", path: "/contact" },
     { text: "Contul meu", path: "/contul-meu" },
     { text: "Povestea noastra", path: "/povestea-noastra" },
     { text: "ANPC", path: "/anpc" },
     { text: "Confidentialitate", path: "/confidentialitate" },
+    { text: "Cookies", path: "/cookies" },
     { text: "Comenzi si plata", path: "/comenzi-si-plata" },
     { text: "Livrare", path: "/livrare" },
     { text: "Retur", path: "/retur" },
   ];
 
+  const [highlightedCategoryIndex, setHighlightedCategoryIndex] =
+    useState<number>(-1);
+
   return (
-    <footer className="mt-6 w-full bg-rosy-nude-200 px-2 pb-24 pt-6 lg:mt-8 lg:px-12 lg:pb-6">
-      <div className="mx-auto max-w-[90%] lg:max-w-[80%]">
+    <footer className="mt-6 w-full bg-rosy-nude-200 px-2 pb-24 pt-6 lg:mt-8 lg:px-12 lg:pb-10">
+      <div className="mx-auto max-w-[90%] lg:max-w-[65%]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-8">
           {/* First column */}
           <div className="h-18 flex items-center justify-center lg:h-full">
@@ -26,14 +30,24 @@ const Footer = () => {
 
           {/* Middle section */}
           <div className="lg:col-span-2">
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-gray-600">
+            <div className="grid grid-cols-2 gap-x-8 text-gray-600">
               {links.map((link, index) => (
                 <Link
                   key={index}
                   to={link.path}
-                  className="text-md w-fit place-self-center border-b-[1px] border-taupe-nude-900 px-2 text-center font-signika-medium transition duration-150 ease-in-out hover:text-gray-900 lg:text-xl"
+                  className="flex w-full flex-row items-center border-b-[1px] border-taupe-nude-900 px-2 py-[6px]"
                 >
-                  {link.text}
+                  <ChevronRight
+                    size={16}
+                    className={`${index === highlightedCategoryIndex ? "text-gray-900" : ""} animated-300ms`}
+                  />
+                  <span
+                    className="animated-300ms text-center font-signika-medium text-base hover:text-gray-900"
+                    onMouseEnter={() => setHighlightedCategoryIndex(index)}
+                    onMouseLeave={() => setHighlightedCategoryIndex(-1)}
+                  >
+                    {link.text}
+                  </span>
                 </Link>
               ))}
             </div>

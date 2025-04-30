@@ -111,7 +111,7 @@ const SearchBar = () => {
 
   return (
     <div
-      className={`absolute left-1/2 mt-[8.5rem] ${show ? "flex" : "hidden"} -translate-x-1/2 cursor-pointer rounded-full bg-rosy-nude-200 shadow-md transition-all duration-500 ease-in-out ${isOpen ? "" : "hover:bg-rosy-nude-300"} lg:relative lg:left-0 lg:mr-4 lg:mt-0 lg:-translate-x-0`}
+      className={`absolute left-1/2 mt-[8.5rem] ${show ? "flex" : "hidden"} animated-300ms -translate-x-1/2 cursor-pointer rounded-full bg-rosy-nude-200 shadow-md ${isOpen ? "" : "hover:bg-rosy-nude-300"} lg:relative lg:left-0 lg:mr-4 lg:mt-0 lg:-translate-x-0`}
     >
       <div
         className={`relative flex h-10 flex-row items-center justify-start overflow-hidden p-2 transition-all duration-500 ease-in-out lg:h-12 lg:p-3 lg:ring-0 ${isOpen ? "w-72 lg:w-80 2xl:w-96" : "w-10 lg:w-12"}`}

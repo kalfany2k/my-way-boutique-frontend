@@ -17,7 +17,7 @@ const App = () => {
           <UserProvider>
             <ApiProvider>
               <div
-                className="flex h-screen min-h-screen w-screen flex-col overflow-y-auto scroll-smooth"
+                className="relative flex h-screen min-h-screen w-screen flex-col overflow-y-auto overflow-x-hidden scroll-smooth"
                 id="scrollable-div"
               >
                 <Banner />

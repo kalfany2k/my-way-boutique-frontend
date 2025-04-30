@@ -8,7 +8,7 @@
   }
 
   .icon {
-    @apply mr-2 flex flex-row items-center rounded-full bg-rosy-nude-200 p-3 shadow-md transition-colors duration-500 ease-in-out hover:bg-rosy-nude-300 lg:mr-4;
+    @apply mr-2 flex flex-row items-center rounded-full p-3 shadow-md lg:mr-4;
   }
 
   .hero-item {
@@ -37,6 +37,10 @@
 
   .accordion-btn {
     @apply text-gray-500;
+  }
+
+  .animated-300ms {
+    @apply transition-colors duration-150 ease-in-out;
   }
 }
 

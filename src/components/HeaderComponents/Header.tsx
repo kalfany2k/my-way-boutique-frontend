@@ -19,7 +19,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="sticky top-0 z-50 flex h-total-header touch-pan-up flex-col bg-white/40 backdrop-blur-[2px] transition-colors duration-200 ease-in-out hover:bg-white">
+    <div className="sticky top-0 z-50 flex h-total-header touch-pan-up flex-col bg-white/40 backdrop-blur-[4px] transition-colors duration-200 ease-in-out hover:bg-white">
       <div className="flex h-header flex-row items-center justify-between border-b-[1px] border-black">
         <div className="z-sidebar flex-1 lg:hidden">
           <TopBar />

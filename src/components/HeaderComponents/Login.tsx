@@ -22,7 +22,7 @@ const Login = () => {
   return (
     <>
       <button
-        className="icon"
+        className="icon animated-300ms bg-rosy-nude-200 hover:bg-rosy-nude-300"
         aria-label="user login"
         aria-checked="false"
         role="button"
@@ -34,7 +34,7 @@ const Login = () => {
         <User className="size-6" />
       </button>
       <div
-        className={`fixed left-1/2 top-1/2 z-priority flex h-full w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center overflow-hidden border border-gray-500/75 bg-white/70 backdrop-blur-sm transition-all duration-500 ease-in-out md:h-fit md:min-h-[624px] md:w-3/5 lg:w-2/5 lg:rounded-lg xl:w-1/3 2xl:w-1/5`}
+        className={`fixed left-1/2 top-[calc(100dvh/2)] z-priority flex h-full w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center overflow-hidden border border-gray-500/75 bg-white/70 backdrop-blur-sm transition-all duration-500 ease-in-out md:h-fit md:min-h-[624px] md:w-3/5 lg:w-2/5 lg:rounded-lg xl:w-1/3 2xl:w-1/5`}
         style={{
           opacity: loginOpen ? 1 : 0,
           pointerEvents: loginOpen ? "auto" : "none",

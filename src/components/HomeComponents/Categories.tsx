@@ -17,7 +17,6 @@ const Categories = () => {
             onMouseEnter={() => setHoveredCategory(index)}
             onMouseLeave={() => {
               setHoveredCategory(-1);
-              console.log(hoveredCategory);
             }}
           >
             <Link
@@ -68,6 +67,7 @@ const Categories = () => {
                           to={subcategory.path}
                           key={index}
                           className="mx-2 font-helvetica text-lg"
+                          onClick={() => setHoveredCategory(-1)}
                         >
                           <span className="text-base">{subcategory.name}</span>
                         </Link>

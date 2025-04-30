@@ -80,7 +80,7 @@ const ProductPage = () => {
 
   if (product)
     return (
-      <div className="flex h-fit min-h-page-height w-full flex-col items-center justify-start overflow-hidden pb-[1px]">
+      <div className="flex min-h-page-height w-full flex-col items-center justify-start overflow-hidden pb-[1px]">
         <span
           className="mt-4 text-center font-helvetica-thin text-4xl lg:text-5xl"
           id="product-name"

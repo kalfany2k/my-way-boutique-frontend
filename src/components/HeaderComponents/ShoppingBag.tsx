@@ -7,6 +7,7 @@ import { useCart } from "../../contexts/CartContext";
 const ShoppingBag = () => {
   const { isOverlayVisible, showOverlay, hideOverlay } = useOverlay();
   const [showCart, setShowCart] = useState<boolean>(false);
+  const [isCartHovered, setIsCartHovered] = useState<boolean>(false);
   const { cartItems } = useCart();
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const ShoppingBag = () => {
   return (
     <>
       <button
-        className="icon relative"
+        className={`${isCartHovered ? "bg-rosy-nude-300" : "bg-rosy-nude-200"} icon animated-300ms relative`}
         aria-label="open shopping bag"
         aria-checked="false"
         role="button"
@@ -26,10 +27,12 @@ const ShoppingBag = () => {
           showOverlay();
           setShowCart(true);
         }}
+        onMouseEnter={() => setIsCartHovered(true)}
+        onMouseLeave={() => setIsCartHovered(false)}
       >
         <Bag className="size-6" />
         <div
-          className={`absolute bottom-2 right-2 flex ${cartItems.length > 9 ? "h-[14px] w-[14px]" : "h-3 w-3"} flex-row items-center justify-center rounded-full bg-inherit ring-1 ring-black`}
+          className={`${isCartHovered ? "bg-rosy-nude-300" : "bg-rosy-nude-200"} absolute bottom-2 right-2 flex ${cartItems.length > 9 ? "h-[14px] w-[14px]" : "h-3 w-3"} flex-row items-center justify-center rounded-full ring-1 ring-black`}
         >
           <span className="mt-[1.75px] text-center font-nunito-regular text-xs tracking-tighter xl:ml-[0.5px]">
             {cartItems.length > 9 ? "9+" : cartItems.length}
