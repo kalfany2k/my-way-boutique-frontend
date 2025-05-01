@@ -40,7 +40,11 @@
   }
 
   .animated-300ms {
-    @apply transition-colors duration-150 ease-in-out;
+    @apply transition-colors duration-300 ease-in-out;
+  }
+
+  .animated-transform-300ms {
+    @apply transition-transform duration-300 ease-in-out;
   }
 }
 

@@ -32,7 +32,7 @@ const ShoppingBag = () => {
       >
         <Bag className="size-6" />
         <div
-          className={`${isCartHovered ? "bg-rosy-nude-300" : "bg-rosy-nude-200"} absolute bottom-2 right-2 flex ${cartItems.length > 9 ? "h-[14px] w-[14px]" : "h-3 w-3"} flex-row items-center justify-center rounded-full ring-1 ring-black`}
+          className={`${isCartHovered ? "bg-rosy-nude-300" : "bg-rosy-nude-200"} absolute bottom-2 right-2 flex ${cartItems.length > 9 ? "h-[14px] w-[14px]" : "h-3 w-3"} animated-300ms flex-row items-center justify-center rounded-full ring-1 ring-black`}
         >
           <span className="mt-[1.75px] text-center font-nunito-regular text-xs tracking-tighter xl:ml-[0.5px]">
             {cartItems.length > 9 ? "9+" : cartItems.length}
@@ -40,7 +40,7 @@ const ShoppingBag = () => {
         </div>
       </button>
       <div
-        className={`absolute ${showCart ? "translate-x-0" : "translate-x-full"} right-0 top-0 z-priority flex h-dvh w-full flex-col bg-rosy-nude-200 transition-transform duration-500 ease-in-out sm:w-1/2 md:w-1/3 xl:w-1/4`}
+        className={`absolute ${showCart ? "translate-x-0" : "translate-x-full"} animated-transform-300ms right-0 top-0 z-priority flex h-dvh w-full flex-col bg-rosy-nude-200 sm:w-1/2 md:w-1/3 xl:w-1/4`}
       >
         <button className="w-fit" role="button">
           <X
